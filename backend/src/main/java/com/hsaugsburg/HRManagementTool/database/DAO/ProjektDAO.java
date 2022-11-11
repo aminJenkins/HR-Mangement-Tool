@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -17,10 +18,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity(name="projekt")
 public class ProjektDAO {
         @Id
-        @GeneratedValue(generator = "uuid2")
-        @GenericGenerator(name = "uuid2", strategy = "uuid2")
+        @GeneratedValue(strategy= GenerationType.AUTO)
         @Column(name = "projekt_id", unique = true, nullable = false, updatable = false, columnDefinition = "BINARY(16)")
-        private UUID id;
+        private int id;
 
         @Column(name = "bezeichnung", nullable = false)
         private String bezeichnung;
