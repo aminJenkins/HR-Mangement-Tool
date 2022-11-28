@@ -1,39 +1,34 @@
 package com.hsaugsburg.HRManagementTool.database.DAO;
 
 import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
-
-@Entity(name = "abteilung")
+@Entity
+@Table(name = "ABTEILUNG")
 public class AbteilungDAO {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "abteilung_id", unique = true, nullable = false, updatable = false, columnDefinition = "BINARY(16)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "abteilung_projekt",
-            joinColumns = { @JoinColumn(name = "abteilung_id") },
-            inverseJoinColumns = { @JoinColumn(name = "projekt_id") }
-    )
-    private Set<ProjektDAO> projekte;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "LEITER", referencedColumnName = "ID")
+    private MitarbeiterDAO leiter;
 
     @OneToMany(mappedBy="abteilung")
     //@Column(name = "mitarbeiter", nullable = false)
