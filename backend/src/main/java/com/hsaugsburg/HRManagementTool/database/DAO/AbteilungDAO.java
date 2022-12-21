@@ -31,6 +31,6 @@ public class AbteilungDAO {
     private MitarbeiterDAO leiter;
 
     @OneToMany(mappedBy="abteilung")
-    //@Column(name = "mitarbeiter", nullable = false)
+    @Column(name = "MITARBEITER", nullable = false)
     private Set<MitarbeiterDAO> mitarbeitern;
 }

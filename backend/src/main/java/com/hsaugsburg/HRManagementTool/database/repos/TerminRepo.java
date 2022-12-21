@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TeriminRepo extends JpaRepository<TerminDAO,Integer> {
+public interface TerminRepo extends JpaRepository<TerminDAO,Integer> {
 }
