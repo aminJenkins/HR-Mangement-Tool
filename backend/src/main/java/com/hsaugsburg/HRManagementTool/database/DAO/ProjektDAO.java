@@ -6,40 +6,57 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name="projekt")
+@Entity(name = "PROJEKT")
 public class ProjektDAO {
-        @Id
-        @GeneratedValue(strategy= GenerationType.AUTO)
-        @Column(name = "projekt_id", unique = true, nullable = false, updatable = false, columnDefinition = "BINARY(16)")
-        private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true, nullable = false, updatable = false)
+    private int id;
 
-        @Column(name = "bezeichnung", nullable = false)
-        private String bezeichnung;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID",
+            insertable = false, updatable = true, nullable = false)
+    private MitarbeiterDAO leiter;
 
-        @ManyToMany(mappedBy = "projekte")
-        //@JoinColumn(name="id",nullable = false , insertable = false, updatable = false)
-        private List<MitarbeiterDAO> mitarbeitern;
+    @ManyToMany(mappedBy = "projekte")
+    //@Column(name = "ZEITERFASSUNG", nullable = true, updatable = true)
+    private Set<ZeiterfassungDAO> zeiterfassungen;
 
-        @ManyToMany(mappedBy = "projekte")
-        //@JoinColumn(name="id", nullable=false, insertable = false, updatable = false)
-        private Set<AbteilungDAO> abteilungen;
+    @Column(name = "STUNDENSATZ", nullable = false)
+    private Double stundensatz;
 
-        @Column(name = "stundensatz", nullable = false, updatable = true, columnDefinition = "DECIMAL(100,2)")
-        private double stundensatz;
+    @Column(name = "BUDGET_IN_ARBEITSTAGEN", nullable = false, updatable = true, columnDefinition = "DECIMAL(100,2)")
+    private double budget;
 
-        @Column(name = "budget", nullable = false, updatable = true, columnDefinition = "DECIMAL(100,2)")
-        private double budget;
+    @Column(name = "AUFTRAGSGEBER", nullable = false, updatable = true)
+    private String auftragsgeber;
 
-        @Column(name = "auftragsgeber", nullable = false, updatable = false)
-        private String auftragsgeber;
+    @Column(name = "BEZEICHNUNG", nullable = false, updatable = true)
+    private String bezeichnung;
+
+    @OneToMany(mappedBy = "projekt")
+    //@Column(name = "TERMIN", insertable = false, updatable = true, nullable = true)
+    private Set<TerminDAO> termine;
+
+    @ManyToMany(mappedBy = "projekte")
+    private Set<KontingentDAO> kontingente;
+
+    @ManyToMany(mappedBy = "projekte")
+    private Set<MitarbeiterDAO> projektbeteiligte;
+
 
 }
