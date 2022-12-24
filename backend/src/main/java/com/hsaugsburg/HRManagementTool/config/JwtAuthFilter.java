@@ -1,6 +1,7 @@
 package com.hsaugsburg.HRManagementTool.config;
 
-import com.hsaugsburg.HRManagementTool.database.DAO.UserDao;
+import com.hsaugsburg.HRManagementTool.services.ZugangsService;
+import com.hsaugsburg.HRManagementTool.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,11 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class is a JWT-Filter that is being used for validating the token if present in the request
+ */
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final UserDao userDao;
+    private final ZugangsService zugangsService;
     private final JwtUtils jwtUtils;
 
     @Override
@@ -39,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         userEmail = jwtUtils.extractUsername(jwtToken);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDao.findUserByEmail(userEmail);
+            UserDetails userDetails = zugangsService.loadUserByUsername(userEmail);
             final boolean isTokenValid = jwtUtils.isTokenValid(jwtToken, userDetails);
 
             if (isTokenValid) {
