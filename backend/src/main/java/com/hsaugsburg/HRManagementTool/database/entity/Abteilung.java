@@ -1,23 +1,26 @@
-package com.hsaugsburg.HRManagementTool.database.DAO;
+package com.hsaugsburg.HRManagementTool.database.entity;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "ABTEILUNG")
-public class AbteilungDAO {
+public class Abteilung {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
@@ -28,9 +31,9 @@ public class AbteilungDAO {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "LEITER", referencedColumnName = "ID")
-    private MitarbeiterDAO leiter;
+    private Mitarbeiter leiter;
 
     @OneToMany(mappedBy="abteilung")
     @Column(name = "MITARBEITER", nullable = false)
-    private Set<MitarbeiterDAO> mitarbeitern;
+    private Set<Mitarbeiter> mitarbeitern;
 }

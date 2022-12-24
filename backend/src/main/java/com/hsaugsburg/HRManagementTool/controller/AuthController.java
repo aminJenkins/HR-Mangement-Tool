@@ -1,38 +1,39 @@
-package com.hsaugsburg.HRManagementTool.controllers;
+package com.hsaugsburg.HRManagementTool.controller;
 
-import com.hsaugsburg.HRManagementTool.config.JwtUtils;
-import com.hsaugsburg.HRManagementTool.database.DAO.UserDao;
 import com.hsaugsburg.HRManagementTool.dto.AuthenticationRequest;
+import com.hsaugsburg.HRManagementTool.services.ZugangsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final UserDao userDao;
-    private final JwtUtils jwtUtils;
+    private final ZugangsService zugangsService;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/auth")
     public ResponseEntity<String> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
+        //checks if user is in db with correct password
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
-       final UserDetails user = userDao.findUserByEmail(request.getEmail());
-       if (user != null) {
-           return ResponseEntity.ok(jwtUtils.generateToken(user));
-       }
-       return ResponseEntity.status(401).body("");
+
+        //generates token for user
+        final String token = zugangsService.generateTokenForUser(request.getEmail());
+        if (token != null) {
+            return ResponseEntity.ok(token);
+        } else {
+            return ResponseEntity.status(401).body("Could not find user");
+        }
     }
 }

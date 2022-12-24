@@ -1,11 +1,9 @@
-package com.hsaugsburg.HRManagementTool.database.DAO;
+package com.hsaugsburg.HRManagementTool.database.entity;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,14 +18,12 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "MITARBEITER")
-public class MitarbeiterDAO {
+public class Mitarbeiter {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -41,7 +37,7 @@ public class MitarbeiterDAO {
     private String nachname;
 
     @OneToOne(mappedBy = "leiter")
-    private AbteilungDAO abteilungenInLeitung;
+    private Abteilung abteilungenInLeitung;
 
     @Column(name = "TELNR", nullable = false, updatable = true, columnDefinition = "VARCHAR(15)")
     private String telnr;
@@ -54,27 +50,27 @@ public class MitarbeiterDAO {
 
     @OneToMany(mappedBy = "leiter")
     @Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
-    private Set<ProjektDAO> projekteInFuehrung;
+    private Set<Projekt> projekteInFuehrung;
 
     @OneToMany(mappedBy = "mitarbeiter")
     //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
-    private Set<ZeiterfassungDAO> zeiterfassungen;
+    private Set<Zeiterfassung> zeiterfassungen;
 
     @ManyToMany
     @JoinTable(name = "TERMIN_TEILNEHMER",
             joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "TERMIN_ID")})
-    private Set<TerminDAO> termine;
+    private Set<Termin> termine;
 
     @ManyToMany
     @JoinTable(name = "PROJEKTVERTEILUNG",
             joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
-    private Set<ProjektDAO> projekte;
+    private Set<Projekt> projekte;
 
     @ManyToOne
     @JoinColumn(name="ABTEILUNG", nullable = false)
-    private AbteilungDAO abteilung;
+    private Abteilung abteilung;
 
 
 }

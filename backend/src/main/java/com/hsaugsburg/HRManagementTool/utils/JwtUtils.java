@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.config;
+package com.hsaugsburg.HRManagementTool.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

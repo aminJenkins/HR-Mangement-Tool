@@ -1,27 +1,17 @@
-package com.hsaugsburg.HRManagementTool.database.DAO;
+package com.hsaugsburg.HRManagementTool.database.entity;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Set;
-import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-
-@Entity(name = "PROJEKT")
-public class ProjektDAO {
+@Getter
+@Setter
+@Entity
+@Table(name = "PROJECT")
+public class Projekt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
@@ -30,11 +20,11 @@ public class ProjektDAO {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID",
             insertable = false, updatable = true, nullable = false)
-    private MitarbeiterDAO leiter;
+    private Mitarbeiter leiter;
 
     @ManyToMany(mappedBy = "projekte")
     //@Column(name = "ZEITERFASSUNG", nullable = true, updatable = true)
-    private Set<ZeiterfassungDAO> zeiterfassungen;
+    private Set<Zeiterfassung> zeiterfassungen;
 
     @Column(name = "STUNDENSATZ", nullable = false)
     private Double stundensatz;
@@ -50,13 +40,13 @@ public class ProjektDAO {
 
     @OneToMany(mappedBy = "projekt")
     //@Column(name = "TERMIN", insertable = false, updatable = true, nullable = true)
-    private Set<TerminDAO> termine;
+    private Set<Termin> termine;
 
     @ManyToMany(mappedBy = "projekte")
-    private Set<KontingentDAO> kontingente;
+    private Set<Kontingent> kontingente;
 
     @ManyToMany(mappedBy = "projekte")
-    private Set<MitarbeiterDAO> projektbeteiligte;
+    private Set<Mitarbeiter> projektbeteiligte;
 
 
 }
