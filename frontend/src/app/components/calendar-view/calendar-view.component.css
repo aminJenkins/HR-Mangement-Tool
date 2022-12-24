@@ -1,0 +1,9 @@
+.appointment-td {
+  height: 10vh;
+}
+
+.calendar-header {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto 0;
+}
