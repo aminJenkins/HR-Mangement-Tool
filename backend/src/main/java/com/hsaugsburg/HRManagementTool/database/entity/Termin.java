@@ -1,23 +1,18 @@
-package com.hsaugsburg.HRManagementTool.database.DAO;
+package com.hsaugsburg.HRManagementTool.database.entity;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
-import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
-@Entity(name = "TERMIN")
-public class TerminDAO {
+@Getter
+@Setter
+@Entity
+@Table(name = "TERMIN")
+public class Termin {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
@@ -26,10 +21,10 @@ public class TerminDAO {
     @ManyToOne
     @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID",
             insertable = false, updatable = true, nullable = false)
-    private ProjektDAO projekt;
+    private Projekt projekt;
 
     @ManyToMany(mappedBy = "termine")
-    private Set<MitarbeiterDAO> teilnehmern;
+    private Set<Mitarbeiter> teilnehmern;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "VON", nullable = false)

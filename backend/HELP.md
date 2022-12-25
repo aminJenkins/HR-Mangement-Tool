@@ -17,4 +17,11 @@ For further reference, please consider the following sections:
 The following guides illustrate how to use some features concretely:
 
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+* [Setup Spring security with JPA](https://www.youtube.com/watch?v=awcCiqBO36E&t=1627s&ab_channel=DanVega)
 
+### Setup DB
+* To set up the db first you have to uncomment the method _commandLineRunner_ in th main file **HrManagementToolApplication.java**.
+This will insert two users into the db on application start up. 
+* After starting the application the _commandLineRunner_ method should be commented again to prevent db errors and inserting duplicates.
+* Then you can access the h2-console under _http://localhost:8090/h2-console/_. The password is defined in the application.properties file.
+* In the h2-console execute the insert statements defined in the file **testData.sql** located in **src/main/resources/database/testData.sql**
