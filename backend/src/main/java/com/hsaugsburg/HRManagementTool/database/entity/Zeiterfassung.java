@@ -1,4 +1,7 @@
-package com.hsaugsburg.HRManagementTool.database.DAO;
+package com.hsaugsburg.HRManagementTool.database.entity;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
@@ -14,9 +17,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Getter
+@Setter
 @Entity
 @Table(name="ZEITERFASSUNG")
-public class ZeiterfassungDAO {
+public class Zeiterfassung {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
@@ -25,17 +30,17 @@ public class ZeiterfassungDAO {
     @ManyToOne
     @JoinColumn(name = "MITARBEITER_ID", unique = true, nullable = false, referencedColumnName = "ID",
             insertable = false, updatable = false)
-    private MitarbeiterDAO mitarbeiter;
+    private Mitarbeiter mitarbeiter;
 
     @ManyToMany
     @JoinTable(
             name = "ZEITERFASSUNG_PROJEKT",
             joinColumns = @JoinColumn(name = "ZEITERFASSUNG_ID"),
             inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))
-    private Set<ProjektDAO> projekte;
+    private Set<Projekt> projekte;
 
     @ManyToMany(mappedBy = "zeiterfassungen")
-    private Set<KontingentDAO> kontingente;
+    private Set<Kontingent> kontingente;
 
     @Column(name = "KOMMENTAR", nullable = false)
     private String kommentar;

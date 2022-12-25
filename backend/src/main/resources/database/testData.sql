@@ -1,4 +1,3 @@
-INSERT INTO ZUGANGSDATEN(USERNAME, PASSWORD) VALUES('admin@hr','password');
 insert into ABTEILUNG(id,name,leiter) values(1,'modern web',null);
 insert into ABTEILUNG(id,name,leiter) values(2,'operations',null);
 insert into ABTEILUNG(id,name,leiter) values(3,'vertrieb',null);
