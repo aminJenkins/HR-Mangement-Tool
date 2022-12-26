@@ -11,9 +11,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 import { HomeViewComponent } from './components/home-view/home-view.component';
+import {TimeTrackingViewComponent} from  './components/time-tracking-view/time-tracking-view.component';
 
+// @ts-ignore
 @NgModule({
-  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent],
+  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
