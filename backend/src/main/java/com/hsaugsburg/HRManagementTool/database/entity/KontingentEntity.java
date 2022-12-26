@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name="KONTINGENT")
-public class Kontingent {
+public class KontingentEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
@@ -30,13 +30,13 @@ public class Kontingent {
     @JoinTable(name = "KONTINGENT_PROJEKT",
             joinColumns = {@JoinColumn(name = "KONTINGENT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
-    private Set<Projekt> projekte;
+    private Set<ProjektEntity> projekte;
 
     @ManyToMany
     @JoinTable(name = "KONTINGENTE_ZEITERFASSUNG",
             joinColumns = {@JoinColumn(name = "KONTINGENT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ZEITERFASSUNG_ID")})
-    private Set<Zeiterfassung> zeiterfassungen;
+    private Set<ZeiterfassungEntity> zeiterfassungen;
 
     @Column(name = "BEZEICHNUNG", nullable = false)
     private String bezeichnung;
