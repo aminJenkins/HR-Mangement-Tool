@@ -26,6 +26,19 @@ import { MatTableModule } from "@angular/material/table";
     MatSortModule,
     MatTableModule,
     MatProgressSpinnerModule,
+  ],
+  exports: [
+    CommonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class MaterialModule { }
