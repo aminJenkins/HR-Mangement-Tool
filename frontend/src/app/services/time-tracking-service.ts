@@ -19,7 +19,7 @@ export class TimeTrackingService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     });
-    //return this.http.get<TimeTracker[]>(environment.TIME_TRACKING_URL,{ headers:new HttpHeaders().append('Authorization', `Bearer ${auth_token}`)});
-    return this.http.get<TimeTracker[]>(environment.GREETING_URL,{ headers:new HttpHeaders().append('Authorization', `Bearer ${auth_token}`)});
+    return this.http.get<TimeTracker[]>(environment.TIME_TRACKING_URL,{ headers:new HttpHeaders().append('Authorization', `Bearer ${auth_token}`)});
+    //return this.http.get<TimeTracker[]>(environment.GREETING_URL,{ headers:new HttpHeaders().append('Authorization', `Bearer ${auth_token}`)});
   }
 }
