@@ -38,6 +38,9 @@ public class TerminEntity {
     @Column(name = "BESCHREIBUNG", nullable = false, updatable = true)
     private String beschreibung;
 
+    @Column(name = "TITEL", nullable = false, updatable = true)
+    private String titel;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "PRIORITY", nullable = false, updatable = true)
     private Priority priority;
