@@ -1,5 +1,6 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
+import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,4 +34,14 @@ public class TerminEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "BIS", nullable = false)
     private Date bis;
+
+    @Column(name = "BESCHREIBUNG", nullable = false, updatable = true)
+    private String beschreibung;
+
+    @Column(name = "TITEL", nullable = false, updatable = true)
+    private String titel;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PRIORITY", nullable = false, updatable = true)
+    private Priority priority;
 }
