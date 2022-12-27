@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ZUGANGS_DATEN")
 @NoArgsConstructor
-public class Zugang {
+public class ZugangEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
@@ -26,7 +26,7 @@ public class Zugang {
     @Column(name = "AUTHORITY", nullable = false)
     private String authority;
 
-    public Zugang(String username, String password, String authority) {
+    public ZugangEntity(String username, String password, String authority) {
         this.username = username;
         this.password = password;
         this.authority = authority;

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "TERMIN")
-public class Termin {
+public class TerminEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
@@ -22,10 +22,10 @@ public class Termin {
     @ManyToOne
     @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID",
             insertable = false, updatable = true, nullable = false)
-    private Projekt projekt;
+    private ProjektEntity projekt;
 
     @ManyToMany(mappedBy = "termine")
-    private Set<Mitarbeiter> teilnehmern;
+    private Set<MitarbeiterEntity> teilnehmern;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "VON", nullable = false)

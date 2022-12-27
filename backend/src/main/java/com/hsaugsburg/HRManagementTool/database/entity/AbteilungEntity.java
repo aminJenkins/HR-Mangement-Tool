@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "ABTEILUNG")
-public class Abteilung {
+public class AbteilungEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
@@ -31,9 +31,9 @@ public class Abteilung {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "LEITER", referencedColumnName = "ID")
-    private Mitarbeiter leiter;
+    private MitarbeiterEntity leiter;
 
     @OneToMany(mappedBy="abteilung")
     @Column(name = "MITARBEITER", nullable = false)
-    private Set<Mitarbeiter> mitarbeitern;
+    private Set<MitarbeiterEntity> mitarbeitern;
 }
