@@ -30,8 +30,12 @@ public class TerminEntity {
 
     @ManyToOne
     @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID",
-            insertable = false, updatable = true, nullable = false)
+            insertable = false, updatable = true)
     private ProjektEntity projekt;
+
+    @ManyToOne
+    @JoinColumn(name = "MITARBEITER_ID", referencedColumnName = "id",updatable = false, nullable = false)
+    private MitarbeiterEntity ersteller;
 
     @ManyToMany(mappedBy = "termine")
     private Set<MitarbeiterEntity> teilnehmern;

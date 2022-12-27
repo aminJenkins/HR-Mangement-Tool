@@ -2,15 +2,13 @@ package com.hsaugsburg.HRManagementTool.services;
 
 import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.TerminRepo;
-import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarMapper;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
+
 
 @Service
 @RequiredArgsConstructor
