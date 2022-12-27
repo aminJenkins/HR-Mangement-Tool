@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  TIME_TRACKING_JSON_URL: 'http://localhost/api/timeTrackings',
+  TIME_TRACKING_URL: 'http://localhost:8090/api/timetracking/tracks',
+  GREETING_URL: 'http://localhost:8090/api/greetings',
 };
 
 /*

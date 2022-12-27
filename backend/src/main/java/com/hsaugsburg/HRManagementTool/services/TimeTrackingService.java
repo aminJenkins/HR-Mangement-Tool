@@ -23,8 +23,8 @@ public class TimeTrackingService {
         return  json;
     }
 
-    private Set<ZeiterfassungEntity> getTimeTracks(int maID){
-        return timeTrackingRepo.findTimeTracksForEmploye(maID);
+    private Set<ZeiterfassungEntity> getTimeTracks(String userEmail){
+        return timeTrackingRepo.findTimeTracksForEmploye(userEmail);
     }
 
     private Set<ZeiterfassungDTO> parseEntitytoDTO(Set<ZeiterfassungEntity> entities){
@@ -42,8 +42,8 @@ public class TimeTrackingService {
         return dtos;
     }
 
-    public String getparsedTimeTrackJson(int maID) throws JsonProcessingException {
-        Set<ZeiterfassungDTO> timeTracksDTO=parseEntitytoDTO(getTimeTracks(maID));
+    public String getparsedTimeTrackJson(String userEmail) throws JsonProcessingException {
+        Set<ZeiterfassungDTO> timeTracksDTO=parseEntitytoDTO(getTimeTracks(userEmail));
         return parseTimeTrackToJson(timeTracksDTO);
 
     }

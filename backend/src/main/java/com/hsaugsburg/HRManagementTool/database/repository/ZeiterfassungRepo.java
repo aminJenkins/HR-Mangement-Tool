@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ZeiterfassungRepo extends JpaRepository<ZeiterfassungEntity,Integer> {
-    @Query(value = "SELECT * FROM ZEITERFASSUNG WHERE MITARBEITER_ID= :id", nativeQuery = true)
-    Set<ZeiterfassungEntity> findTimeTracksForEmploye(@Param("id") Integer id);
+    @Query(value = "SELECT * FROM ZEITERFASSUNG WHERE MITARBEITER_ID= (SELECT U.ID FROM MITARBEITER U WHERE U.MAIL = :email)", nativeQuery = true)
+    Set<ZeiterfassungEntity> findTimeTracksForEmploye(@Param("email") String userMail);
 
 }
