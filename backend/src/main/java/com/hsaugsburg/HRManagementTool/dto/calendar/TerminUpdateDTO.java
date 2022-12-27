@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class UpdateTerminDTO {
+public class TerminUpdateDTO {
 
     @NotNull
     private int id;
@@ -19,7 +19,7 @@ public class UpdateTerminDTO {
     private String beschreibung;
 
     @NotNull
-    private LocalTime begin;
+    private LocalTime beginn;
 
     @NotNull
     private LocalTime ende;

@@ -18,7 +18,7 @@ public class TerminDTO {
     private String beschreibung;
 
     @NotNull
-    private LocalTime begin;
+    private LocalTime beginn;
 
     @NotNull
     private LocalTime ende;
