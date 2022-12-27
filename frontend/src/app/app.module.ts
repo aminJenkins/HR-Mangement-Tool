@@ -8,6 +8,7 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
 import { HomeViewComponent } from './components/home-view/home-view.component';
 import {TimeTrackingViewComponent} from  './components/time-tracking-view/time-tracking-view.component';
 import { MaterialModule } from './material/material.module';
+import {TimeTrackingService} from "./services/time-tracking-service";
 
 // @ts-ignore
 @NgModule({
@@ -18,7 +19,7 @@ import { MaterialModule } from './material/material.module';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [TimeTrackingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
