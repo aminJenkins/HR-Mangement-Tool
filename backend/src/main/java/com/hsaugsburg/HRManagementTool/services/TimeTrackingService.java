@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
+import com.hsaugsburg.HRManagementTool.database.repository.KontingentRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.MitarbeiterRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.ZeiterfassungRepo;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
@@ -27,6 +28,8 @@ public class TimeTrackingService {
 
     @Autowired
     private MitarbeiterRepo mitarbeiterRepo;
+    @Autowired
+    private KontingentRepo kontingentRepo;
 
     public String getMitarbeiter(String email) throws JsonProcessingException {
         return JsonMapper.parseObjectToJson(mitarbeiterRepo.findMitarbeiterByMail(email));
@@ -43,12 +46,16 @@ public class TimeTrackingService {
 
     }
 
+    public String getContingents() throws JsonProcessingException {
+        return parseObjectToJson(kontingentRepo.findAll());
+    }
+
     public void createTimeTrack(String mail,String jsonBody) throws JsonProcessingException {
         MitarbeiterEntity maEntity = mitarbeiterRepo.findMitarbeiterByMail(mail);
 
         ZeiterfassungDTO zeiterfassungDTO=new ZeiterfassungDTO();
 
-        //zeiterfassungDTO = (ZeiterfassungDTO)parseJsonToObject(jsonBody,zeiterfassungDTO);
+        zeiterfassungDTO = (ZeiterfassungDTO)parseJsonToObject(jsonBody,zeiterfassungDTO);
 
         ObjectMapper mapper = new ObjectMapper();
         zeiterfassungDTO = mapper.readValue(jsonBody, ZeiterfassungDTO.class);

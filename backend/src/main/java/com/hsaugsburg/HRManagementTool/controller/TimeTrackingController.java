@@ -31,6 +31,16 @@ public class TimeTrackingController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+    @GetMapping("/contingents")
+    public ResponseEntity<String> getContingents(Authentication authentication) {
+        try {
+            return ResponseEntity.ok(timeTrackingService.getContingents());
+        }catch (Exception exception){
+            return ResponseEntity.status(500).body(exception.getMessage());
+        }
+    }
+
 //    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
 //    @GetMapping("/mitarbeiter")
 //    public ResponseEntity<String> getMitarbeiter(Authentication authentication) {
@@ -52,4 +62,5 @@ public class TimeTrackingController {
             return ResponseEntity.status(500).body(exception.getMessage());
         }
     }
+
 }
