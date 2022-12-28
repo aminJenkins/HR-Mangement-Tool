@@ -41,7 +41,7 @@ public class MitarbeiterEntity {
     @Column(name = "TELNR", nullable = false, updatable = true, columnDefinition = "VARCHAR(15)")
     private String telnr;
 
-    @Column(name = "MAIL", nullable = false, updatable = true, columnDefinition = "VARCHAR(50)")
+    @Column(name = "MAIL", unique = true, nullable = false, updatable = true, columnDefinition = "VARCHAR(50)")
     private String email;
 
     @Column(name = "ANSCHRIFT", nullable = false, updatable = true, columnDefinition = "VARCHAR(100)")

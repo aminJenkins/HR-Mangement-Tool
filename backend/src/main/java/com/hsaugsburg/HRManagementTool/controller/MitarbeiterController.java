@@ -1,10 +1,7 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
-import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
-import com.hsaugsburg.HRManagementTool.services.KontingentService;
 import com.hsaugsburg.HRManagementTool.services.MitarbeiterService;
-import com.hsaugsburg.HRManagementTool.services.TimeTrackingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,31 +15,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/timetracking")
+@RequestMapping("/api/employee")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-public class TimeTrackingController {
-    @Autowired
-    private  TimeTrackingService timeTrackingService;
+public class MitarbeiterController {
 
+    @Autowired
+    MitarbeiterService maService;
 
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-    @GetMapping("/tracks")
-    public ResponseEntity<String> getTimeTracks(Authentication authentication) {
+    @GetMapping("/")
+    public ResponseEntity<MitarbeiterDTO> getEmployee(Authentication authentication) {
         try {
-            return ResponseEntity.ok(timeTrackingService.getparsedTimeTrackJson(authentication.getName()));
+            return ResponseEntity.ok(maService.getMitarbeiterDTO(authentication.getName()));
         }catch (Exception exception){
-            return ResponseEntity.status(500).body(exception.getMessage());
+            return ResponseEntity.status(500).body(null);
         }
     }
 
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-    @PostMapping("/tracks")
-    public ResponseEntity<String> postTimeTrack(Authentication authentication, @RequestBody String jsonBody) {
+    @PostMapping("/")
+    public ResponseEntity<String> createEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
         try {
-            String mail =authentication.getName();
-            timeTrackingService.createTimeTrack(authentication.getName(),jsonBody);
-            return ResponseEntity.ok("Eintrag wurde gespeichert!");
+            maService.createMitarbeiter(mitarbeiterDTO);
+            return ResponseEntity.ok("Der Mitarbeiter wurde erfolgreich angelegt");
         }catch (Exception exception){
             return ResponseEntity.status(500).body(exception.getMessage());
         }

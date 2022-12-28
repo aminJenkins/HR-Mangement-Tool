@@ -32,15 +32,20 @@ public class ZeiterfassungEntity {
             insertable = false, updatable = false)
     private MitarbeiterEntity mitarbeiter;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "ZEITERFASSUNG_PROJEKT",
             joinColumns = @JoinColumn(name = "ZEITERFASSUNG_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))
-    private Set<ProjektEntity> projekte;
+            inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))*/
+    @ManyToOne
+    @JoinColumn(name = "Projekt_ID", nullable = true, referencedColumnName = "ID",
+            insertable = false, updatable = false)
+    private ProjektEntity projekt;
 
-    @ManyToMany(mappedBy = "zeiterfassungen")
-    private Set<KontingentEntity> kontingente;
+    @ManyToOne
+    @JoinColumn(name = "KONTINGENT_ID", nullable = false, referencedColumnName = "ID",
+            insertable = false, updatable = false)
+    private KontingentEntity kontingent;
 
     @Column(name = "KOMMENTAR", nullable = false)
     private String kommentar;

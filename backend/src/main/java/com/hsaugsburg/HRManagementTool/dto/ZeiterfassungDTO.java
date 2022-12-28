@@ -25,8 +25,8 @@ import lombok.Setter;
 public class ZeiterfassungDTO {
     private int id;
     private MitarbeiterEntity mitarbeiter;
-    private Set<ProjektEntity> projekte;
-    private Set<KontingentEntity> kontingente;
+    private int projektID;
+    private int kontingentID;
     private String kommentar;
     private double dauer;
     private Date datum;

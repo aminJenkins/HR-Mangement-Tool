@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjektRepo extends JpaRepository<ProjektEntity,Integer> {
+
+    ProjektEntity findById(int id);
 }

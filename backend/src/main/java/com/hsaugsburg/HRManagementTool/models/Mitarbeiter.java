@@ -5,11 +5,7 @@ import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.AbteilungEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
-import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,15 +35,15 @@ public class Mitarbeiter {
         return dto;
     }
 
-    public static MitarbeiterEntity mapDTOToEntity(MitarbeiterDTO dto) {
+    public static MitarbeiterEntity mapDTOToEntity(MitarbeiterDTO dto, AbteilungEntity abteilungEntity) {
         MitarbeiterEntity entity = new MitarbeiterEntity();
-//        entity.setAbteilung(dto.getAbteilung());
-//        entity.setAbteilung(dto.getAbteilung());
+        entity.setAbteilung(abteilungEntity);
         entity.setAnschrift(dto.getAnschrift());
         entity.setEmail(dto.getEmail());
         entity.setId(dto.getId());
         entity.setNachname(dto.getNachname());
         entity.setName(dto.getName());
+        entity.setTelnr(dto.getTelnr());
         return entity;
     }
 
@@ -59,11 +55,4 @@ public class Mitarbeiter {
         return dtos;
     }
 
-    public static Set<MitarbeiterDTO> parseDTOsToEntyties(Set<MitarbeiterDTO> dtos) {
-        Set<MitarbeiterEntity> entities = new HashSet<>();
-        dtos.forEach((e) -> {
-            entities.add(Mitarbeiter.mapDTOToEntity(e));
-        });
-        return dtos;
-    }
 }
