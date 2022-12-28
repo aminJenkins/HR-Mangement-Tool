@@ -14,4 +14,5 @@ public interface ZeiterfassungRepo extends JpaRepository<ZeiterfassungEntity,Int
     @Query(value = "SELECT * FROM ZEITERFASSUNG WHERE MITARBEITER_ID= (SELECT U.ID FROM MITARBEITER U WHERE U.MAIL = :email)", nativeQuery = true)
     Set<ZeiterfassungEntity> findTimeTracksForEmploye(@Param("email") String userMail);
 
+
 }

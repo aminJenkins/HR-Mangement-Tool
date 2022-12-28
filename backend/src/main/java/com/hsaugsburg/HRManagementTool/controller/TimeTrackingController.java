@@ -8,6 +8,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,12 +20,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class TimeTrackingController {
     @Autowired
     private  TimeTrackingService timeTrackingService;
+
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
     @GetMapping("/tracks")
     public ResponseEntity<String> getTimeTracks(Authentication authentication) {
         try {
-            String name = authentication.getName();
             return ResponseEntity.ok(timeTrackingService.getparsedTimeTrackJson(authentication.getName()));
+        }catch (Exception exception){
+            return ResponseEntity.status(500).body(exception.getMessage());
+        }
+    }
+
+//    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+//    @GetMapping("/mitarbeiter")
+//    public ResponseEntity<String> getMitarbeiter(Authentication authentication) {
+//        try {
+//            return ResponseEntity.ok(timeTrackingService.getMitarbeiter(authentication.getName()));
+//        }catch (Exception exception){
+//            return ResponseEntity.status(500).body(exception.getMessage());
+//        }
+//    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+    @PostMapping("/tracks")
+    public ResponseEntity<String> postTimeTrack(Authentication authentication, @RequestBody String jsonBody) {
+        try {
+            String mail =authentication.getName();
+            timeTrackingService.createTimeTrack(authentication.getName(),jsonBody);
+            return ResponseEntity.ok("Eintrag wurde gespeichert!");
         }catch (Exception exception){
             return ResponseEntity.status(500).body(exception.getMessage());
         }

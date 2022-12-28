@@ -10,18 +10,28 @@ import {TimeTrackingViewComponent} from  './components/time-tracking-view/time-t
 import { MaterialModule } from './material/material.module';
 import {TimeTrackingService} from "./services/time-tracking-service";
 import { HttpClientModule } from '@angular/common/http';
+import { TimetrackingFormViewComponent } from './components/timetracking-from-view/timetracking-form-view.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 
 // @ts-ignore
 @NgModule({
-  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent],
+  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent, TimetrackingFormViewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+
+
+
   ],
-  providers: [TimeTrackingService],
+  providers: [TimeTrackingService,MatDatepickerModule,MatNativeDateModule ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

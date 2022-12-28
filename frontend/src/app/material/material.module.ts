@@ -11,6 +11,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import {MatTableModule} from "@angular/material/table";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatSelectModule} from "@angular/material/select";
+import {ReactiveFormsModule} from "@angular/forms";
+
 
 
 
@@ -28,7 +33,10 @@ import {MatTableDataSource} from "@angular/material/table";
     MatSortModule,
     MatTableModule,
     MatProgressSpinnerModule,
-
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
@@ -42,6 +50,10 @@ import {MatTableDataSource} from "@angular/material/table";
     MatSortModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ]
 })
 export class MaterialModule { }
