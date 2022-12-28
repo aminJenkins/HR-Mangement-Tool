@@ -55,4 +55,14 @@ public class Mitarbeiter {
         return dtos;
     }
 
+<<<<<<< HEAD
+=======
+    public static Set<MitarbeiterDTO> parseDTOsToEntyties(Set<MitarbeiterDTO> dtos) {
+        Set<MitarbeiterEntity> entities = new HashSet<>();
+        dtos.forEach((e) -> {
+            entities.add(Mitarbeiter.mapDTOToEntity(e));
+        });
+        return dtos;
+    }
+>>>>>>> origin/main
 }
