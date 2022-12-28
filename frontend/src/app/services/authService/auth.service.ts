@@ -35,6 +35,7 @@ export class AuthService {
 
   isUserLoggedIn(): boolean {
     return localStorage.getItem(AuthService.TOKEN_ID) != null;
+    // todo check if token is expired
   }
 
   public setSession(token: string | undefined): void {

@@ -1,5 +1,6 @@
 package com.hsaugsburg.HRManagementTool.services;
 
+import com.hsaugsburg.HRManagementTool.database.entity.Zugang;
 import com.hsaugsburg.HRManagementTool.utils.JwtUtils;
 import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
 import com.hsaugsburg.HRManagementTool.models.SecurityUser;

@@ -27,8 +27,8 @@ public class HrManagementToolApplication {
 //	@Bean
 //	CommandLineRunner commandLineRunner(ZugangsRepo zugangsRepo, PasswordEncoder encoder) {
 //		return args -> {
-//			zugangsRepo.save(new Zugang("user@ma", encoder.encode("password"), "ROLE_USER"));
-//			zugangsRepo.save(new Zugang("admin@hr", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
+//			zugangsRepo.save(new Zugang("max.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+//			zugangsRepo.save(new Zugang("kai.musterman@gmail.com", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
 //		};
 //	}
 
