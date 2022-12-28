@@ -32,15 +32,11 @@ public class TimeTrackingService {
 
 
 
-    private Set<ZeiterfassungEntity> getTimeTracks(String userEmail){
-        return timeTrackingRepo.findTimeTracksForEmploye(userEmail);
+    public Set<ZeiterfassungDTO> getTimeTracks(String userEmail){
+
+        return Zeiterfassung.parseEntitiestoDTOs(timeTrackingRepo.findTimeTracksForEmploye(userEmail));
     }
 
-    public String getparsedTimeTrackJson(String userEmail) throws JsonProcessingException {
-        Set<ZeiterfassungDTO> timeTracksDTO=Zeiterfassung.parseEntitiestoDTOs(getTimeTracks(userEmail));
-        return parseObjectToJson(timeTracksDTO);
-
-    }
 
     public void createTimeTrack(String mail,String jsonBody) throws JsonProcessingException {
         MitarbeiterEntity maEntity = mitarbeiterService.getMitarbeiterEntity(mail);

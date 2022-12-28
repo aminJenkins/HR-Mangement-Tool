@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   TIME_TRACKING_URL: 'http://localhost:8090/api/timetracking/tracks',
-  CONTINGENTS_URL: 'http://localhost:8090/api/contingent',
+  CONTINGENTS_URL: 'http://localhost:8090/api/contingent/',
   GREETING_URL: 'http://localhost:8090/api/greetings',
 };
 

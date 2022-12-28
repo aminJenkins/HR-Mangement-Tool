@@ -1,7 +1,10 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import java.util.Set;
+
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
+import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import com.hsaugsburg.HRManagementTool.services.KontingentService;
 import com.hsaugsburg.HRManagementTool.services.MitarbeiterService;
 import com.hsaugsburg.HRManagementTool.services.TimeTrackingService;
@@ -28,11 +31,11 @@ public class TimeTrackingController {
 
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
     @GetMapping("/tracks")
-    public ResponseEntity<String> getTimeTracks(Authentication authentication) {
+    public ResponseEntity<Set<ZeiterfassungDTO>> getTimeTracks(Authentication authentication) {
         try {
-            return ResponseEntity.ok(timeTrackingService.getparsedTimeTrackJson(authentication.getName()));
+            return ResponseEntity.ok(timeTrackingService.getTimeTracks(authentication.getName()));
         }catch (Exception exception){
-            return ResponseEntity.status(500).body(exception.getMessage());
+            return ResponseEntity.status(500).body(null);
         }
     }
 

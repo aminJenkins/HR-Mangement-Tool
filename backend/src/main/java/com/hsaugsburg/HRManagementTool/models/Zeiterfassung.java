@@ -28,8 +28,12 @@ public class Zeiterfassung {
 
     public static ZeiterfassungDTO mapEntityToDTO(ZeiterfassungEntity entity){
         ZeiterfassungDTO dto = new ZeiterfassungDTO();
-        dto.setProjektID(entity.getProjekt().getId());
-        dto.setKontingentID(entity.getKontingent().getId());
+        if(entity.getProjekt()!=null){
+            dto.setProjektID(entity.getProjekt().getId());
+        }
+        if(entity.getKontingent()!=null){
+            dto.setKontingentID(entity.getKontingent().getId());
+        }
         dto.setKommentar(entity.getKommentar());
         dto.setId(entity.getId());
         dto.setDauer(entity.getDauer());
@@ -58,8 +62,12 @@ public class Zeiterfassung {
             dto.setDauer(e.getDauer());
             dto.setId(e.getId());
             dto.setKommentar(e.getKommentar());
-            dto.setProjektID(e.getProjekt().getId());
-            dto.setKontingentID(e.getKontingent().getId());
+            if(e.getProjekt()!=null){
+                dto.setProjektID(e.getProjekt().getId());
+            }
+            if(e.getKontingent()!=null){
+                dto.setKontingentID(e.getKontingent().getId());
+            }
             dtos.add(dto);
         });
         return dtos;
