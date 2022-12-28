@@ -22,7 +22,7 @@ public class ProjektEntity {
             insertable = false, updatable = true, nullable = false)
     private MitarbeiterEntity leiter;
 
-    @ManyToMany(mappedBy = "projekte")
+    @OneToMany(mappedBy = "projekt")
     //@Column(name = "ZEITERFASSUNG", nullable = true, updatable = true)
     private Set<ZeiterfassungEntity> zeiterfassungen;
 

@@ -5,9 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
+import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
+import com.hsaugsburg.HRManagementTool.dto.ProjektDTO;
 import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,17 +19,21 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Zeiterfassung {
     private int id;
-    private MitarbeiterEntity mitarbeiter;
-    private Set<ProjektEntity> projekte;
-    private Set<KontingentEntity> kontingente;
+    private MitarbeiterDTO mitarbeiter;
+    private Set<ProjektDTO> projekte;
+    private Set<KontingentDTO> kontingente;
     private String kommentar;
     private double dauer;
     private Date datum;
 
     public static ZeiterfassungDTO mapEntityToDTO(ZeiterfassungEntity entity){
         ZeiterfassungDTO dto = new ZeiterfassungDTO();
-        dto.setProjekte(entity.getProjekte());
-        dto.setKontingente(entity.getKontingente());
+        if(entity.getProjekt()!=null){
+            dto.setProjektID(entity.getProjekt().getId());
+        }
+        if(entity.getKontingent()!=null){
+            dto.setKontingentID(entity.getKontingent().getId());
+        }
         dto.setKommentar(entity.getKommentar());
         dto.setId(entity.getId());
         dto.setDauer(entity.getDauer());
@@ -36,10 +42,10 @@ public class Zeiterfassung {
         return dto;
     }
 
-    public static ZeiterfassungEntity mapDTOToEntity(ZeiterfassungDTO dto){
+    public static ZeiterfassungEntity mapDTOToEntity(ZeiterfassungDTO dto, ProjektEntity projektEntity,KontingentEntity kontingentEntity){
         ZeiterfassungEntity entity = new ZeiterfassungEntity();
-        entity.setProjekte(dto.getProjekte());
-        entity.setKontingente(dto.getKontingente());
+        entity.setProjekt(projektEntity);
+        entity.setKontingent(kontingentEntity);
         entity.setKommentar(dto.getKommentar());
         entity.setId(dto.getId());
         entity.setDauer(dto.getDauer());
@@ -56,8 +62,12 @@ public class Zeiterfassung {
             dto.setDauer(e.getDauer());
             dto.setId(e.getId());
             dto.setKommentar(e.getKommentar());
-            dto.setKontingente(e.getKontingente());
-            dto.setProjekte(e.getProjekte());
+            if(e.getProjekt()!=null){
+                dto.setProjektID(e.getProjekt().getId());
+            }
+            if(e.getKontingent()!=null){
+                dto.setKontingentID(e.getKontingent().getId());
+            }
             dtos.add(dto);
         });
         return dtos;

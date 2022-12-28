@@ -32,7 +32,7 @@ export class TimeTrackingService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     });
-    return this.http.get<Contingent[]>(environment.GET_CONTINGENTS_URL,{ headers:new HttpHeaders().append('Authorization', `Bearer ${auth_token}`)});
+    return this.http.get<Contingent[]>(environment.CONTINGENTS_URL,{ headers:new HttpHeaders().append('Authorization', `Bearer ${auth_token}`)});
 
   }
 
