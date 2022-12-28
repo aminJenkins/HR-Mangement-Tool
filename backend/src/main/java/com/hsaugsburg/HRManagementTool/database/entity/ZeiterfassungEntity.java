@@ -28,7 +28,7 @@ public class ZeiterfassungEntity {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "MITARBEITER_ID", unique = true, nullable = false, referencedColumnName = "ID",
+    @JoinColumn(name = "MITARBEITER_ID", nullable = false, referencedColumnName = "ID",
             insertable = false, updatable = false)
     private MitarbeiterEntity mitarbeiter;
 

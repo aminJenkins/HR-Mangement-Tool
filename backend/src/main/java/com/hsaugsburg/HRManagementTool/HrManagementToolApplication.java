@@ -1,7 +1,4 @@
 package com.hsaugsburg.HRManagementTool;
-import com.hsaugsburg.HRManagementTool.database.entity.Zugang;
-import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

@@ -1,42 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 import { HomeViewComponent } from './components/home-view/home-view.component';
-import { LoginComponent } from './components/login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {TimeTrackingViewComponent} from  './components/time-tracking-view/time-tracking-view.component';
+import { MaterialModule } from './material/material.module';
+import {TimeTrackingService} from "./services/time-tracking-service";
 import { HttpClientModule } from '@angular/common/http';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
+import { TimetrackingFormViewComponent } from './components/timetracking-from-view/timetracking-form-view.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { LoginComponent } from './components/login/login.component';
+
 
 // @ts-ignore
 @NgModule({
-  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, LoginComponent],
+  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent, TimetrackingFormViewComponent,LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    ReactiveFormsModule,
+    MaterialModule,
     HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
-  providers: [],
+  providers: [TimeTrackingService,MatDatepickerModule,MatNativeDateModule ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
