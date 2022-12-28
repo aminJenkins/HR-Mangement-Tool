@@ -9,6 +9,7 @@ import com.hsaugsburg.HRManagementTool.services.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,8 +23,8 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/termin")
-    public ResponseEntity<TerminDTO> createNewTermin(@RequestBody @Valid final NewTerminDTO newTerminDTO){
-        Termin newTermin = this.calendarService.createNewTermin(this.calendarApiMapper.map(newTerminDTO));
+    public ResponseEntity<TerminDTO> createNewTermin(@RequestBody @Valid final NewTerminDTO newTerminDTO,Authentication authentication ){
+        Termin newTermin = this.calendarService.createNewTermin(this.calendarApiMapper.map(newTerminDTO),authentication);
         return ResponseEntity.ok(this.calendarApiMapper.map(newTermin));
     }
 

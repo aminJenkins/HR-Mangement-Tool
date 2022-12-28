@@ -17,9 +17,7 @@ public class MitarbeiterDTO {
     @NotNull
     private int id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String nachname;
 }

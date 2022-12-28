@@ -16,7 +16,6 @@ import java.util.Set;
 
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class TerminDTO {
     @NotNull
@@ -38,9 +37,6 @@ public class TerminDTO {
 
     @NotNull
     private Date datum;
-
-    @NotNull
-    private Mitarbeiter ersteller;
 
     @NotNull
     private Set<MitarbeiterDTO> teilnehmer;

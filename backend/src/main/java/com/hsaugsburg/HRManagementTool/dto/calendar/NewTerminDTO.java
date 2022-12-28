@@ -34,9 +34,6 @@ public class NewTerminDTO {
     private Date datum;
 
     @NotNull
-    private MitarbeiterDTO ersteller;
-
-    @NotNull
     private Set<MitarbeiterDTO> teilnehmer;
 
     @NotNull

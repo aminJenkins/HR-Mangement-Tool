@@ -7,6 +7,7 @@ import com.hsaugsburg.HRManagementTool.models.mitarbeiter.Mitarbeiter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.Date;
@@ -22,9 +23,9 @@ public class Termin {
     private LocalTime beginn;
     private LocalTime ende;
     private Date datum;
-    private Mitarbeiter ersteller;
     private Set<Mitarbeiter> teilnehmer;
     private Priority priority;
+    private int mitarbeiterId;
 
     public void update(final TerminUpdate update){
         this.beschreibung = update.getBeschreibung();
@@ -34,4 +35,10 @@ public class Termin {
         this.teilnehmer = update.getTeilnehmer();
         this.priority = update.getPriority();
     }
+
+    public void setMitarbeiterId(int id){
+        this.mitarbeiterId=id;
+        System.out.print("Was passiert?");
+    }
+
 }
