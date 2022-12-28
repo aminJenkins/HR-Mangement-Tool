@@ -11,11 +11,16 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 import { HomeViewComponent } from './components/home-view/home-view.component';
-import {TimeTrackingViewComponent} from  './components/time-tracking-view/time-tracking-view.component';
+import { LoginComponent } from './components/login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 
 // @ts-ignore
 @NgModule({
-  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent],
+  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +30,11 @@ import {TimeTrackingViewComponent} from  './components/time-tracking-view/time-t
     MatIconModule,
     MatListModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,12 +2,14 @@ package com.hsaugsburg.HRManagementTool.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //Test controller for checking authentication and role validation
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/greetings")
 public class GreetingController {
 
