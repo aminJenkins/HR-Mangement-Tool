@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MitarbeiterRepo extends JpaRepository<MitarbeiterEntity,Integer> {
-    @Query(value = "SELECT * FROM MITARBEITER U WHERE U.MAIL = :email", nativeQuery = true)
-    MitarbeiterEntity findMitarbeiterByMail(@Param("email") String userMail);
+    //@Query(value = "SELECT * FROM MITARBEITER U WHERE U.MAIL = :email", nativeQuery = true)
+    MitarbeiterEntity findByEmail(String userMail);
 }

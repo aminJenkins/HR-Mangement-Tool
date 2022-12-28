@@ -15,8 +15,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
-
-
+import {HttpClientModule} from "@angular/common/http";
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -37,6 +38,16 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatRadioModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
   ],
   exports: [
     CommonModule,
@@ -54,6 +65,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatRadioModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatCardModule,
   ]
 })
 export class MaterialModule { }

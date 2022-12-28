@@ -1,5 +1,7 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.services.TimeTrackingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/timetracking")
-@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class TimeTrackingController {
     @Autowired
@@ -41,15 +43,15 @@ public class TimeTrackingController {
         }
     }
 
-//    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-//    @GetMapping("/mitarbeiter")
-//    public ResponseEntity<String> getMitarbeiter(Authentication authentication) {
-//        try {
-//            return ResponseEntity.ok(timeTrackingService.getMitarbeiter(authentication.getName()));
-//        }catch (Exception exception){
-//            return ResponseEntity.status(500).body(exception.getMessage());
-//        }
-//    }
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+    @GetMapping("/mitarbeiter")
+    public ResponseEntity<MitarbeiterDTO> getMitarbeiter(Authentication authentication) {
+        try {
+            return ResponseEntity.ok(timeTrackingService.getMitarbeiter(authentication.getName()));
+        }catch (Exception exception){
+            return ResponseEntity.status(500).body(null);
+        }
+    }
 
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
     @PostMapping("/tracks")

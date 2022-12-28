@@ -31,8 +31,9 @@ public class TimeTrackingService {
     @Autowired
     private KontingentRepo kontingentRepo;
 
-    public String getMitarbeiter(String email) throws JsonProcessingException {
-        return JsonMapper.parseObjectToJson(mitarbeiterRepo.findMitarbeiterByMail(email));
+    public MitarbeiterDTO getMitarbeiter(String email) throws JsonProcessingException {
+
+        return  Mitarbeiter.mapEntityToDTO(mitarbeiterRepo.findByEmail(email));
     }
 
 
@@ -51,16 +52,14 @@ public class TimeTrackingService {
     }
 
     public void createTimeTrack(String mail,String jsonBody) throws JsonProcessingException {
-        MitarbeiterEntity maEntity = mitarbeiterRepo.findMitarbeiterByMail(mail);
+        MitarbeiterEntity maEntity = mitarbeiterRepo.findByEmail(mail);
 
         ZeiterfassungDTO zeiterfassungDTO=new ZeiterfassungDTO();
 
+        zeiterfassungDTO.setMitarbeiter(maEntity);
+
         zeiterfassungDTO = (ZeiterfassungDTO)parseJsonToObject(jsonBody,zeiterfassungDTO);
 
-        ObjectMapper mapper = new ObjectMapper();
-        zeiterfassungDTO = mapper.readValue(jsonBody, ZeiterfassungDTO.class);
-
-        zeiterfassungDTO.setMitarbeiter(maEntity);
 
         ZeiterfassungEntity entity =  Zeiterfassung.mapDTOToEntity(zeiterfassungDTO);
 

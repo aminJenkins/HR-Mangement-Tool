@@ -26,45 +26,28 @@ public class Mitarbeiter {
     private String telnr;
     private String email;
     private String anschrift;
-    private Set<ProjektEntity> projekteInFuehrung;
-    private Set<ZeiterfassungEntity> zeiterfassungen;
-    private Set<TerminEntity> termine;
-    private Set<ProjektEntity> projekte;
     private AbteilungEntity abteilung;
 
     public static MitarbeiterDTO mapEntityToDTO(MitarbeiterEntity entity) {
         MitarbeiterDTO dto = new MitarbeiterDTO();
-        dto.setAbteilung(entity.getAbteilung());
-        dto.setAbteilungenInLeitung(entity.getAbteilungenInLeitung());
-        dto.setAbteilung(entity.getAbteilung());
+        dto.setAbteilung(entity.getAbteilung().getId());
         dto.setAnschrift(entity.getAnschrift());
         dto.setEmail(entity.getEmail());
         dto.setId(entity.getId());
         dto.setNachname(entity.getNachname());
         dto.setName(entity.getName());
-        dto.setProjekte(entity.getProjekte());
-        dto.setProjekteInFuehrung(entity.getProjekteInFuehrung());
-        dto.setTelnr(entity.getTelnr());
-        dto.setTermine(entity.getTermine());
-        dto.setZeiterfassungen(entity.getZeiterfassungen());
         return dto;
     }
 
     public static MitarbeiterEntity mapDTOToEntity(MitarbeiterDTO dto) {
         MitarbeiterEntity entity = new MitarbeiterEntity();
-        entity.setAbteilung(dto.getAbteilung());
-        entity.setAbteilungenInLeitung(dto.getAbteilungenInLeitung());
-        entity.setAbteilung(dto.getAbteilung());
+//        entity.setAbteilung(dto.getAbteilung());
+//        entity.setAbteilung(dto.getAbteilung());
         entity.setAnschrift(dto.getAnschrift());
         entity.setEmail(dto.getEmail());
         entity.setId(dto.getId());
         entity.setNachname(dto.getNachname());
         entity.setName(dto.getName());
-        entity.setProjekte(dto.getProjekte());
-        entity.setProjekteInFuehrung(dto.getProjekteInFuehrung());
-        entity.setTelnr(dto.getTelnr());
-        entity.setTermine(dto.getTermine());
-        entity.setZeiterfassungen(dto.getZeiterfassungen());
         return entity;
     }
 

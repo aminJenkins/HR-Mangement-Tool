@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,19 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { TimetrackingFormViewComponent } from './components/timetracking-from-view/timetracking-form-view.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
-
 import { LoginComponent } from './components/login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
+
 
 // @ts-ignore
 @NgModule({
-  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent, TimetrackingFormViewComponent],
-  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, LoginComponent],
+  declarations: [AppComponent, CalendarViewComponent, HomeViewComponent, TimeTrackingViewComponent, TimetrackingFormViewComponent,LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,19 +26,6 @@ import {MatCardModule} from '@angular/material/card';
     HttpClientModule,
     MatNativeDateModule,
     MatDatepickerModule,
-
-
-
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule
   ],
   providers: [TimeTrackingService,MatDatepickerModule,MatNativeDateModule ],
   bootstrap: [AppComponent],
