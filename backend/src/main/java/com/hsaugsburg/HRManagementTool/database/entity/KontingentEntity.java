@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Getter
@@ -32,10 +33,7 @@ public class KontingentEntity {
             inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
     private Set<ProjektEntity> projekte;
 
-    @ManyToMany
-    @JoinTable(name = "KONTINGENTE_ZEITERFASSUNG",
-            joinColumns = {@JoinColumn(name = "KONTINGENT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ZEITERFASSUNG_ID")})
+    @OneToMany(mappedBy = "kontingent")
     private Set<ZeiterfassungEntity> zeiterfassungen;
 
     @Column(name = "BEZEICHNUNG", nullable = false)

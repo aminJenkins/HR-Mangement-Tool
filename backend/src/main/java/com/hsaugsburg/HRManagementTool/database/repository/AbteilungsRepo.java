@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AbteilungsRepo extends JpaRepository<AbteilungEntity,Integer> {
+    AbteilungEntity findById(int id);
 }
