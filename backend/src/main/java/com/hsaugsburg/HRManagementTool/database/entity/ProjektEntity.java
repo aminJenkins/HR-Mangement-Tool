@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "PROJEKT")
-public class Projekt {
+public class ProjektEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
@@ -20,11 +20,11 @@ public class Projekt {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID",
             insertable = false, updatable = true, nullable = false)
-    private Mitarbeiter leiter;
+    private MitarbeiterEntity leiter;
 
-    @ManyToMany(mappedBy = "projekte")
+    @OneToMany(mappedBy = "projekt")
     //@Column(name = "ZEITERFASSUNG", nullable = true, updatable = true)
-    private Set<Zeiterfassung> zeiterfassungen;
+    private Set<ZeiterfassungEntity> zeiterfassungen;
 
     @Column(name = "STUNDENSATZ", nullable = false)
     private Double stundensatz;
@@ -40,13 +40,13 @@ public class Projekt {
 
     @OneToMany(mappedBy = "projekt")
     //@Column(name = "TERMIN", insertable = false, updatable = true, nullable = true)
-    private Set<Termin> termine;
+    private Set<TerminEntity> termine;
 
     @ManyToMany(mappedBy = "projekte")
-    private Set<Kontingent> kontingente;
+    private Set<KontingentEntity> kontingente;
 
     @ManyToMany(mappedBy = "projekte")
-    private Set<Mitarbeiter> projektbeteiligte;
+    private Set<MitarbeiterEntity> projektbeteiligte;
 
 
 }

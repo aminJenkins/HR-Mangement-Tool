@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  TIME_TRACKING_URL: 'http://localhost:8090/api/timetracking/tracks',
+  CONTINGENTS_URL: 'http://localhost:8090/api/contingent/',
+  GREETING_URL: 'http://localhost:8090/api/greetings',
+  PROJECTS_URL: 'http://localhost:8090/api/projects/',
 };
 
 /*

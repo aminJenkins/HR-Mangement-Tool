@@ -16,14 +16,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "MITARBEITER")
-public class Mitarbeiter {
+public class MitarbeiterEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -37,12 +36,12 @@ public class Mitarbeiter {
     private String nachname;
 
     @OneToOne(mappedBy = "leiter")
-    private Abteilung abteilungenInLeitung;
+    private AbteilungEntity abteilungenInLeitung;
 
     @Column(name = "TELNR", nullable = false, updatable = true, columnDefinition = "VARCHAR(15)")
     private String telnr;
 
-    @Column(name = "MAIL", nullable = false, updatable = true, columnDefinition = "VARCHAR(50)")
+    @Column(name = "MAIL", unique = true, nullable = false, updatable = true, columnDefinition = "VARCHAR(50)")
     private String email;
 
     @Column(name = "ANSCHRIFT", nullable = false, updatable = true, columnDefinition = "VARCHAR(100)")
@@ -50,27 +49,27 @@ public class Mitarbeiter {
 
     @OneToMany(mappedBy = "leiter")
     @Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
-    private Set<Projekt> projekteInFuehrung;
+    private Set<ProjektEntity> projekteInFuehrung;
 
     @OneToMany(mappedBy = "mitarbeiter")
     //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
-    private Set<Zeiterfassung> zeiterfassungen;
+    private Set<ZeiterfassungEntity> zeiterfassungen;
 
     @ManyToMany
     @JoinTable(name = "TERMIN_TEILNEHMER",
             joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "TERMIN_ID")})
-    private Set<Termin> termine;
+    private Set<TerminEntity> termine;
 
     @ManyToMany
     @JoinTable(name = "PROJEKTVERTEILUNG",
             joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
-    private Set<Projekt> projekte;
+    private Set<ProjektEntity> projekte;
 
     @ManyToOne
     @JoinColumn(name="ABTEILUNG", nullable = false)
-    private Abteilung abteilung;
+    private AbteilungEntity abteilung;
 
 
 }

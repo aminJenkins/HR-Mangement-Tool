@@ -21,26 +21,31 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name="ZEITERFASSUNG")
-public class Zeiterfassung {
+public class ZeiterfassungEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "MITARBEITER_ID", unique = true, nullable = false, referencedColumnName = "ID",
+    @JoinColumn(name = "MITARBEITER_ID", nullable = false, referencedColumnName = "ID",
             insertable = false, updatable = false)
-    private Mitarbeiter mitarbeiter;
+    private MitarbeiterEntity mitarbeiter;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "ZEITERFASSUNG_PROJEKT",
             joinColumns = @JoinColumn(name = "ZEITERFASSUNG_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))
-    private Set<Projekt> projekte;
+            inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))*/
+    @ManyToOne
+    @JoinColumn(name = "Projekt_ID", nullable = true, referencedColumnName = "ID",
+            insertable = false, updatable = false)
+    private ProjektEntity projekt;
 
-    @ManyToMany(mappedBy = "zeiterfassungen")
-    private Set<Kontingent> kontingente;
+    @ManyToOne
+    @JoinColumn(name = "KONTINGENT_ID", nullable = false, referencedColumnName = "ID",
+            insertable = false, updatable = false)
+    private KontingentEntity kontingent;
 
     @Column(name = "KOMMENTAR", nullable = false)
     private String kommentar;

@@ -1,6 +1,6 @@
 package com.hsaugsburg.HRManagementTool.models;
 
-import com.hsaugsburg.HRManagementTool.database.entity.Zugang;
+import com.hsaugsburg.HRManagementTool.database.entity.ZugangEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class SecurityUser implements UserDetails {
 
-    private Zugang user;
+    private ZugangEntity user;
 
-    public SecurityUser(Zugang zugang) {
+    public SecurityUser(ZugangEntity zugang) {
         this.user = zugang;
     }
 

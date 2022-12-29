@@ -14,13 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Table(name="KONTINGENT")
-public class Kontingent {
+public class KontingentEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
@@ -30,13 +31,10 @@ public class Kontingent {
     @JoinTable(name = "KONTINGENT_PROJEKT",
             joinColumns = {@JoinColumn(name = "KONTINGENT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
-    private Set<Projekt> projekte;
+    private Set<ProjektEntity> projekte;
 
-    @ManyToMany
-    @JoinTable(name = "KONTINGENTE_ZEITERFASSUNG",
-            joinColumns = {@JoinColumn(name = "KONTINGENT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ZEITERFASSUNG_ID")})
-    private Set<Zeiterfassung> zeiterfassungen;
+    @OneToMany(mappedBy = "kontingent")
+    private Set<ZeiterfassungEntity> zeiterfassungen;
 
     @Column(name = "BEZEICHNUNG", nullable = false)
     private String bezeichnung;
