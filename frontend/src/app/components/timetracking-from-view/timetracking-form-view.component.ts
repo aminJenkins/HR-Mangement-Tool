@@ -4,6 +4,7 @@ import {TimeTrackingService} from "../../services/time-tracking-service";
 import { Router } from '@angular/router';
 import {TimeTracker} from "../../shared/TimeTracker";
 import {Contingent} from "../../shared/Contingent";
+import {Project} from "../../models/Project";
 
 
 @Component({
@@ -13,21 +14,26 @@ import {Contingent} from "../../shared/Contingent";
 })
 
 export class TimetrackingFormViewComponent {
-  options: Contingent [] = [];
+  contingents: Contingent [] = [];
+  projects : Project [] = [];
   elements = new FormGroup({
-    gender: new FormControl('', [
+    kommentar: new FormControl('', [
       Validators.required
     ]),
-    name: new FormControl('', [
+    dauer: new FormControl('', [
       Validators.required,
-      Validators.minLength(2)
+      Validators.min(0)
     ]),
     date: new FormControl('', [
       Validators.required,
     ]),
-    status: new FormControl('', [
+    contingent: new FormControl('', [
       Validators.required,
     ]),
+    projects: new FormControl('', [
+      Validators.required,
+    ]),
+
   });
 
 
@@ -35,13 +41,22 @@ export class TimetrackingFormViewComponent {
 
   ngOnInit(): void {
     this.timeTrackingService.getContingents().subscribe((response:Contingent[]) => {
-      this.options = response;
+      this.contingents = response;
       console.log(response);
     });
+    this.timeTrackingService.getProjects().subscribe((response:Project[]) => {
+      this.projects = response;
+      console.log(response);
+    });
+
   }
 
   public onSubmit(): void{
-    console.log(this.elements.value.gender);
+    let values = this.elements.getRawValue();
+    let timeTrack = new TimeTracker(this.elements.value.projects,this.elements.value.kommentar,this.elements.value.contingent,this.elements.value.dauer,this.elements.value.date);
+    this.timeTrackingService.sendTimeTrack(timeTrack);
+    console.log(timeTrack);
+    //console.log(this.elements.value.kommentar);
     this.router.navigate(['../timetracking']);
   }
 }
