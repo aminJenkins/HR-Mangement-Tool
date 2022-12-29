@@ -4,15 +4,12 @@ import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.services.MitarbeiterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -23,7 +20,7 @@ public class MitarbeiterController {
     @Autowired
     MitarbeiterService maService;
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/")
     public ResponseEntity<MitarbeiterDTO> getEmployee(Authentication authentication) {
         try {
@@ -33,8 +30,21 @@ public class MitarbeiterController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-    @PostMapping("/")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/update")
+    public ResponseEntity<MitarbeiterDTO> updateEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
+        try {
+            maService.checkAuthority(authentication, mitarbeiterDTO.getEmail());
+            MitarbeiterDTO m =  maService.updateEmployee(mitarbeiterDTO);
+            System.out.println("nach update:" + m.toString());
+            return ResponseEntity.status(HttpStatus.OK).body(m);
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Irgendetwas stimmt nicht");
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/create")
     public ResponseEntity<String> createEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
         try {
             maService.createMitarbeiter(mitarbeiterDTO);

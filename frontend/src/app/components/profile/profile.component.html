@@ -1,0 +1,107 @@
+<mat-card>
+  <mat-card-title>User Profile</mat-card-title>
+  <mat-card-content>
+
+    <!-- Change User information   -->
+    <form id="change-username-form" [formGroup]="profileInfoFormGroup" (ngSubmit)="updateProfileInfo()" class="column">
+      <div class="column">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            [(ngModel)]="employee.email"
+            matInput
+            type="email"
+            id="inputEmail4"
+            formControlName="email"
+            readonly
+            style="color: gray"
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Firstname</mat-label>
+          <input
+            [(ngModel)]="employee.name"
+            required="false"
+            matInput
+            type="text"
+            id="firstname"
+            formControlName="firstname"
+          />
+          <!--            placeholder="{{employee.name}}"-->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input
+            matInput
+            required="false"
+            type="text"
+            id="lastname"
+            [(ngModel)]="employee.nachname"
+            formControlName="lastname"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            required="false"
+            type="text"
+            id="address"
+            [(ngModel)]="employee.anschrift"
+            formControlName="address"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Tel. Number</mat-label>
+          <input
+            matInput
+            required="false"
+            type="text"
+            id="telNumber"
+            [(ngModel)]="employee.telnr"
+            formControlName="telNumber"
+          />
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+
+
+    <hr style="height: 50%; background-color: gray">
+
+    <!-- Password reset         -->
+    <form [formGroup]="changePasswordFormGroup" (ngSubmit)="changePassword()" class="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Old Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword4"
+          formControlName="oldPassword"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>New Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword5"
+          formControlName="newPassword"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword6"
+          formControlName="confirmPassword"/>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Change Password</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>

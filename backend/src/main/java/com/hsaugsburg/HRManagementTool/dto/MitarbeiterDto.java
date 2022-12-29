@@ -1,25 +1,18 @@
 package com.hsaugsburg.HRManagementTool.dto;
 
-import com.hsaugsburg.HRManagementTool.database.entity.Mitarbeiter;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
 @Setter
+@Getter
 @ToString
-public class MitarbeiterDto {
+public class MitarbeiterDTO {
+    private int id;
     private String name;
-    private String nachName;
-    private String email;
+    private String nachname;
     private String telnr;
+    private String email;
     private String anschrift;
-
-    public MitarbeiterDto(Mitarbeiter ma) {
-        this.name = ma.getName();
-        nachName = ma.getNachname();
-        email = ma.getEmail();
-        telnr = ma.getTelnr();
-        anschrift = ma.getAnschrift();
-    }
+    private int abteilung;
 }

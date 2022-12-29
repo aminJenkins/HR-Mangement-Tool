@@ -2,6 +2,7 @@ package com.hsaugsburg.HRManagementTool.database.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "ABTEILUNG")
+@ToString
 public class AbteilungEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
