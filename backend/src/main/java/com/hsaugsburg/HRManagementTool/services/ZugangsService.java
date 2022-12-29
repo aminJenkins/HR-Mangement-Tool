@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.services;
 
-import com.hsaugsburg.HRManagementTool.database.entity.Zugang;
 import com.hsaugsburg.HRManagementTool.utils.JwtUtils;
 import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
 import com.hsaugsburg.HRManagementTool.models.SecurityUser;
@@ -21,7 +20,6 @@ public class ZugangsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("loaduser: "+ zugangsRepo);
         return zugangsRepo.findByUsername(email)
                 .map(SecurityUser::new)
                 .orElseThrow(() ->

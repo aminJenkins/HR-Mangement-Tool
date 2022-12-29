@@ -2,7 +2,6 @@ package com.hsaugsburg.HRManagementTool.controller;
 
 import java.util.Set;
 
-import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.dto.ProjektDTO;
 import com.hsaugsburg.HRManagementTool.services.ProjektService;
 import lombok.RequiredArgsConstructor;
