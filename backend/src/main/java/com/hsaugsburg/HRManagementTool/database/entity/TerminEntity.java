@@ -1,9 +1,12 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
 import com.hsaugsburg.HRManagementTool.models.Priority;
+import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,29 +22,40 @@ public class TerminEntity {
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
     private int id;
 
+    @Column(name = "TITEL", nullable = false,updatable = true)
+    private String titel;
+
+    @Column(name = "BESCHREIBUNG", nullable = false)
+    private String beschreibung;
+
     @ManyToOne
     @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID",
-            insertable = false, updatable = true, nullable = false)
+            insertable = false, updatable = true)
     private ProjektEntity projekt;
+
+
+    @JoinColumn(name = "MITARBEITER_ID", insertable = false, updatable = false)
+    @ManyToOne(targetEntity = MitarbeiterEntity.class)
+    private MitarbeiterEntity mitarbeiterEntity;
+
+    @Column(name = "MITARBEITER_ID")
+    private int mitarbeiterId;
 
     @ManyToMany(mappedBy = "termine")
     private Set<MitarbeiterEntity> teilnehmern;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "VON", nullable = false)
-    private Date von;
+    @Column(name = "BEGINN", nullable = false)
+    private LocalTime beginn;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "BIS", nullable = false)
-    private Date bis;
+    @Column(name = "ENDE", nullable = false)
+    private LocalTime ende;
 
-    @Column(name = "BESCHREIBUNG", nullable = false, updatable = true)
-    private String beschreibung;
-
-    @Column(name = "TITEL", nullable = false, updatable = true)
-    private String titel;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATUM", nullable = false)
+    private Date datum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PRIORITY", nullable = false, updatable = true)
     private Priority priority;
+
 }
