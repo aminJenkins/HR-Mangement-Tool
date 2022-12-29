@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -37,7 +38,7 @@ public class TerminUpdateDTO {
     private Date datum;
 
     @NotNull
-    private Set<MitarbeiterDTO> teilnehmer;
+    private Set<Integer> teilnehmer;
 
     @NotNull
     private Priority priority;

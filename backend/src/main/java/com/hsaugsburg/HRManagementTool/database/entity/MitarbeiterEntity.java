@@ -55,10 +55,7 @@ public class MitarbeiterEntity {
     //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
     private Set<ZeiterfassungEntity> zeiterfassungen;
 
-    @ManyToMany
-    @JoinTable(name = "TERMIN_TEILNEHMER",
-            joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "TERMIN_ID")})
+    @ManyToMany(mappedBy = "teilnehmern")
     private Set<TerminEntity> termine;
 
     @ManyToMany

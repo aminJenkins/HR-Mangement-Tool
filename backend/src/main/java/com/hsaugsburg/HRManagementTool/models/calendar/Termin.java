@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -23,9 +24,9 @@ public class Termin {
     private LocalTime beginn;
     private LocalTime ende;
     private Date datum;
-    private Set<Mitarbeiter> teilnehmer;
+    private Set<Integer> teilnehmer;
     private Priority priority;
-    private int mitarbeiterId;
+
 
     public void update(final TerminUpdate update){
         this.beschreibung = update.getBeschreibung();
@@ -36,9 +37,5 @@ public class Termin {
         this.priority = update.getPriority();
     }
 
-    public void setMitarbeiterId(int id){
-        this.mitarbeiterId=id;
-        System.out.print("Was passiert?");
-    }
 
 }

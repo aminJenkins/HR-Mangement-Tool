@@ -10,6 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class MitarbeiterService {
@@ -27,9 +31,14 @@ public class MitarbeiterService {
          return mitarbeiterRepo.findByEmail(userName);
     }
 
+    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<Integer> mitarbeiterIds){
+            return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllById(mitarbeiterIds));
+    }
+
     public void createMitarbeiter(MitarbeiterDTO mitarbeiter){
         AbteilungEntity abteilungEntity = abteilungsRepo.findById(mitarbeiter.getAbteilung());
         mitarbeiterRepo.save(Mitarbeiter.mapDTOToEntity(mitarbeiter,abteilungEntity));
         return;
     }
+
 }

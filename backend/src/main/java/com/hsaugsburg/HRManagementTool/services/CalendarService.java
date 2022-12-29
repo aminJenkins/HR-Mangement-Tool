@@ -11,21 +11,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
+import java.util.Set;
+
 
 @Service
 @RequiredArgsConstructor
 public class CalendarService {
 
     private final TerminRepo terminRepo;
-    private final MitarbeiterRepo mitarbeiterRepo;
+    private final MitarbeiterService mitarbeiterService;
     private final CalendarMapper calendarMapper;
-    private final ZugangsService zugangsService;
 
     public Termin createNewTermin(Termin newTermin,Authentication authentication) {
-        MitarbeiterEntity erstellerOfTermin = this.mitarbeiterRepo.findByEmail(authentication.getName());
-        newTermin.setMitarbeiterId(erstellerOfTermin.getId());
-        TerminEntity savedTermin = this.terminRepo.save(this.calendarMapper.map(newTermin));
-        return this.calendarMapper.map(savedTermin);
+        MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
+        Set<MitarbeiterEntity> teilnehmerOfTermin = this.mitarbeiterService.getMitarbeiterEntities(newTermin.getTeilnehmer());
+        TerminEntity terminToBeSaved =  this.calendarMapper.map(newTermin);
+        terminToBeSaved.setErstellerId(erstellerOfTermin.getId());
+        terminToBeSaved.setTeilnehmern(teilnehmerOfTermin);
+        this.terminRepo.save(terminToBeSaved);
+        return this.calendarMapper.map(terminToBeSaved);
     }
 
     public void deleteTermin(int terminId) {

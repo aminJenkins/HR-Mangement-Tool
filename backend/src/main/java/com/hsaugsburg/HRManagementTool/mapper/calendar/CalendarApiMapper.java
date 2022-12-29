@@ -15,7 +15,6 @@ public interface CalendarApiMapper {
     Termin map (TerminDTO termin);
     Termin map(NewTerminDTO newTermin);
     TerminUpdate map(TerminUpdateDTO terminUpdateDTO);
-    Mitarbeiter map(MitarbeiterDTO mitarbeiterDTO);
-    MitarbeiterDTO map(Mitarbeiter mitarbeiter);
+
 
 }

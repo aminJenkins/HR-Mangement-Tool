@@ -8,6 +8,7 @@ import lombok.Getter;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,6 +21,6 @@ public class TerminUpdate {
     private final LocalTime beginn;
     private final LocalTime ende;
     private final Date datum;
-    private final Set<Mitarbeiter> teilnehmer;
+    private final Set<Integer> teilnehmer;
     private final Priority priority;
 }

@@ -34,14 +34,17 @@ public class TerminEntity {
     private ProjektEntity projekt;
 
 
-    @JoinColumn(name = "MITARBEITER_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "ERSTELLER_ID", insertable = false, updatable = false)
     @ManyToOne(targetEntity = MitarbeiterEntity.class)
     private MitarbeiterEntity mitarbeiterEntity;
 
-    @Column(name = "MITARBEITER_ID")
-    private int mitarbeiterId;
+    @Column(name = "ERSTELLER_ID")
+    private int erstellerId;
 
-    @ManyToMany(mappedBy = "termine")
+    @ManyToMany
+    @JoinTable(name = "TERMIN_TEILNEHMER",
+            joinColumns = {@JoinColumn(name = "TERMIN_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "MITARBEITER_ID")})
     private Set<MitarbeiterEntity> teilnehmern;
 
     @Column(name = "BEGINN", nullable = false)

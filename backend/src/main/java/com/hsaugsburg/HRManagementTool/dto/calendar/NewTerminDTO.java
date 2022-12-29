@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -34,7 +35,7 @@ public class NewTerminDTO {
     private Date datum;
 
     @NotNull
-    private Set<MitarbeiterDTO> teilnehmer;
+    private Set<Integer> teilnehmer;
 
     @NotNull
     private Priority priority;
