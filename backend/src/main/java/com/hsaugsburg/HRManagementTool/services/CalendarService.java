@@ -37,6 +37,7 @@ public class CalendarService {
     }
 
     public void deleteTermin(int terminId) {
+        this.terminRepo.deleteById(terminId);
     }
 
     public Termin updateTermin(TerminUpdate terminUpdate) {
@@ -52,11 +53,6 @@ public class CalendarService {
 
     public Termin getTermin(final int terminId){
         return this.terminRepo.findById(terminId).map(termin -> calendarMapper.mapToTermin(termin)).orElseThrow();
-
-    }
-
-    public void clearTeilnehmer(int terminId){
-//        this.terminRepo.deleteAllTeilnehmer(terminId);
     }
 
 }

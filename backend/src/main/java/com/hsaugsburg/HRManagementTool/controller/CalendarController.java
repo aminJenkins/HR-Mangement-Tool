@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,7 +36,7 @@ public class CalendarController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @DeleteMapping("/{terminId}")
+    @DeleteMapping("/termin/{terminId}")
     public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId){
         this.calendarService.deleteTermin(terminId);
         return ResponseEntity.ok().build();
