@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../services/authService/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  error: string | undefined;
+  errorMessage: string | undefined;
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
@@ -39,9 +40,13 @@ export class LoginComponent implements OnInit {
               this.authService.setSession(authResponse.token);
               this.router.navigateByUrl('/');
             },
-            (err) => {
-              console.log(err);
-              this.error = err;
+            (err: HttpErrorResponse) => {
+              if (err.status === 403) {
+                this.errorMessage = 'Username or Password is wrong';
+              } else {
+                console.log('error:', err.message);
+                this.errorMessage = err.message;
+              }
             }
           );
       }

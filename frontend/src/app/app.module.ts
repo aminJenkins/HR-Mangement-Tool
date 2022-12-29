@@ -23,7 +23,6 @@ import {FormsModule} from '@angular/forms';
 // @ts-ignore
 @NgModule({
   declarations: [
-    AppComponent,
     CalendarViewComponent,
     HomeViewComponent,
     TimeTrackingViewComponent,
@@ -32,6 +31,7 @@ import {FormsModule} from '@angular/forms';
     AppointmentComponent,
     AppointmentDetailsViewComponent,
     ProfileComponent,
+    AppComponent,
   ],
   imports: [
     BrowserModule,

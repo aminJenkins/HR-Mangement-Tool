@@ -1,7 +1,7 @@
 :host {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 2%;
 }
 
 .mat-form-field {
@@ -9,17 +9,42 @@
   min-width: 300px;
 }
 
-mat-card-title,
+mat-card {
+  width: 55%;
+}
+
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  padding-top: 2%;
+}
 mat-card-content {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   padding-top: 5%;
 }
 
 .error {
   padding: 16px;
-  width: 300px;
   color: white;
   background-color: red;
+  width: 89%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+}
+
+form {
+  width: 45%;
+}
+
+.button {
+  padding-bottom: 10%;
+  width: 100%;
 }
 
