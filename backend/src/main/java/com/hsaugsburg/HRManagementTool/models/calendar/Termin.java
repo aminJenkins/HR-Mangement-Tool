@@ -26,6 +26,7 @@ public class Termin {
     private Date datum;
     private Set<Integer> teilnehmer;
     private Priority priority;
+    private int erstellerId;
 
 
     public void update(final TerminUpdate update){

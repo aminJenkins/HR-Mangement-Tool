@@ -45,7 +45,7 @@ public class TerminEntity {
     @JoinTable(name = "TERMIN_TEILNEHMER",
             joinColumns = {@JoinColumn(name = "TERMIN_ID")},
             inverseJoinColumns = {@JoinColumn(name = "MITARBEITER_ID")})
-    private Set<MitarbeiterEntity> teilnehmern;
+    private Set<MitarbeiterEntity> teilnehmer;
 
     @Column(name = "BEGINN", nullable = false)
     private LocalTime beginn;

@@ -55,7 +55,7 @@ public class MitarbeiterEntity {
     //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
     private Set<ZeiterfassungEntity> zeiterfassungen;
 
-    @ManyToMany(mappedBy = "teilnehmern")
+    @ManyToMany(mappedBy = "teilnehmer")
     private Set<TerminEntity> termine;
 
     @ManyToMany

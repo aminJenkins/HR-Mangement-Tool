@@ -31,9 +31,9 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/termin")
-    public ResponseEntity<TerminUpdateDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO){
-        this.calendarService.updateTermin(terminUpdateDTO);
-        return null;
+    public ResponseEntity<TerminDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO){
+        Termin updatedTermin = this.calendarService.updateTermin(this.calendarApiMapper.map(terminUpdateDTO));
+        return ResponseEntity.ok(this.calendarApiMapper.map(updatedTermin));
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")

@@ -28,6 +28,9 @@ public class TerminDTO {
     private String beschreibung;
 
     @NotNull
+    private int erstellerId;
+
+    @NotNull
     private LocalTime beginn;
 
     @NotNull
