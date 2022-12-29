@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -9,16 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
-import {MatTableModule} from "@angular/material/table";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatRadioModule} from "@angular/material/radio";
-import {MatSelectModule} from "@angular/material/select";
-import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
-import {MatCardModule} from "@angular/material/card";
-import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -47,7 +48,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
   ],
   exports: [
     CommonModule,
@@ -66,6 +67,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSelectModule,
     ReactiveFormsModule,
     MatCardModule,
-  ]
+    MatDialogModule,
+  ],
 })
-export class MaterialModule { }
+export class MaterialModule {}

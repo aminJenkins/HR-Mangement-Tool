@@ -8,3 +8,14 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.sidenav-content {
+  margin-top: 5vh;
+  height: 92vh;
+  width: 90vw;
+  margin-left: 4vw;
+}
+
+.bold {
+  font-weight: bold;
+}
