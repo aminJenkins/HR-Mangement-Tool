@@ -8,7 +8,7 @@ import {Project} from "../../models/Project";
 
 
 @Component({
-  selector: 'app-timetracking-from-view',
+  selector: 'app-timetracking-form-view',
   templateUrl: './timetracking-form-view.component.html',
   styleUrls: ['./timetracking-form-view.component.css']
 })
@@ -59,4 +59,5 @@ export class TimetrackingFormViewComponent {
     //console.log(this.elements.value.kommentar);
     this.router.navigate(['../timetracking']);
   }
+
 }

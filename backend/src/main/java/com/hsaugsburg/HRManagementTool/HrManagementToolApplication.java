@@ -25,16 +25,16 @@ public class HrManagementToolApplication {
 	 * @param encoder to encode the passwords
 	 * @return
 	 */
-//	@Bean
-//	CommandLineRunner commandLineRunner(ZugangsRepo zugangsRepo, PasswordEncoder encoder) {
-//		return args -> {
-//			zugangsRepo.save(new ZugangEntity("max.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-//			zugangsRepo.save(new ZugangEntity("kai.musterman@gmail.com", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
-//			zugangsRepo.save(new ZugangEntity("user.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-//			zugangsRepo.save(new ZugangEntity("rudolf.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-//			zugangsRepo.save(new ZugangEntity("amin.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-//			zugangsRepo.save(new ZugangEntity("user@ma", encoder.encode("password"), "ROLE_USER"));
-//		};
-//	}
+	@Bean
+	CommandLineRunner commandLineRunner(ZugangsRepo zugangsRepo, PasswordEncoder encoder) {
+		return args -> {
+			zugangsRepo.save(new ZugangEntity("max.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+			zugangsRepo.save(new ZugangEntity("kai.musterman@gmail.com", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
+			zugangsRepo.save(new ZugangEntity("user.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+			zugangsRepo.save(new ZugangEntity("rudolf.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+			zugangsRepo.save(new ZugangEntity("amin.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+			zugangsRepo.save(new ZugangEntity("user@ma", encoder.encode("password"), "ROLE_USER"));
+		};
+	}
 
 }

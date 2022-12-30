@@ -28,9 +28,11 @@ public class ZeiterfassungEntity {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "MITARBEITER_ID", nullable = false, referencedColumnName = "ID",
+    @JoinColumn(name = "MITARBEITER_ID", nullable = true, referencedColumnName = "ID",
             insertable = false, updatable = false)
     private MitarbeiterEntity mitarbeiter;
+    @Column(name = "MITARBEITER_ID", nullable = false)
+    private Integer mitarbeiterID;
 
     /*@ManyToMany
     @JoinTable(
@@ -41,11 +43,16 @@ public class ZeiterfassungEntity {
     @JoinColumn(name = "Projekt_ID", nullable = true, referencedColumnName = "ID",
             insertable = false, updatable = false)
     private ProjektEntity projekt;
+    @Column(name = "Projekt_ID", nullable = false)
+    private Integer projektID;
 
     @ManyToOne
-    @JoinColumn(name = "KONTINGENT_ID", nullable = false, referencedColumnName = "ID",
+    @JoinColumn(name = "KONTINGENT_ID", nullable = true, referencedColumnName = "ID",
             insertable = false, updatable = false)
     private KontingentEntity kontingent;
+
+    @Column(name = "KONTINGENT_ID", nullable = false)
+    private Integer kontingentID;
 
     @Column(name = "KOMMENTAR", nullable = false)
     private String kommentar;
