@@ -27,24 +27,21 @@ mat-card-content {
 
 .error {
   padding: 16px;
+  width: 300px;
   color: white;
   background-color: red;
-  width: 89%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-
 }
 
 form {
   width: 45%;
 }
-
-.button {
-  padding-bottom: 10%;
-  width: 100%;
-}
-

@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {Contingent} from "../shared/Contingent";
-import {AuthenticationResponse} from "../dto/AuthenticationResponse";
+import {AuthenticationResponse} from "../shared/AuthenticationResponse";
 import {Project} from "../models/Project";
 
 

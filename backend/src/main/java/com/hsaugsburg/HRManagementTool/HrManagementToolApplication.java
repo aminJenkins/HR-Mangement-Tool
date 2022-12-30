@@ -1,4 +1,5 @@
 package com.hsaugsburg.HRManagementTool;
+
 import com.hsaugsburg.HRManagementTool.database.entity.ZugangEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -25,10 +26,13 @@ public class HrManagementToolApplication {
 	 * @return
 	 */
 //	@Bean
-//    CommandLineRunner commandLineRunner(ZugangsRepo zugangsRepo, PasswordEncoder encoder) {
+//	CommandLineRunner commandLineRunner(ZugangsRepo zugangsRepo, PasswordEncoder encoder) {
 //		return args -> {
-//			zugangsRepo.save(new ZugangEntity("user@ma", encoder.encode("password"), "ROLE_USER"));
-//			zugangsRepo.save(new ZugangEntity("admin@hr", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
+//			zugangsRepo.save(new ZugangEntity("max.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+//			zugangsRepo.save(new ZugangEntity("kai.musterman@gmail.com", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
+//			zugangsRepo.save(new ZugangEntity("user.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+//			zugangsRepo.save(new ZugangEntity("rudolf.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+//			zugangsRepo.save(new ZugangEntity("amin.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
 //		};
 //	}
 

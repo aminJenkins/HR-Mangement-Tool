@@ -20,8 +20,4 @@ export class AppComponent {
   logout(): void {
     this.authService.logOut();
   }
-
-  toggleSideBar(): void {
-    this.showSidebar = !this.showSidebar;
-  }
 }

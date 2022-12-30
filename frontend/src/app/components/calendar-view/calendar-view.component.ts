@@ -1,4 +1,3 @@
-import { AppComponent } from './../../app.component';
 import { Component } from '@angular/core';
 import { AppointmentDetailsViewComponent } from '../appointment-details-view/appointment-details-view.component';
 

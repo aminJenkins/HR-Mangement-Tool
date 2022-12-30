@@ -20,7 +20,6 @@ public class ZugangsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("loaduser: "+ zugangsRepo);
         return zugangsRepo.findByUsername(email)
                 .map(SecurityUser::new)
                 .orElseThrow(() ->

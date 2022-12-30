@@ -1,7 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto.mitarbeiter;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MitarbeiterDTO {
+public class CalenderMitarbeiterDTO {
     @NotNull
     private int id;
 

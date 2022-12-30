@@ -32,6 +32,7 @@ public class Mitarbeiter {
         dto.setId(entity.getId());
         dto.setNachname(entity.getNachname());
         dto.setName(entity.getName());
+        dto.setTelnr(entity.getTelnr());
         return dto;
     }
 

@@ -14,7 +14,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
