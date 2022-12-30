@@ -27,15 +27,18 @@ public class Termin {
     private Set<Integer> teilnehmer;
     private Priority priority;
     private int erstellerId;
+    private int projektId;
 
 
     public void update(final TerminUpdate update){
+        this.titel = update.getTitel();
         this.beschreibung = update.getBeschreibung();
         this.beginn = update.getBeginn();
         this.ende = update.getEnde();
         this.datum = update.getDatum();
         this.teilnehmer = update.getTeilnehmer();
         this.priority = update.getPriority();
+        this.projektId = update.getProjektId();
     }
 
 

@@ -45,4 +45,7 @@ public class TerminDTO {
     @NotNull
     private Set<Integer> teilnehmer;
 
+    @NotNull
+    private int projektId;
+
 }

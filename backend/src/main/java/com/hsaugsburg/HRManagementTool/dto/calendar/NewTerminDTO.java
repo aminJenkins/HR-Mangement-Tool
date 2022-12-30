@@ -40,4 +40,7 @@ public class NewTerminDTO {
     @NotNull
     private Priority priority;
 
+    @NotNull
+    private int projektId;
+
 }

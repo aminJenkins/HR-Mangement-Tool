@@ -25,7 +25,7 @@ public class CalendarMapper{
         Set<Integer> teilnehmerOfTermin = terminEntity.getTeilnehmer().stream().map(teilnehmer -> teilnehmer.getId()).collect(Collectors.toSet());
 
         Termin termin =    Termin.builder().titel(terminEntity.getTitel()).beschreibung(terminEntity.getBeschreibung()).id(terminEntity.getId()).beginn(terminEntity.getBeginn())
-                .ende(terminEntity.getEnde()).datum(terminEntity.getDatum()).erstellerId(terminEntity.getErstellerId()).priority(terminEntity.getPriority()).teilnehmer(teilnehmerOfTermin).build();
+                .ende(terminEntity.getEnde()).datum(terminEntity.getDatum()).erstellerId(terminEntity.getErstellerId()).priority(terminEntity.getPriority()).teilnehmer(teilnehmerOfTermin).projektId(terminEntity.getProjektId()).build();
 
         return termin;
     }
@@ -39,7 +39,9 @@ public class CalendarMapper{
         terminEntity.setEnde(termin.getEnde());
         terminEntity.setDatum(termin.getDatum());
         terminEntity.setPriority(termin.getPriority());
+        terminEntity.setProjektId(termin.getProjektId());
         terminEntity.setErstellerId(termin.getErstellerId());
+
 
 
         return terminEntity;

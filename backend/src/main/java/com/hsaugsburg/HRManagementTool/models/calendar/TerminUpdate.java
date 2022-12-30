@@ -23,4 +23,5 @@ public class TerminUpdate {
     private final Date datum;
     private final Set<Integer> teilnehmer;
     private final Priority priority;
+    private final int projektId;
 }

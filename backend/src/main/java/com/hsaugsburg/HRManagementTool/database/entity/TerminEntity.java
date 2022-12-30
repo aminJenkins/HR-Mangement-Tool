@@ -28,11 +28,13 @@ public class TerminEntity {
     @Column(name = "BESCHREIBUNG", nullable = false)
     private String beschreibung;
 
-    @ManyToOne
-    @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID",
-            insertable = false, updatable = true)
+    @JoinColumn(name = "PROJEKT_ID",
+            insertable = false, updatable = false)
+    @ManyToOne(targetEntity = ProjektEntity.class)
     private ProjektEntity projekt;
 
+    @Column(name="PROJEKT_ID")
+    private int projektId;
 
     @JoinColumn(name = "ERSTELLER_ID", insertable = false, updatable = false)
     @ManyToOne(targetEntity = MitarbeiterEntity.class)

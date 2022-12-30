@@ -26,6 +26,7 @@ public class TerminUpdateDTO {
     @NotNull
     private String titel;
 
+    @NotNull
     private String beschreibung;
 
     @NotNull
@@ -42,6 +43,9 @@ public class TerminUpdateDTO {
 
     @NotNull
     private Priority priority;
+
+    @NotNull
+    private int projektId;
 
 
 
