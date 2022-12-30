@@ -39,7 +39,7 @@ export class TimeTrackingService {
 
   public sendTimeTrack(timeTrack:TimeTracker) : Observable<any>{
     console.log(timeTrack)
-    return this.http.post<any>(environment.TIME_TRACKING_URL,timeTrack,{ headers:new HttpHeaders().append('Authorization', `Bearer ${this.auth_token}`)},);
+    return this.http.post<any>(environment.TIME_TRACKING_URL,timeTrack);
 
   }
 }

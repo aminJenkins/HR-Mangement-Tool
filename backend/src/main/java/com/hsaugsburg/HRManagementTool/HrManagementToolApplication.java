@@ -33,6 +33,7 @@ public class HrManagementToolApplication {
 //			zugangsRepo.save(new ZugangEntity("user.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
 //			zugangsRepo.save(new ZugangEntity("rudolf.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
 //			zugangsRepo.save(new ZugangEntity("amin.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
+//			zugangsRepo.save(new ZugangEntity("user@ma", encoder.encode("password"), "ROLE_USER"));
 //		};
 //	}
 

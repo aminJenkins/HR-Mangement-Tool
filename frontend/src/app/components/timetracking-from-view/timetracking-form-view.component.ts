@@ -54,7 +54,7 @@ export class TimetrackingFormViewComponent {
   public onSubmit(): void{
     let values = this.elements.getRawValue();
     let timeTrack = new TimeTracker(this.elements.value.projects,this.elements.value.kommentar,this.elements.value.contingent,this.elements.value.dauer,this.elements.value.date);
-    this.timeTrackingService.sendTimeTrack(timeTrack);
+    this.timeTrackingService.sendTimeTrack(timeTrack).subscribe(value => console.log(" termi antwort:", value));
     console.log(timeTrack);
     //console.log(this.elements.value.kommentar);
     this.router.navigate(['../timetracking']);
