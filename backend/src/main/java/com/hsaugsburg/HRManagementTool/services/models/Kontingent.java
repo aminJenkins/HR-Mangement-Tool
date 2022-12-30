@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.models;
+package com.hsaugsburg.HRManagementTool.services.models;
 
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
 import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;

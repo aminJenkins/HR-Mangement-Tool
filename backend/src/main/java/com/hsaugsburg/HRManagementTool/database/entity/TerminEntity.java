@@ -1,11 +1,9 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
-import com.hsaugsburg.HRManagementTool.models.Priority;
-import com.hsaugsburg.HRManagementTool.models.Priority;
+import com.hsaugsburg.HRManagementTool.services.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;

@@ -1,20 +1,10 @@
 package com.hsaugsburg.HRManagementTool.mapper.calendar;
 
 import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
-import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
-import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
-import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
-import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.MitarbeiterDTO;
-import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
-import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
-import com.hsaugsburg.HRManagementTool.models.mitarbeiter.Mitarbeiter;
+import com.hsaugsburg.HRManagementTool.services.models.calendar.Termin;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 @Component

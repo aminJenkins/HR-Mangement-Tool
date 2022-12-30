@@ -7,7 +7,7 @@ import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.ZeiterfassungRepo;
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
-import com.hsaugsburg.HRManagementTool.models.Zeiterfassung;
+import com.hsaugsburg.HRManagementTool.services.models.Zeiterfassung;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

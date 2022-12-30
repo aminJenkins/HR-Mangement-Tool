@@ -1,14 +1,12 @@
-package com.hsaugsburg.HRManagementTool.models.calendar;
+package com.hsaugsburg.HRManagementTool.services.models.calendar;
 
-import com.hsaugsburg.HRManagementTool.models.Priority;
-import com.hsaugsburg.HRManagementTool.models.mitarbeiter.Mitarbeiter;
+import com.hsaugsburg.HRManagementTool.services.models.Priority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Getter

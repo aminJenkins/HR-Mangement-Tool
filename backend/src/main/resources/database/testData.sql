@@ -12,6 +12,8 @@ INSERT INTO mitarbeiter(id, anschrift, mail, nachname, name, telnr,  abteilung)
 VALUES (4,'Dritte Muster Str.', 'kai.musterman@gmail.com', 'Kai', 'Musterman', '020982474',2);
 INSERT INTO mitarbeiter(id, anschrift, mail, nachname, name, telnr,  abteilung)
 VALUES (5,'Vierte Muster Str.', 'rudolf.musterman@gmail.com', 'Rudolf', 'Musterman', '020982475',3);
+INSERT INTO mitarbeiter(id, anschrift, mail, nachname, name, telnr,  abteilung)
+VALUES (6,'Andere Str.', 'admin@hr', 'Amin', 'Musterman', '020982472',1);
 INSERT INTO PROJECT(ID, AUFTRAGSGEBER, BEZEICHNUNG,BUDGET_IN_ARBEITSTAGEN, STUNDENSATZ,PROJEKT_LEITER) VALUES(1,'HS Augsburg','WinterSemester Projekt',4000,20,1);
 INSERT INTO PROJECT(ID, AUFTRAGSGEBER, BEZEICHNUNG,BUDGET_IN_ARBEITSTAGEN, STUNDENSATZ,PROJEKT_LEITER) VALUES(2,'Uni Augsburg','SommerSemester Projekt',4000,20,2);
 INSERT INTO PROJECT(ID, AUFTRAGSGEBER, BEZEICHNUNG,BUDGET_IN_ARBEITSTAGEN, STUNDENSATZ,PROJEKT_LEITER) VALUES(3,'HS Augsburg','WinterSemester Projekt',4000,20,1);

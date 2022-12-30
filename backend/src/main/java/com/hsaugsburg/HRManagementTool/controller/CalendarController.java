@@ -4,7 +4,7 @@ import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarApiMapper;
-import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
+import com.hsaugsburg.HRManagementTool.services.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.services.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,15 +30,15 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/termin")
-    public ResponseEntity<TerminDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO){
-        Termin updatedTermin = this.calendarService.updateTermin(this.calendarApiMapper.map(terminUpdateDTO));
+    public ResponseEntity<TerminDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO, Authentication authentication){
+        Termin updatedTermin = this.calendarService.updateTermin(this.calendarApiMapper.map(terminUpdateDTO),authentication);
         return ResponseEntity.ok(this.calendarApiMapper.map(updatedTermin));
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/termin/{terminId}")
-    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId){
-        this.calendarService.deleteTermin(terminId);
+    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId,Authentication authentication){
+        this.calendarService.deleteTermin(terminId,authentication);
         return ResponseEntity.ok().build();
     }
 

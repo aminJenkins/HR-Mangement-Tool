@@ -5,13 +5,12 @@ import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.AbteilungsRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.MitarbeiterRepo;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
-import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
+import com.hsaugsburg.HRManagementTool.services.models.Mitarbeiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
