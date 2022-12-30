@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.services.models;
+package com.hsaugsburg.HRManagementTool.models;
 
 import java.util.Date;
 import java.util.HashSet;

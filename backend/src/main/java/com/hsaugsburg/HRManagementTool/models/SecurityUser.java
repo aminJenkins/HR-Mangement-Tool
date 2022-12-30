@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.services.models;
+package com.hsaugsburg.HRManagementTool.models;
 
 import com.hsaugsburg.HRManagementTool.database.entity.ZugangEntity;
 import org.springframework.security.core.GrantedAuthority;

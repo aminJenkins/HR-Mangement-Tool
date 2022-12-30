@@ -1,6 +1,6 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
-import com.hsaugsburg.HRManagementTool.services.models.Priority;
+import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
 

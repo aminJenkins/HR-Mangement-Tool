@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.services.models.mitarbeiter;
+package com.hsaugsburg.HRManagementTool.models.mitarbeiter;
 
 
 import lombok.AllArgsConstructor;

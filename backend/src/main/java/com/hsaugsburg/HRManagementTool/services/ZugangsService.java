@@ -2,7 +2,7 @@ package com.hsaugsburg.HRManagementTool.services;
 
 import com.hsaugsburg.HRManagementTool.utils.JwtUtils;
 import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
-import com.hsaugsburg.HRManagementTool.services.models.SecurityUser;
+import com.hsaugsburg.HRManagementTool.models.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

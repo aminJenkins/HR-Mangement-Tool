@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.KontingentRepo;
 import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
-import com.hsaugsburg.HRManagementTool.services.models.Kontingent;
+import com.hsaugsburg.HRManagementTool.models.Kontingent;
 import com.hsaugsburg.HRManagementTool.utils.JsonMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
-import com.hsaugsburg.HRManagementTool.services.models.Priority;
+import com.hsaugsburg.HRManagementTool.models.Priority;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
-package com.hsaugsburg.HRManagementTool.services.models.calendar;
+package com.hsaugsburg.HRManagementTool.models.calendar;
 
-import com.hsaugsburg.HRManagementTool.services.models.Priority;
+import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

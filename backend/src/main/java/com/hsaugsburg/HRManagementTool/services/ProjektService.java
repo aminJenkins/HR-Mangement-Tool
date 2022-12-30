@@ -5,7 +5,7 @@ import java.util.Set;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.ProjektRepo;
 import com.hsaugsburg.HRManagementTool.dto.ProjektDTO;
-import com.hsaugsburg.HRManagementTool.services.models.Projekt;
+import com.hsaugsburg.HRManagementTool.models.Projekt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

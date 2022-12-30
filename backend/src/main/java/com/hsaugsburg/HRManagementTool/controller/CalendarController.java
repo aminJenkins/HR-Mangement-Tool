@@ -4,7 +4,7 @@ import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarApiMapper;
-import com.hsaugsburg.HRManagementTool.services.models.calendar.Termin;
+import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.services.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
