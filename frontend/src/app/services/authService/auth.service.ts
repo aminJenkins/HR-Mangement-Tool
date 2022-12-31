@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AuthenticationResponse} from '../../dto/AuthenticationResponse';
+import {AuthenticationResponse} from '../../shared/AuthenticationResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,7 @@ export class AuthService {
 
   isUserLoggedIn(): boolean {
     return localStorage.getItem(AuthService.TOKEN_ID) != null;
+    // todo check if token is expired
   }
 
   public setSession(token: string | undefined): void {

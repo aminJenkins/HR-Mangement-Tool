@@ -2,6 +2,7 @@ package com.hsaugsburg.HRManagementTool.mapper.calendar;
 
 import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
+
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -42,16 +42,16 @@ public class CalendarService {
     }
 
     public Termin updateTermin(TerminUpdate terminUpdate,Authentication authentication) {
-       Termin terminToBeUpdated= getTermin(terminUpdate.getId());
-       if(!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErstellerId(),authentication)){
-           throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
-       }
-       terminToBeUpdated.update(terminUpdate);
-       TerminEntity terminToBeUpdatedEntity = calendarMapper.mapToTerminEntity(terminToBeUpdated);
-       Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getMitarbeiterEntities(terminUpdate.getTeilnehmer());
-       terminToBeUpdatedEntity.setTeilnehmer(teilnehmerOfUpdatedTermin);
-       this.terminRepo.save(terminToBeUpdatedEntity);
-       return this.calendarMapper.mapToTermin(terminToBeUpdatedEntity);
+        Termin terminToBeUpdated= getTermin(terminUpdate.getId());
+        if(!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErstellerId(),authentication)){
+            throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
+        }
+        terminToBeUpdated.update(terminUpdate);
+        TerminEntity terminToBeUpdatedEntity = calendarMapper.mapToTerminEntity(terminToBeUpdated);
+        Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getMitarbeiterEntities(terminUpdate.getTeilnehmer());
+        terminToBeUpdatedEntity.setTeilnehmer(teilnehmerOfUpdatedTermin);
+        this.terminRepo.save(terminToBeUpdatedEntity);
+        return this.calendarMapper.mapToTermin(terminToBeUpdatedEntity);
 
     }
 
@@ -67,3 +67,4 @@ public class CalendarService {
 
 
 }
+

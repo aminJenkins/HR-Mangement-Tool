@@ -1,4 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
+package com.hsaugsburg.HRManagementTool.dto.calendar;
 
 import com.hsaugsburg.HRManagementTool.models.Priority;
 import javax.validation.constraints.NotNull;

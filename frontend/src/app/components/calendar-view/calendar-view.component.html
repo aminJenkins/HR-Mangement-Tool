@@ -1,0 +1,68 @@
+<div class="calendar-header">
+  <h1>Kalendar</h1>
+  <h2>Woche: {{ calendarData.week }}</h2>
+</div>
+
+<table
+  mat-table
+  [dataSource]="calendarData.appointments"
+  class="mat-elevation-z8"
+>
+  <ng-container matColumnDef="Montag">
+    <th class="bold" mat-header-cell *matHeaderCellDef>Montag</th>
+    <td class="appointment-td" mat-cell *matCellDef="let appointment">
+      <app-appointment
+        (click)="showAppointmentDetails(appointment.monday)"
+        [appointment]="appointment.monday"
+      >
+      </app-appointment>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Dienstag">
+    <th class="bold" mat-header-cell *matHeaderCellDef>Dienstag</th>
+    <td mat-cell *matCellDef="let appointment">
+      <app-appointment
+        (click)="showAppointmentDetails(appointment.tuesday)"
+        [appointment]="appointment.tuesday"
+      >
+      </app-appointment>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Mittwoch">
+    <th class="bold" mat-header-cell *matHeaderCellDef>Mittwoch</th>
+    <td mat-cell *matCellDef="let appointment">
+      <app-appointment
+        (click)="showAppointmentDetails(appointment.wednesday)"
+        [appointment]="appointment.wednesday"
+      >
+      </app-appointment>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Donnerstag">
+    <th class="bold" mat-header-cell *matHeaderCellDef>Donnerstag</th>
+    <td mat-cell *matCellDef="let appointment">
+      <app-appointment
+        (click)="showAppointmentDetails(appointment.thursday)"
+        [appointment]="appointment.thursday"
+      >
+      </app-appointment>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Freitag">
+    <th class="bold" mat-header-cell *matHeaderCellDef>Freitag</th>
+    <td mat-cell *matCellDef="let appointment">
+      <app-appointment
+        (click)="showAppointmentDetails(appointment.friday)"
+        [appointment]="appointment.friday"
+      >
+      </app-appointment>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

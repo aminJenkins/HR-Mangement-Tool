@@ -68,5 +68,4 @@ public class MitarbeiterEntity {
     @JoinColumn(name="ABTEILUNG", nullable = false)
     private AbteilungEntity abteilung;
 
-
 }

@@ -8,20 +8,21 @@ import { HomeViewComponent } from './components/home-view/home-view.component';
 import { TimeTrackingViewComponent } from './components/time-tracking-view/time-tracking-view.component';
 import { MaterialModule } from './material/material.module';
 import { TimeTrackingService } from './services/time-tracking-service';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TimetrackingFormViewComponent } from './components/timetracking-from-view/timetracking-form-view.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginComponent } from './components/login/login.component';
 import { AppointmentComponent } from './components/calendar/appointment/appointment.component';
 import { AppointmentDetailsViewComponent } from './components/calendar/appointment-details-view/appointment-details-view.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import {AuthInterceptor} from './services/authInterceptor/auth.interceptor';
+import {FormsModule} from '@angular/forms';
 import { AddAppointmentFormComponent } from './components/calendar/add-appointment-form/add-appointment-form.component';
-import { FormsModule } from '@angular/forms';
 
 // @ts-ignore
 @NgModule({
   declarations: [
-    AppComponent,
     CalendarViewComponent,
     HomeViewComponent,
     TimeTrackingViewComponent,
@@ -29,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     AppointmentComponent,
     AppointmentDetailsViewComponent,
-    AddAppointmentFormComponent,
+    ProfileComponent,
+    AppComponent,
+    AddAppointmentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,10 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     FormsModule,
   ],
-  providers: [TimeTrackingService, MatDatepickerModule, MatNativeDateModule],
+  providers: [TimeTrackingService, MatDatepickerModule, MatNativeDateModule,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
