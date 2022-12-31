@@ -1,0 +1,62 @@
+<mat-card>
+  <mat-card-title>Termin anlegen</mat-card-title>
+  <mat-card-content>
+    <form style="padding: 10px" class="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Titel</mat-label>
+        <input
+          name="titel"
+          [(ngModel)]="appointment.titel"
+          matInput
+          style="color: gray"
+        />
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline">
+    <mat-label>Beschreibung</mat-label>
+    <textarea
+      name="beschreibung"
+      [(ngModel)]="appointment.beschreibung"
+      matInput
+      style="color: gray"
+    ></textarea>
+  </mat-form-field>
+ -->
+      <mat-form-field appearence="outline">
+        <mat-label>Priorität</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let priorityOption of priorityOptions"
+            [value]="appointment.priority"
+          >
+            {{ priorityOption }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Beginn</mat-label>
+        <input
+          name="beginn"
+          [(ngModel)]="appointment.beginn"
+          matInput
+          style="color: gray"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ende</mat-label>
+        <input
+          name="ende"
+          [(ngModel)]="appointment.beginn"
+          matInput
+          style="color: gray"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        Termin anlegen
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
