@@ -30,7 +30,6 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/termin")
-
     public ResponseEntity<TerminDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO, Authentication authentication){
         Termin updatedTermin = this.calendarService.updateTermin(this.calendarApiMapper.map(terminUpdateDTO),authentication);
         return ResponseEntity.ok(this.calendarApiMapper.map(updatedTermin));
@@ -38,23 +37,10 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/termin/{terminId}")
-    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId,Authentication authentication){
-        this.calendarService.deleteTermin(terminId,authentication);
-
-    public ResponseEntity<TerminUpdateDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO){
-        this.calendarService.updateTermin(terminUpdateDTO);
-        return null;
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @DeleteMapping("/{terminId}")
-    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId){
-        this.calendarService.deleteTermin(terminId);
->>>>>>> main
+    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId,Authentication authentication) {
+        this.calendarService.deleteTermin(terminId, authentication);
         return ResponseEntity.ok().build();
     }
 
 
-
-
-}
+    }
