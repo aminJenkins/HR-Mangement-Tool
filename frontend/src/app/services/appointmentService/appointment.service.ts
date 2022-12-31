@@ -11,11 +11,10 @@ import { Employee } from 'src/app/shared/employee/Employee';
 export class AppointmentService {
   constructor(private http: HttpClient) {}
 
-  public getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(environment.PROJECTS_URL);
+  public getAllProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(environment.PROJECTS_URL + 'all');
   }
-
-  getProfileInfo(): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8090/api/employee/');
+  public getAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(environment.EMPLOYEE_URL + 'all');
   }
 }

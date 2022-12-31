@@ -1,3 +1,4 @@
+import { Employee } from './../../../shared/employee/Employee';
 import { AppointmentService } from './../../../services/appointmentService/appointment.service';
 import { AddAppointment } from './../../../shared/Appointment';
 import { Component } from '@angular/core';
@@ -94,19 +95,30 @@ export class CalendarViewComponent {
   ];
 
   projects: Project[];
+  employees: Employee[];
 
   constructor(
     public dialog: MatDialog,
     private appointmentService: AppointmentService
   ) {
     this.projects = [];
+    this.employees = [];
   }
 
   ngOnInit(): void {
-    this.appointmentService.getProjects().subscribe((response: Project[]) => {
-      this.projects = response;
-      console.log(this.projects);
-    });
+    this.appointmentService
+      .getAllProjects()
+      .subscribe((response: Project[]) => {
+        this.projects = response;
+        console.log(this.projects);
+      });
+
+    this.appointmentService
+      .getAllEmployees()
+      .subscribe((response: Employee[]) => {
+        this.employees = response;
+        console.log(this.projects);
+      });
   }
 
   showAppointmentDetails(appointment: any): void {
@@ -125,8 +137,11 @@ export class CalendarViewComponent {
     const addAppointmentDialogRef = this.dialog.open(
       AddAppointmentFormComponent,
       {
-        data: this.projects,
-        height: '400px',
+        data: {
+          employees: this.employees,
+          projects: this.projects,
+        },
+        height: '520px',
         width: '600px',
       }
     );

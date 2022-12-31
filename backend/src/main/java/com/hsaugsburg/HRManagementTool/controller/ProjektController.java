@@ -32,4 +32,11 @@ public class ProjektController {
             return ResponseEntity.status(500).body(null);
         }
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/all")
+    public ResponseEntity<Set<ProjektDTO>> getAllProjects(){
+        return ResponseEntity.ok(projektService.getAllProjects());
+    }
+
 }

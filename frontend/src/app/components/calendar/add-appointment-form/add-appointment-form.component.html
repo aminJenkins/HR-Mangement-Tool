@@ -1,37 +1,35 @@
-<mat-card>
+<mat-card style="padding: 20px">
   <mat-card-title>Termin anlegen</mat-card-title>
   <mat-card-content>
     <form
       id="create-appointment-form"
       (ngSubmit)="createAppointment()"
       style="padding: 10px"
+      [formGroup]="addAppointmentFormGroup"
     >
-      <mat-form-field appearance="outline">
+      <mat-form-field style="margin-right: 10px" appearance="outline">
         <mat-label>Titel</mat-label>
         <input
           name="titel"
-          [(ngModel)]="appointment.titel"
           matInput
           style="color: gray"
+          formControlName="title"
         />
       </mat-form-field>
       <mat-form-field appearence="outline">
         <mat-label>Priorität</mat-label>
-        <mat-select>
-          <mat-option
-            *ngFor="let priorityOption of priorityOptions"
-            [value]="appointment.priority"
-          >
-            {{ priorityOption }}
-          </mat-option>
+        <mat-select formControlName="priority">
+          <mat-option value="LOW">LOW</mat-option>
+          <mat-option value="MIDDLE">MIDDLE</mat-option>
+          <mat-option value="HIGH">HIGH</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field style="margin-right: 10px" appearance="outline">
         <mat-label>Beginn</mat-label>
         <input
-          name="beginn"
-          [(ngModel)]="appointment.beginn"
+          name="begin"
+          formControlName="begin"
           matInput
           style="color: gray"
         />
@@ -39,17 +37,12 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Ende</mat-label>
-        <input
-          name="ende"
-          [(ngModel)]="appointment.beginn"
-          matInput
-          style="color: gray"
-        />
+        <input name="ende" formControlName="end" matInput style="color: gray" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field style="margin-right: 10px" appearance="outline">
         <mat-label>Datum</mat-label>
-        <input matInput [matDatepicker]="picker" />
+        <input matInput formControlName="date" [matDatepicker]="picker" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
@@ -59,29 +52,43 @@
 
       <mat-form-field appearence="outline">
         <mat-label>Projekt</mat-label>
-        <mat-select>
+        <mat-select formControlName="project">
           <mat-option
-            *ngFor="let projekt of data"
+            *ngFor="let projekt of data.projects"
             [value]="projekt.bezeichnung"
           >
             {{ projekt.bezeichnung }}
           </mat-option>
+          <mat-option [value]="null">Kein Projekt</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field style="width: 80%" appearance="outline">
         <mat-label>Beschreibung</mat-label>
         <textarea
+          formControlName="description"
           name="beschreibung"
-          [(ngModel)]="appointment.beschreibung"
           matInput
           style="color: gray"
         ></textarea>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit">
-        Termin anlegen
-      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>Teilnehmer</mat-label>
+        <mat-select formControlName="participants" multiple>
+          <mat-option
+            *ngFor="let employee of data.employees"
+            [value]="employee.email"
+            >{{ employee.email }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" type="submit">
+          Termin anlegen
+        </button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

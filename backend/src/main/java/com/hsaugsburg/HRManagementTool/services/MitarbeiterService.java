@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -60,5 +61,10 @@ public class MitarbeiterService {
                 throw new Exception("You can only update your own user information");
             }
         }
+    }
+
+    public Set<MitarbeiterDTO> getAllEmployees() {
+        List<MitarbeiterEntity> allEmployees = this.mitarbeiterRepo.findAll();
+        return Mitarbeiter.parseEntitiestoDTOs(new HashSet<>(allEmployees));
     }
 }

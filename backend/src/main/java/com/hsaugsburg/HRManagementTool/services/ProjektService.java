@@ -1,5 +1,7 @@
 package com.hsaugsburg.HRManagementTool.services;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
@@ -28,4 +30,8 @@ public class ProjektService {
                 projektRepo.findByMitarbeiterID(mitarbeiterService.getMitarbeiterDTO(userMail).getId()));
     }
 
+    public Set<ProjektDTO> getAllProjects() {
+        List<ProjektEntity> allProjects = projektRepo.findAll();
+        return Projekt.parseEntitiesToDTOs(new HashSet<>(allProjects));
+    }
 }
