@@ -104,7 +104,8 @@ export class CalendarViewComponent {
 
   ngOnInit(): void {
     this.appointmentService.getProjects().subscribe((response: Project[]) => {
-      console.log(response);
+      this.projects = response;
+      console.log(this.projects);
     });
   }
 
@@ -124,8 +125,9 @@ export class CalendarViewComponent {
     const addAppointmentDialogRef = this.dialog.open(
       AddAppointmentFormComponent,
       {
+        data: this.projects,
         height: '400px',
-        width: '400px',
+        width: '600px',
       }
     );
 

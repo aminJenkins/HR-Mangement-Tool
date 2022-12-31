@@ -23,4 +23,6 @@ export class AddAppointmentFormComponent {
       ende: '',
     };
   }
+
+  createAppointment(): void {}
 }
