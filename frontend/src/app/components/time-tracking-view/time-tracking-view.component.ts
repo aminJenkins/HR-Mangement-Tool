@@ -17,8 +17,8 @@ export class TimeTrackingViewComponent {
   constructor(private timeTrackingService : TimeTrackingService){}
 
   ngOnInit(): void {
-    this.timeTrackingService.getDatasource().subscribe((response) => {
-      // this.dataSource = response;
+    this.timeTrackingService.getDatasource().subscribe((response: TimeTracker[]) => {
+      this.dataSource = response;
       console.log(response);
     });
   }
