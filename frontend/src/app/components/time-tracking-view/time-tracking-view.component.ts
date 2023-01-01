@@ -11,13 +11,14 @@ import {TimetrackingFormViewComponent} from "../timetracking-from-view/timetrack
 })
 export class TimeTrackingViewComponent {
   displayedColumns: string[] = ['id', 'kommentar','dauer', 'kontingente','datum'];
+  testdaten = 'test';
   public dataSource: TimeTracker[] = [];
 
   constructor(private timeTrackingService : TimeTrackingService){}
 
   ngOnInit(): void {
-    this.timeTrackingService.getDatasource().subscribe((response:TimeTracker[]) => {
-      this.dataSource = response;
+    this.timeTrackingService.getDatasource().subscribe((response) => {
+      // this.dataSource = response;
       console.log(response);
     });
   }

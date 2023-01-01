@@ -28,8 +28,7 @@ public class ZeiterfassungEntity {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "MITARBEITER_ID", nullable = false, referencedColumnName = "ID",
-            insertable = false, updatable = false)
+    @JoinColumn(name = "MITARBEITER_ID", nullable = false, referencedColumnName = "ID")
     private MitarbeiterEntity mitarbeiter;
 
     /*@ManyToMany
@@ -38,13 +37,11 @@ public class ZeiterfassungEntity {
             joinColumns = @JoinColumn(name = "ZEITERFASSUNG_ID"),
             inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))*/
     @ManyToOne
-    @JoinColumn(name = "Projekt_ID", nullable = true, referencedColumnName = "ID",
-            insertable = false, updatable = false)
+    @JoinColumn(name = "Projekt_ID", referencedColumnName = "ID")
     private ProjektEntity projekt;
 
     @ManyToOne
-    @JoinColumn(name = "KONTINGENT_ID", nullable = false, referencedColumnName = "ID",
-            insertable = false, updatable = false)
+    @JoinColumn(name = "KONTINGENT_ID", nullable = false, referencedColumnName = "ID")
     private KontingentEntity kontingent;
 
     @Column(name = "KOMMENTAR", nullable = false)

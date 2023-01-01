@@ -1,26 +1,16 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "MITARBEITER")
 @Table(name = "MITARBEITER")
 public class MitarbeiterEntity {
 
@@ -35,40 +25,46 @@ public class MitarbeiterEntity {
     @Column(name = "NACHNAME", nullable = false)
     private String nachname;
 
-    @OneToOne(mappedBy = "leiter")
-    private AbteilungEntity abteilungenInLeitung;
-
-    @Column(name = "TELNR", nullable = false, updatable = true, columnDefinition = "VARCHAR(15)")
+    @Column(name = "TELNR", nullable = false, columnDefinition = "VARCHAR(15)")
     private String telnr;
 
-    @Column(name = "MAIL", unique = true, nullable = false, updatable = true, columnDefinition = "VARCHAR(50)")
+    @Column(name = "MAIL", unique = true, nullable = false, columnDefinition = "VARCHAR(50)")
     private String email;
 
-    @Column(name = "ANSCHRIFT", nullable = false, updatable = true, columnDefinition = "VARCHAR(100)")
+    @Column(name = "ANSCHRIFT", nullable = false, columnDefinition = "VARCHAR(100)")
     private String anschrift;
 
-    @OneToMany(mappedBy = "leiter")
-    @Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
-    private Set<ProjektEntity> projekteInFuehrung;
+    @ManyToOne
+    @JoinColumn(name="ABTEILUNG", nullable = false)
+    private AbteilungEntity abteilung;
 
-    @OneToMany(mappedBy = "mitarbeiter")
+//    @OneToOne(fetch = FetchType.LAZY, targetEntity = ZugangEntity.class)
+//    @JoinColumn(name = "MAIL", referencedColumnName = "USERNAME", unique = true)
+//    private ZugangEntity zugangEntity;
+
+    @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ProjektEntity> projekteInFuehrung = new HashSet<>();
+
+    @OneToMany(mappedBy = "ersteller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<TerminEntity> hostTermine = new HashSet<>();
+
+    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
     private Set<ZeiterfassungEntity> zeiterfassungen;
+
+    @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<AbteilungEntity> abteilungenInLeitung = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "TERMIN_TEILNEHMER",
             joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "TERMIN_ID")})
-    private Set<TerminEntity> termine;
+    private Set<TerminEntity> teilnehmerTermine;
 
     @ManyToMany
     @JoinTable(name = "PROJEKTVERTEILUNG",
             joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
     private Set<ProjektEntity> projekte;
-
-    @ManyToOne
-    @JoinColumn(name="ABTEILUNG", nullable = false)
-    private AbteilungEntity abteilung;
 
 }
