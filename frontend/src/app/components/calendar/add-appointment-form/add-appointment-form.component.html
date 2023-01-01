@@ -13,7 +13,7 @@
           name="titel"
           matInput
           style="color: gray"
-          formControlName="title"
+          formControlName="titel"
         />
       </mat-form-field>
       <mat-form-field appearence="outline">
@@ -29,7 +29,7 @@
         <mat-label>Beginn</mat-label>
         <input
           name="begin"
-          formControlName="begin"
+          formControlName="beginn"
           matInput
           style="color: gray"
         />
@@ -37,12 +37,17 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Ende</mat-label>
-        <input name="ende" formControlName="end" matInput style="color: gray" />
+        <input
+          name="ende"
+          formControlName="ende"
+          matInput
+          style="color: gray"
+        />
       </mat-form-field>
 
       <mat-form-field style="margin-right: 10px" appearance="outline">
         <mat-label>Datum</mat-label>
-        <input matInput formControlName="date" [matDatepicker]="picker" />
+        <input matInput formControlName="datum" [matDatepicker]="picker" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
@@ -52,10 +57,10 @@
 
       <mat-form-field appearence="outline">
         <mat-label>Projekt</mat-label>
-        <mat-select formControlName="project">
+        <mat-select formControlName="projektId">
           <mat-option
             *ngFor="let projekt of data.projects"
-            [value]="projekt.bezeichnung"
+            [value]="projekt.id"
           >
             {{ projekt.bezeichnung }}
           </mat-option>
@@ -66,7 +71,7 @@
       <mat-form-field style="width: 80%" appearance="outline">
         <mat-label>Beschreibung</mat-label>
         <textarea
-          formControlName="description"
+          formControlName="beschreibung"
           name="beschreibung"
           matInput
           style="color: gray"
@@ -75,7 +80,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Teilnehmer</mat-label>
-        <mat-select formControlName="participants" multiple>
+        <mat-select formControlName="teilnehmer" multiple>
           <mat-option
             *ngFor="let employee of data.employees"
             [value]="employee.email"

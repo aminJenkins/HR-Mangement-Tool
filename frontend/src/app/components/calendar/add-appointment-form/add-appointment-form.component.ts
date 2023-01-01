@@ -23,14 +23,14 @@ export class AddAppointmentFormComponent {
 
   initForms(): void {
     this.addAppointmentFormGroup = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      begin: ['', Validators.required],
-      end: ['', Validators.required],
-      date: ['', Validators.required],
+      titel: ['', Validators.required],
+      beschreibung: ['', Validators.required],
+      beginn: ['', Validators.required],
+      ende: ['', Validators.required],
+      datum: ['', Validators.required],
       priority: ['', Validators.required],
-      project: [''],
-      participants: [[]],
+      projektId: [''],
+      teilnehmer: [[]],
     });
   }
 

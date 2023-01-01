@@ -50,9 +50,7 @@ const calendarData = {
         to: '10:00',
         projektid: 3,
       },
-      tuesday: null,
-      wednesday: null,
-      thursday: null,
+
       friday: {
         description: 'Interne Besprechung',
         from: '11:00',
@@ -67,9 +65,7 @@ const calendarData = {
         to: '16:00',
         projektid: 3,
       },
-      tuesday: null,
-      wednesday: null,
-      thursday: null,
+
       friday: {
         description: 'Schulung',
         from: '13:00',
