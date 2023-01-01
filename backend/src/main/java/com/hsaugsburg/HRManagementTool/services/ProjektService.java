@@ -24,6 +24,10 @@ public class ProjektService {
         return projektRepo.findById(projektID);
     }
 
+    public ProjektEntity getProjectEntity(String bezeichnung){
+        return projektRepo.findByBezeichnung(bezeichnung);
+    }
+
     public Set<ProjektDTO> getProjektDTOs(String userMail) {
 
         return Projekt.parseEntitiesToDTOs(

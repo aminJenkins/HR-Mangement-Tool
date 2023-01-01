@@ -33,12 +33,12 @@ public class NewTerminDTO {
     private Date datum;
 
     @NotNull
-    private Set<Integer> teilnehmer;
+    private Set<String> teilnehmer;
 
     @NotNull
     private Priority priority;
 
     @NotNull
-    private int projektId;
+    private String projekt;
 
 }

@@ -19,10 +19,10 @@ public class Termin {
     private LocalTime beginn;
     private LocalTime ende;
     private Date datum;
-    private Set<Integer> teilnehmer;
+    private Set<String> teilnehmer;
     private Priority priority;
     private int erstellerId;
-    private int projektId;
+    private String projekt;
 
 
     public void update(final TerminUpdate update){
@@ -33,7 +33,7 @@ public class Termin {
         this.datum = update.getDatum();
         this.teilnehmer = update.getTeilnehmer();
         this.priority = update.getPriority();
-        this.projektId = update.getProjektId();
+        this.projekt = update.getProjekt();
     }
 
 

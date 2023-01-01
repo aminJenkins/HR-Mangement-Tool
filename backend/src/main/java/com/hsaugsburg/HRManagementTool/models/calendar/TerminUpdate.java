@@ -19,7 +19,7 @@ public class TerminUpdate {
     private final LocalTime beginn;
     private final LocalTime ende;
     private final Date datum;
-    private final Set<Integer> teilnehmer;
+    private final Set<String> teilnehmer;
     private final Priority priority;
-    private final int projektId;
+    private final String projekt;
 }

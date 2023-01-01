@@ -27,19 +27,14 @@ public class TerminEntity {
     private String beschreibung;
 
     @JoinColumn(name = "PROJEKT_ID",
-            insertable = false, updatable = false)
+            insertable = true, updatable = true)
     @ManyToOne(targetEntity = ProjektEntity.class)
     private ProjektEntity projekt;
 
-    @Column(name="PROJEKT_ID")
-    private int projektId;
-
-    @JoinColumn(name = "ERSTELLER_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "ERSTELLER_ID", insertable = true, updatable = false)
     @ManyToOne(targetEntity = MitarbeiterEntity.class)
     private MitarbeiterEntity mitarbeiterEntity;
 
-    @Column(name = "ERSTELLER_ID")
-    private int erstellerId;
 
     @ManyToMany
     @JoinTable(name = "TERMIN_TEILNEHMER",

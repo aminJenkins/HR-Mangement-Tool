@@ -39,8 +39,8 @@ public class MitarbeiterService {
 
     }
 
-    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<Integer> mitarbeiterIds){
-        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllById(mitarbeiterIds));
+    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<String> mitarbeiterEmails){
+        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(mitarbeiterEmails));
     }
 
     public MitarbeiterDTO updateEmployee(MitarbeiterDTO mitarbeiterDTO) {
