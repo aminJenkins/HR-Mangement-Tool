@@ -9,6 +9,7 @@ export const environment = {
   GREETING_URL: 'http://localhost:8090/api/greetings',
   PROJECTS_URL: 'http://localhost:8090/api/projects/',
   EMPLOYEE_URL: 'http://localhost:8090/api/employee/',
+  CALENDAR_URL: 'http://localhost:8090/api/calendar/',
 };
 
 /*

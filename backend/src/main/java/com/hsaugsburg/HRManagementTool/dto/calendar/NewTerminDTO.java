@@ -38,7 +38,6 @@ public class NewTerminDTO {
     @NotNull
     private Priority priority;
 
-    @NotNull
     private String projekt;
 
 }

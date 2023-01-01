@@ -9,6 +9,7 @@ import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 @Component
@@ -17,7 +18,7 @@ public class CalendarMapper{
 
     public Termin mapToTermin(TerminEntity terminEntity){
         Set<String> teilnehmerOfTermin = terminEntity.getTeilnehmer().stream().map(teilnehmer -> teilnehmer.getEmail()).collect(Collectors.toSet());
-        String projekt = terminEntity.getProjekt().getBezeichnung();
+        String projekt = terminEntity.getProjekt() == null? null : terminEntity.getProjekt().getBezeichnung();
         Termin termin =    Termin.builder().titel(terminEntity.getTitel())
                 .beschreibung(terminEntity.getBeschreibung())
                 .id(terminEntity.getId()).beginn(terminEntity.getBeginn())
@@ -31,7 +32,7 @@ public class CalendarMapper{
         return termin;
     }
 
-    public TerminEntity mapToTerminEntity(Termin termin, Set<MitarbeiterEntity> teilnehmerOfTermin, MitarbeiterEntity ersteller, ProjektEntity projektEntity){
+    public TerminEntity mapToTerminEntity(Termin termin, Set<MitarbeiterEntity> teilnehmerOfTermin, MitarbeiterEntity ersteller, Optional<ProjektEntity> projektEntity){
         TerminEntity terminEntity = new TerminEntity();
         terminEntity.setId(termin.getId());
         terminEntity.setTitel(termin.getTitel());
@@ -40,9 +41,14 @@ public class CalendarMapper{
         terminEntity.setEnde(termin.getEnde());
         terminEntity.setDatum(termin.getDatum());
         terminEntity.setPriority(termin.getPriority());
-        terminEntity.setProjekt(projektEntity);
+
         terminEntity.setMitarbeiterEntity(ersteller);
         terminEntity.setTeilnehmer(teilnehmerOfTermin);
+
+        if(projektEntity.isPresent()){
+            terminEntity.setProjekt(projektEntity.get());
+        }
+
         return terminEntity;
 
     }

@@ -28,7 +28,7 @@ public class CalendarService {
     public Termin createNewTermin(Termin newTermin,Authentication authentication) {
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
         Set<MitarbeiterEntity> teilnehmerOfTermin = this.mitarbeiterService.getMitarbeiterEntities(newTermin.getTeilnehmer());
-        ProjektEntity projektOfTermin = this.projektService.getProjectEntity(newTermin.getProjekt());
+        Optional<ProjektEntity> projektOfTermin = this.projektService.getProjectEntity(newTermin.getProjekt());
         TerminEntity terminToBeSaved =  calendarMapper.mapToTerminEntity(newTermin,teilnehmerOfTermin,erstellerOfTermin,projektOfTermin);
         this.terminRepo.save(terminToBeSaved);
         return this.calendarMapper.mapToTermin(terminToBeSaved);
@@ -51,7 +51,7 @@ public class CalendarService {
         terminToBeUpdated.update(terminUpdate);
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
         Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getMitarbeiterEntities(terminUpdate.getTeilnehmer());
-        ProjektEntity projectOfTermin = this.projektService.getProjectEntity(terminToBeUpdated.getProjekt());
+        Optional<ProjektEntity> projectOfTermin = this.projektService.getProjectEntity(terminToBeUpdated.getProjekt());
         TerminEntity terminToBeUpdatedEntity = calendarMapper.mapToTerminEntity(terminToBeUpdated,teilnehmerOfUpdatedTermin,erstellerOfTermin,projectOfTermin);
         this.terminRepo.save(terminToBeUpdatedEntity);
         return this.calendarMapper.mapToTermin(terminToBeUpdatedEntity);

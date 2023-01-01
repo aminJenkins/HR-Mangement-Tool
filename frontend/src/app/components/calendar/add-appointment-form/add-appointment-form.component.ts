@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AddAppointment } from 'src/app/shared/Appointment';
+import { AppointmentService } from 'src/app/services/appointmentService/appointment.service';
+import { AddAppointment, Appointment } from 'src/app/shared/Appointment';
 
 @Component({
   selector: 'app-add-appointment-form',
@@ -9,14 +10,15 @@ import { AddAppointment } from 'src/app/shared/Appointment';
   styleUrls: ['./add-appointment-form.component.css'],
 })
 export class AddAppointmentFormComponent {
-  appointment!: AddAppointment;
+  newAppointment!: AddAppointment;
   priorityOptions = ['LOW', 'MIDDLE', 'HIGH'];
   addAppointmentFormGroup!: FormGroup;
 
   constructor(
     public addAppointmentDialogRef: MatDialogRef<AddAppointmentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private appointmentService: AppointmentService
   ) {
     this.initForms();
   }
@@ -29,16 +31,19 @@ export class AddAppointmentFormComponent {
       ende: ['', Validators.required],
       datum: ['', Validators.required],
       priority: ['', Validators.required],
-      projektId: [''],
+      projekt: [''],
       teilnehmer: [[]],
     });
   }
 
   createAppointment(): void {
-    console.log(this.addAppointmentFormGroup.value);
     if (this.addAppointmentFormGroup.valid) {
-      this.appointment = this.addAppointmentFormGroup.value;
-      console.log(this.appointment);
+      this.newAppointment = this.addAppointmentFormGroup.value;
+      this.appointmentService
+        .createNewAppointment(this.newAppointment)
+        .subscribe((response: Appointment) => {
+          console.log(response);
+        });
     }
   }
 }

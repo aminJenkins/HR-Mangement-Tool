@@ -2,6 +2,7 @@ package com.hsaugsburg.HRManagementTool.services;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
@@ -24,7 +25,7 @@ public class ProjektService {
         return projektRepo.findById(projektID);
     }
 
-    public ProjektEntity getProjectEntity(String bezeichnung){
+    public Optional<ProjektEntity> getProjectEntity(String bezeichnung){
         return projektRepo.findByBezeichnung(bezeichnung);
     }
 
