@@ -2,8 +2,10 @@ package com.hsaugsburg.HRManagementTool.services;
 
 import com.hsaugsburg.HRManagementTool.database.entity.AbteilungEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.ZugangEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.AbteilungsRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.MitarbeiterRepo;
+import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +28,8 @@ public class MitarbeiterService {
     MitarbeiterRepo mitarbeiterRepo;
     @Autowired
     AbteilungsRepo abteilungsRepo;
+    @Autowired
+    ZugangsRepo zugangsRepo;
 
     public MitarbeiterDTO getMitarbeiterDTO(String userName) {
         MitarbeiterEntity maEntity = getMitarbeiterEntity(userName);
@@ -33,21 +40,18 @@ public class MitarbeiterService {
         return mitarbeiterRepo.findByEmail(userName);
     }
 
-    public void createMitarbeiter(MitarbeiterDTO mitarbeiter){
+    public void createMitarbeiter(MitarbeiterDTO mitarbeiter) {
         AbteilungEntity abteilungEntity = abteilungsRepo.findById(mitarbeiter.getAbteilung());
-        mitarbeiterRepo.save(Mitarbeiter.mapDTOToEntity(mitarbeiter,abteilungEntity));
-
-    }
-
-    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<String> mitarbeiterEmails){
-        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(mitarbeiterEmails));
+        ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiter.getEmail()).orElseThrow();
+        mitarbeiterRepo.save(Mitarbeiter.mapDTOToEntity(mitarbeiter, abteilungEntity, zugang));
     }
 
     public MitarbeiterDTO updateEmployee(MitarbeiterDTO mitarbeiterDTO) {
         System.out.println("in update employee:" + mitarbeiterDTO.toString());
         AbteilungEntity abteilungEntity = abteilungsRepo.findById(mitarbeiterDTO.getAbteilung());
+        ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiterDTO.getEmail()).orElseThrow();
         System.out.println("abteilung: " + abteilungEntity.toString());
-        MitarbeiterEntity me = Mitarbeiter.mapDTOToEntity(mitarbeiterDTO, abteilungEntity);
+        MitarbeiterEntity me = Mitarbeiter.mapDTOToEntity(mitarbeiterDTO, abteilungEntity, zugang);
         System.out.println("MAEntity: "+ me.toString());
         MitarbeiterEntity updatedMitarbeiter = mitarbeiterRepo.save(me);
         return Mitarbeiter.mapEntityToDTO(updatedMitarbeiter);
@@ -66,5 +70,9 @@ public class MitarbeiterService {
     public Set<MitarbeiterDTO> getAllEmployees() {
         List<MitarbeiterEntity> allEmployees = this.mitarbeiterRepo.findAll();
         return Mitarbeiter.parseEntitiestoDTOs(new HashSet<>(allEmployees));
+    }
+
+    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<String> mitarbeiterEmails){
+        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(mitarbeiterEmails));
     }
 }

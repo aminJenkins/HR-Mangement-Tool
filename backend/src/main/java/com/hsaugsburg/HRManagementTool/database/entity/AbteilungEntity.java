@@ -6,22 +6,12 @@ import lombok.ToString;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name="abteilung")
 @Table(name = "ABTEILUNG")
-@ToString
 public class AbteilungEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,11 +21,10 @@ public class AbteilungEntity {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "LEITER", referencedColumnName = "ID")
     private MitarbeiterEntity leiter;
 
-    @OneToMany(mappedBy="abteilung")
-    @Column(name = "MITARBEITER", nullable = false)
-    private Set<MitarbeiterEntity> mitarbeitern;
+    @OneToMany(mappedBy="abteilung", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<MitarbeiterEntity> zugeteilteMitarbeiter;
 }
