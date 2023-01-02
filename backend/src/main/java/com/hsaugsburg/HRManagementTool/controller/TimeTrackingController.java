@@ -38,11 +38,11 @@ public class TimeTrackingController {
 
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
     @PostMapping("/tracks")
-    public ResponseEntity<String> postTimeTrack(Authentication authentication, @RequestBody AngelegteZeiterfassungDTO jsonBody) {
+    public ResponseEntity postTimeTrack(Authentication authentication, @RequestBody AngelegteZeiterfassungDTO jsonBody) {
         try {
             String mail =authentication.getName();
             timeTrackingService.createTimeTrack(authentication.getName(),jsonBody);
-            return ResponseEntity.ok("Eintrag wurde gespeichert!");
+            return ResponseEntity.ok().build();
         }catch (Exception exception){
             return ResponseEntity.status(500).body(exception.getMessage());
         }

@@ -13,12 +13,13 @@ import {Router} from "@angular/router";
 })
 export class TimeTrackingViewComponent {
   displayedColumns: string[] = ['id', 'kommentar','dauer', 'kontingente','datum'];
-  public dataSource: TimetrackExist[] = [];
+  testdaten = 'test';
+  public dataSource: TimeTracker[] = [];
 
   constructor(private timeTrackingService : TimeTrackingService,private router: Router){}
 
   ngOnInit(): void {
-    this.timeTrackingService.getDatasource().subscribe((response:TimetrackExist[]) => {
+    this.timeTrackingService.getDatasource().subscribe((response: TimeTracker[]) => {
       this.dataSource = response;
       console.log(response);
     });

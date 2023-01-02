@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TimeTrackingService} from "../../services/time-tracking-service";
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import {Project} from "../../models/Project";
 })
 
 export class TimetrackingFormViewComponent {
+ @Input() dataFromComponent = '';
   contingents: Contingent [] = [];
   projects : Project [] = [];
   elements = new FormGroup({
@@ -48,7 +49,7 @@ export class TimetrackingFormViewComponent {
       this.projects = response;
       console.log(response);
     });
-
+console.log("testdaten:" + this.dataFromComponent)
   }
 
   public onSubmit(): void{

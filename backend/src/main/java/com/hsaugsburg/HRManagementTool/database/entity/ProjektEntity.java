@@ -17,29 +17,26 @@ public class ProjektEntity {
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID",
-            insertable = false, updatable = true, nullable = false)
-    private MitarbeiterEntity leiter;
-
-    @OneToMany(mappedBy = "projekt")
-    //@Column(name = "ZEITERFASSUNG", nullable = true, updatable = true)
-    private Set<ZeiterfassungEntity> zeiterfassungen;
-
     @Column(name = "STUNDENSATZ", nullable = false)
     private Double stundensatz;
 
-    @Column(name = "BUDGET_IN_ARBEITSTAGEN", nullable = false, updatable = true, columnDefinition = "DECIMAL(100,2)")
+    @Column(name = "BUDGET_IN_ARBEITSTAGEN", nullable = false, columnDefinition = "DECIMAL(100,2)")
     private double budget;
 
-    @Column(name = "AUFTRAGSGEBER", nullable = false, updatable = true)
+    @Column(name = "AUFTRAGSGEBER", nullable = false)
     private String auftragsgeber;
 
-    @Column(name = "BEZEICHNUNG", nullable = false, updatable = true)
+    @Column(name = "BEZEICHNUNG", nullable = false)
     private String bezeichnung;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID", nullable = false)
+    private MitarbeiterEntity leiter;
+
     @OneToMany(mappedBy = "projekt")
-    //@Column(name = "TERMIN", insertable = false, updatable = true, nullable = true)
+    private Set<ZeiterfassungEntity> zeiterfassungen;
+
+    @OneToMany(mappedBy = "projekt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TerminEntity> termine;
 
     @ManyToMany(mappedBy = "projekte")

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.AbteilungEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.ZugangEntity;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,7 +37,7 @@ public class Mitarbeiter {
         return dto;
     }
 
-    public static MitarbeiterEntity mapDTOToEntity(MitarbeiterDTO dto, AbteilungEntity abteilungEntity) {
+    public static MitarbeiterEntity mapDTOToEntity(MitarbeiterDTO dto, AbteilungEntity abteilungEntity, ZugangEntity zugang) {
         MitarbeiterEntity entity = new MitarbeiterEntity();
         entity.setAbteilung(abteilungEntity);
         entity.setAnschrift(dto.getAnschrift());

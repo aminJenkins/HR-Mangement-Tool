@@ -1,11 +1,8 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
 import com.hsaugsburg.HRManagementTool.models.Priority;
-import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
@@ -22,27 +19,22 @@ public class TerminEntity {
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
     private int id;
 
-    @Column(name = "TITEL", nullable = false,updatable = true)
+    @Column(name = "TITEL", nullable = false)
     private String titel;
 
     @Column(name = "BESCHREIBUNG", nullable = false)
     private String beschreibung;
 
     @ManyToOne
-    @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID",
-            insertable = false, updatable = true)
+    @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID")
     private ProjektEntity projekt;
 
+    @ManyToOne
+    @JoinColumn(name = "ERSTELLER", updatable = false)
+    private MitarbeiterEntity ersteller;
 
-    @JoinColumn(name = "MITARBEITER_ID", insertable = false, updatable = false)
-    @ManyToOne(targetEntity = MitarbeiterEntity.class)
-    private MitarbeiterEntity mitarbeiterEntity;
-
-    @Column(name = "MITARBEITER_ID")
-    private int mitarbeiterId;
-
-    @ManyToMany(mappedBy = "termine")
-    private Set<MitarbeiterEntity> teilnehmern;
+    @ManyToMany(mappedBy = "teilnehmerTermine")
+    private Set<MitarbeiterEntity> terminTeilnehmern;
 
     @Column(name = "BEGINN", nullable = false)
     private LocalTime beginn;
@@ -55,7 +47,7 @@ public class TerminEntity {
     private Date datum;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "PRIORITY", nullable = false, updatable = true)
+    @Column(name = "PRIORITY", nullable = false)
     private Priority priority;
 
 }
