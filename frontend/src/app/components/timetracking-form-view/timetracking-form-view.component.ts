@@ -14,7 +14,6 @@ import {Project} from "../../models/Project";
 })
 
 export class TimetrackingFormViewComponent {
- @Input() dataFromComponent = '';
   contingents: Contingent [] = [];
   projects : Project [] = [];
   elements = new FormGroup({
@@ -49,16 +48,18 @@ export class TimetrackingFormViewComponent {
       this.projects = response;
       console.log(response);
     });
-console.log("testdaten:" + this.dataFromComponent)
+    //console.log("testdaten:" + this.dataFromComponent)
   }
 
   public onSubmit(): void{
+    if (this.elements.valid) {
     let values = this.elements.getRawValue();
     let timeTrack = new TimeTracker(this.elements.value.projects,this.elements.value.kommentar,this.elements.value.contingent,this.elements.value.dauer,this.elements.value.date);
     this.timeTrackingService.sendTimeTrack(timeTrack).subscribe(value => console.log(" termi antwort:", value));
     console.log(timeTrack);
     //console.log(this.elements.value.kommentar);
     this.router.navigate(['../timetracking']);
+  }
   }
 
 }

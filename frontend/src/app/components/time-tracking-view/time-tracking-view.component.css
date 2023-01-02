@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+mat-table {
+  width: 100%;
+  min-width: 300px;
+}
+.content{
+  margin-left: auto;
+  margin-right: auto;
+}

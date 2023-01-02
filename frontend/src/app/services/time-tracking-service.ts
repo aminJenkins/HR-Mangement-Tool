@@ -44,11 +44,11 @@ export class TimeTrackingService {
 
   }
 
-  public static setTimeTrackToUpdate(timeTrack:TimetrackExist):void{
+/*  public static setTimeTrackToUpdate(timeTrack:TimetrackExist):void{
     TimeTrackingService.updateTimeTrackForm=timeTrack;
   }
 
   public static getTimeTrackToUpdate():TimetrackExist{
     return TimeTrackingService.updateTimeTrackForm;
-  }
+  }*/
 }

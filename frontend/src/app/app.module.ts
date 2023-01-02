@@ -18,7 +18,7 @@ import { AppointmentDetailsViewComponent } from './components/appointment-detail
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthInterceptor} from './services/authInterceptor/auth.interceptor';
 import {FormsModule} from '@angular/forms';
-import { UpdateTimeTrackingViewComponent } from './components/update-time-tracking-view/update-time-tracking-view.component';
+import { UpdateTimeTrackingFormComponent } from './components/update-time-tracking-form/update-time-tracking-form.component';
 
 
 // @ts-ignore
@@ -33,7 +33,7 @@ import { UpdateTimeTrackingViewComponent } from './components/update-time-tracki
     AppointmentDetailsViewComponent,
     ProfileComponent,
     AppComponent,
-    UpdateTimeTrackingViewComponent,
+    UpdateTimeTrackingFormComponent,
   ],
   imports: [
     BrowserModule,

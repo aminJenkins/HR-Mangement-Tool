@@ -12,7 +12,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./time-tracking-view.component.css']
 })
 export class TimeTrackingViewComponent {
-  displayedColumns: string[] = ['id', 'kommentar','dauer', 'kontingente','datum'];
+  displayedColumns: string[] = ['id', 'kommentar','dauer', 'kontingentID','datum'];
+  displayUpdateForm : boolean = false;
+  timeTrackToUpdate : any;
   testdaten = 'test';
   public dataSource: TimeTracker[] = [];
 

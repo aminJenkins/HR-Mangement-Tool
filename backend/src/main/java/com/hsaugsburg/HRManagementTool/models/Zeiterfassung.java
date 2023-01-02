@@ -53,9 +53,9 @@ public class Zeiterfassung {
         entity.setDauer(dto.getDauer());
         entity.setDatum(dto.getDatum());
         entity.setMitarbeiter(mitarbeiterEntity);
-        entity.setKontingentID(kontingentEntity.getId());
-        entity.setMitarbeiterID(mitarbeiterEntity.getId());
-        entity.setProjektID(projektEntity.getId());
+//        entity.setKontingentID(kontingentEntity.getId());
+//        entity.setMitarbeiterID(mitarbeiterEntity.getId());
+//        entity.setProjektID(projektEntity.getId());
         return entity;
     }
 

@@ -7,16 +7,12 @@ import {TimetrackingFormViewComponent} from './components/timetracking-form-view
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/authGuard/auth-guard.service';
 import {ProfileComponent} from './components/profile/profile.component';
-import {
-  UpdateTimeTrackingViewComponent
-} from "./components/update-time-tracking-view/update-time-tracking-view.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: HomeViewComponent, canActivate: [AuthGuard]},
   {path: 'timetracking', component: TimeTrackingViewComponent, canActivate: [AuthGuard]},
   {path: 'timetracking/timetracking-form', component: TimetrackingFormViewComponent, canActivate: [AuthGuard]},
-  {path: 'timetracking/update-form', component: UpdateTimeTrackingViewComponent, canActivate: [AuthGuard]},
   {path: 'calendar', component: CalendarViewComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 ];
