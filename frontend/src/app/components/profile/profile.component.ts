@@ -1,33 +1,34 @@
-import {Component, Input} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProfileService} from '../../services/profile.service';
-import {throwError} from 'rxjs';
-import {Employee, UpdateEmployee} from '../../shared/employee/Employee';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProfileService } from '../../services/profile.service';
+import { throwError } from 'rxjs';
+import { Employee, UpdateEmployee } from '../../shared/employee/Employee';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-
-
   employee: Employee;
 
   profileInfoFormGroup!: FormGroup;
   changePasswordFormGroup!: FormGroup;
 
-  constructor(private profileService: ProfileService, private fb: FormBuilder, private snackbar: MatSnackBar) {
+  constructor(
+    private profileService: ProfileService,
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar
+  ) {
     this.employee = new Employee(0, '', '', '', '', '', 0);
     console.log('emp: ', this.employee);
-    profileService.getProfileInfo()
-      .subscribe(
-        (emp) => {
-          this.employee = emp;
-        },
-        (error => throwError(error))
-      );
+    profileService.getProfileInfo().subscribe(
+      (emp) => {
+        this.employee = emp;
+      },
+      (error) => throwError(error)
+    );
     this.initForms();
   }
 
@@ -37,7 +38,7 @@ export class ProfileComponent {
       firstname: [''],
       lastname: [''],
       address: [''],
-      telNumber: ['', Validators.pattern('[0-9 ]{11}')]
+      telNumber: ['', Validators.pattern('[0-9 ]{11}')],
     });
 
     this.changePasswordFormGroup = this.fb.group({
@@ -49,13 +50,12 @@ export class ProfileComponent {
 
   updateProfileInfo(): void {
     if (this.profileInfoFormGroup.valid) {
-
       const value: UpdateEmployee = this.profileInfoFormGroup.value;
       console.log(typeof this.employee);
       const emp = this.fromUpdateEmployee(value);
 
       this.profileInfoFormGroup.reset();
-      this.profileService.updateProfile(emp).subscribe(value1 => {
+      this.profileService.updateProfile(emp).subscribe((value1) => {
         this.showInfoUserSuccessfulUpdated();
         console.log('update info: ', value1);
         this.employee = value1;
@@ -75,7 +75,9 @@ export class ProfileComponent {
   }
 
   private showInfoUserSuccessfulUpdated(): void {
-    this.snackbar.open('User information successfully updated', 'OK', {duration: 3000});
+    this.snackbar.open('User information successfully updated', 'OK', {
+      duration: 3000,
+    });
   }
 
   private fromUpdateEmployee(updateEmp: UpdateEmployee): Employee {
@@ -86,7 +88,7 @@ export class ProfileComponent {
       updateEmp.lastname ? updateEmp.lastname : this.employee.nachname,
       updateEmp.address ? updateEmp.address : this.employee.anschrift,
       updateEmp.telNumber ? updateEmp.telNumber : this.employee.telnr,
-      this.employee.abteilung,
+      this.employee.abteilung
     );
   }
 }

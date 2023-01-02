@@ -37,7 +37,7 @@ public class CalendarService {
 
     public void deleteTermin(int terminId, Authentication authentication) {
         TerminEntity terminToDeleted =  this.terminRepo.findById(terminId).orElseThrow();
-        if(!isLoggedInUserOwnerOfTermin(terminToDeleted.getMitarbeiterEntity().getId(),authentication)){
+        if(!isLoggedInUserOwnerOfTermin(terminToDeleted.getErsteller().getId(),authentication)){
             throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
         }
         this.terminRepo.deleteById(terminId);

@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
 public class CalendarMapper{
 
     public Termin mapToTermin(TerminEntity terminEntity){
-        Set<String> teilnehmerOfTermin = terminEntity.getTeilnehmer().stream().map(teilnehmer -> teilnehmer.getEmail()).collect(Collectors.toSet());
+        Set<String> teilnehmerOfTermin = terminEntity.getTerminTeilnehmer().stream().map(teilnehmer -> teilnehmer.getEmail()).collect(Collectors.toSet());
         String projekt = terminEntity.getProjekt() == null? null : terminEntity.getProjekt().getBezeichnung();
         Termin termin =    Termin.builder().titel(terminEntity.getTitel())
                 .beschreibung(terminEntity.getBeschreibung())
                 .id(terminEntity.getId()).beginn(terminEntity.getBeginn())
                 .ende(terminEntity.getEnde())
                 .datum(terminEntity.getDatum())
-                .erstellerId(terminEntity.getMitarbeiterEntity().getId())
+                .erstellerId(terminEntity.getErsteller().getId())
                 .priority(terminEntity.getPriority())
                 .teilnehmer(teilnehmerOfTermin)
                 .projekt(projekt).build();
@@ -42,8 +42,8 @@ public class CalendarMapper{
         terminEntity.setDatum(termin.getDatum());
         terminEntity.setPriority(termin.getPriority());
 
-        terminEntity.setMitarbeiterEntity(ersteller);
-        terminEntity.setTeilnehmer(teilnehmerOfTermin);
+        terminEntity.setErsteller(ersteller);
+        terminEntity.setTerminTeilnehmer(teilnehmerOfTermin);
 
         if(projektEntity.isPresent()){
             terminEntity.setProjekt(projektEntity.get());

@@ -20,27 +20,25 @@ public class TerminEntity {
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
     private int id;
 
-    @Column(name = "TITEL", nullable = false,updatable = true)
+    @Column(name = "TITEL", nullable = false)
     private String titel;
 
     @Column(name = "BESCHREIBUNG", nullable = false)
     private String beschreibung;
 
-    @JoinColumn(name = "PROJEKT_ID",
-            insertable = true, updatable = true)
-    @ManyToOne(targetEntity = ProjektEntity.class)
+    @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID")
+    @ManyToOne
     private ProjektEntity projekt;
 
-    @JoinColumn(name = "ERSTELLER_ID", insertable = true, updatable = false)
+    @JoinColumn(name = "ERSTELLER_ID",updatable = false)
     @ManyToOne(targetEntity = MitarbeiterEntity.class)
-    private MitarbeiterEntity mitarbeiterEntity;
-
+    private MitarbeiterEntity ersteller;
 
     @ManyToMany
     @JoinTable(name = "TERMIN_TEILNEHMER",
             joinColumns = {@JoinColumn(name = "TERMIN_ID")},
             inverseJoinColumns = {@JoinColumn(name = "MITARBEITER_ID")})
-    private Set<MitarbeiterEntity> teilnehmer;
+    private Set<MitarbeiterEntity> terminTeilnehmer;
 
     @Column(name = "BEGINN", nullable = false)
     private LocalTime beginn;
@@ -53,7 +51,7 @@ public class TerminEntity {
     private Date datum;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "PRIORITY", nullable = false, updatable = true)
+    @Column(name = "PRIORITY", nullable = false)
     private Priority priority;
 
 }
