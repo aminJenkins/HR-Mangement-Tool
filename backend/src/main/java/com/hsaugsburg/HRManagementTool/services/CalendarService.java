@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -71,9 +70,10 @@ public class CalendarService {
     }
 
 
-    public CalendarTableDTO getCalendarData(Date startDate, Date endDate) {
-
+    public CalendarTableDTO getCalendarData(LocalDate startOfWeek, LocalDate endOfWeek) {
+        endOfWeek =endOfWeek.minusDays(1);
         return null;
+
     }
 }
 

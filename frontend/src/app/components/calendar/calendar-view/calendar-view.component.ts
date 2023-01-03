@@ -1,6 +1,6 @@
 import { Employee } from './../../../shared/employee/Employee';
 import { AppointmentService } from './../../../services/appointmentService/appointment.service';
-import { AddAppointment } from './../../../shared/Appointment';
+import { AddAppointment, CalendarTable } from './../../../shared/Appointment';
 import { Component } from '@angular/core';
 import { AppointmentDetailsViewComponent } from '../appointment-details-view/appointment-details-view.component';
 
@@ -9,70 +9,105 @@ import { AddAppointmentFormComponent } from '../add-appointment-form/add-appoint
 import { Project } from 'src/app/models/Project';
 import { endOfWeek, startOfWeek } from 'date-fns';
 
-const calendarData = {
+const calendarData: CalendarTable = {
   startOfWeek: '2023-01-02',
   endOfWeek: '2023-01-06',
   appointments: [
     {
       monday: {
-        description: 'Interne Besprechung',
-        from: '09:30',
-        to: '10:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Interne Besprechung',
+        beginn: '09:30',
+        ende: '10:00',
+        projekt: 'Projekt',
       },
       tuesday: {
-        description: 'Arzttermin',
-        from: '12:30',
-        to: '14:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Arzttermin',
+        beginn: '12:30',
+        ende: '14:00',
+        projekt: 'Projekt',
       },
       wednesday: {
-        description: 'Arzttermin',
-        from: '09:30',
-        to: '10:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Arzttermin',
+        beginn: '09:30',
+        ende: '10:00',
+        projekt: 'Projekt',
       },
       thursday: {
-        description: 'Kundengespräch',
-        from: '11:00',
-        to: '15:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Kundengespräch',
+        beginn: '11:00',
+        ende: '15:00',
+        projekt: 'Projekt',
       },
       friday: {
-        description: 'Präsentation',
-        from: '09:30',
-        to: '10:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Präsentation',
+        beginn: '09:30',
+        ende: '10:00',
+        projekt: 'Projekt',
       },
     },
     {
       monday: {
-        description: 'Kundengespräch',
-        from: '09:30',
-        to: '10:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Kundengespräch',
+        beginn: '09:30',
+        ende: '10:00',
+        projekt: 'Projekt',
       },
-
       friday: {
-        description: 'Interne Besprechung',
-        from: '11:00',
-        to: '12:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Interne Besprechung',
+        beginn: '11:00',
+        ende: '12:00',
+        projekt: 'Projekt',
       },
     },
     {
       monday: {
-        description: 'Vorstellungsgespräch',
-        from: '14:00',
-        to: '16:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Vorstellungsgespräch',
+        beginn: '14:00',
+        ende: '16:00',
+        projekt: 'Projekt',
       },
 
       friday: {
-        description: 'Schulung',
-        from: '13:00',
-        to: '15:00',
-        projektid: 3,
+        titel: 'Titel',
+        datum: new Date(),
+        priority: 'HIGH',
+        teilnehmer: [],
+        beschreibung: 'Schulung',
+        beginn: '13:00',
+        ende: '15:00',
+        projekt: 'Projekt',
       },
     },
   ],
@@ -83,9 +118,10 @@ const calendarData = {
   styleUrls: ['./calendar-view.component.css'],
 })
 export class CalendarViewComponent {
-  calendarData = calendarData;
-  currentStartOfWeek = new Date(calendarData.startOfWeek);
-  currentEndOfWeek = new Date(calendarData.endOfWeek);
+  calendarData!: CalendarTable;
+  currentStartOfWeek: string | undefined;
+  currentEndOfWeek: string | undefined;
+
   displayedColumns: string[] = [
     'Montag',
     'Dienstag',
@@ -121,20 +157,16 @@ export class CalendarViewComponent {
       });
 
     let currentDate = new Date();
-    const startDate = startOfWeek(currentDate, { weekStartsOn: 1 });
-    const endDate = endOfWeek(currentDate);
+    const currentStartDate = startOfWeek(currentDate, { weekStartsOn: 1 });
+    const currentEndDate = endOfWeek(currentDate);
 
     this.appointmentService
-      .getCalendarWeekData(startDate, endDate)
-      .subscribe((response: any) => {
-        console.log(response);
+      .getCalendarWeekData(currentStartDate, currentEndDate)
+      .subscribe((response: CalendarTable) => {
+        this.calendarData = calendarData;
+        this.currentStartOfWeek = response.startOfWeek;
+        this.currentEndOfWeek = response.endOfWeek;
       });
-
-    /*     var curr = new Date();
-    const start = startOfWeek(curr, { weekStartsOn: 1 });
-    console.log(start);
-    const end = endOfWeek(curr);
-    console.log(end); */
   }
 
   showAppointmentDetails(appointment: any): void {
@@ -169,7 +201,7 @@ export class CalendarViewComponent {
   }
 
   showAppointmentsNextWeek(): void {
-    console.log(this.currentStartOfWeek);
-    console.log(this.currentEndOfWeek);
+    /* console.log(this.currentStartOfWeek);
+    console.log(this.currentEndOfWeek); */
   }
 }

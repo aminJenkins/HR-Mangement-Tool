@@ -19,3 +19,17 @@ export interface Appointment {
   teilnehmer: [];
   projekt: string;
 }
+
+export interface CalendarTable {
+  startOfWeek: string;
+  endOfWeek: string;
+  appointments: CalendarWeekRow[];
+}
+
+export interface CalendarWeekRow {
+  monday?: Appointment;
+  tuesday?: Appointment;
+  wednesday?: Appointment;
+  thursday?: Appointment;
+  friday?: Appointment;
+}

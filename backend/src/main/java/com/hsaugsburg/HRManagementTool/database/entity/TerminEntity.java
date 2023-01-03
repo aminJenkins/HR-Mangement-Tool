@@ -4,8 +4,8 @@ import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -47,9 +47,8 @@ public class TerminEntity {
     @Column(name = "ENDE", nullable = false)
     private LocalTime ende;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "DATUM", nullable = false)
-    private Date datum;
+    private LocalDate datum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PRIORITY", nullable = false)

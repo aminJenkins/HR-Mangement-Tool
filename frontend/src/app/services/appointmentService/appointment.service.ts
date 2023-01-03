@@ -29,10 +29,13 @@ export class AppointmentService {
     );
   }
 
-  public getCalendarWeekData(startDate: Date, endDate: Date): Observable<any> {
+  public getCalendarWeekData(
+    startOfWeek: Date,
+    endOfWeek: Date
+  ): Observable<any> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append('startDate', startDate.toDateString());
-    queryParams = queryParams.append('endDate', endDate.toDateString());
+    queryParams = queryParams.append('startOfWeek', startOfWeek.toDateString());
+    queryParams = queryParams.append('endOfWeek', endOfWeek.toDateString());
 
     return this.http.get<any>(environment.CALENDAR_URL, {
       params: queryParams,

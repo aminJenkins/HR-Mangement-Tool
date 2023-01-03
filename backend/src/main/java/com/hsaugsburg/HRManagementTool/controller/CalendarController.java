@@ -47,8 +47,8 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
-    public ResponseEntity<CalendarTableDTO> getCalendarData(@RequestParam Date startDate, @RequestParam Date endDate ){
-        CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(startDate,endDate);
+    public ResponseEntity<CalendarTableDTO> getCalendarData(@RequestParam LocalDate startOfWeek, @RequestParam LocalDate endOfWeek ){
+        CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(startOfWeek,endOfWeek);
         return ResponseEntity.ok(calendarTableDTO);
     }
 

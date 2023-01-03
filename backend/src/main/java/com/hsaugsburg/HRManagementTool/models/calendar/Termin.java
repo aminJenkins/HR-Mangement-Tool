@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class Termin {
     private String beschreibung;
     private LocalTime beginn;
     private LocalTime ende;
-    private Date datum;
+    private LocalDate datum;
     private Set<String> teilnehmer;
     private Priority priority;
     private int erstellerId;
