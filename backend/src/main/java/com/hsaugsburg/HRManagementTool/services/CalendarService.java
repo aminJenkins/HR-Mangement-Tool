@@ -8,6 +8,7 @@ import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarMapper;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 

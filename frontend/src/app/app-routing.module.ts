@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeViewComponent} from './components/home-view/home-view.component';
 import {CalendarViewComponent} from './components/calendar-view/calendar-view.component';
 import {TimeTrackingViewComponent} from './components/time-tracking-view/time-tracking-view.component';
-import {TimetrackingFormViewComponent} from './components/timetracking-from-view/timetracking-form-view.component';
+import {TimetrackingFormViewComponent} from './components/timetracking-form-view/timetracking-form-view.component';
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/authGuard/auth-guard.service';
 import {ProfileComponent} from './components/profile/profile.component';

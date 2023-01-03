@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
+}
+
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}

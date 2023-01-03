@@ -1,4 +1,4 @@
-export class TimeTracker {
+export class TimeTrack {
   projektID : number;
   kommentar : string;
   kontingentID : number;
