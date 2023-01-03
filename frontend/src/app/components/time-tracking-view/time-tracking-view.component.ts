@@ -5,6 +5,7 @@ import {TimeTrackingService} from "../../services/time-tracking-service";
 import {TimetrackingFormViewComponent} from "../timetracking-form-view/timetracking-form-view.component";
 import {TimetrackExist} from "../../shared/TimetrackExist";
 import {Router} from "@angular/router";
+import {Workday} from "../../shared/Workday";
 
 @Component({
   selector: 'app-time-tracking-view',
@@ -14,9 +15,10 @@ import {Router} from "@angular/router";
 export class TimeTrackingViewComponent {
   displayedColumns: string[] = ['kommentar', 'dauer', 'kontingentID', 'datum'];
   displayUpdateForm: boolean = false;
+  displayCreateForm:boolean =true;
   timeTrackToUpdate: any;
   testdaten = 'test';
-  public dataSource: TimetrackExist[] = [];
+  public dataSource: Workday[] = [];
 
   constructor(private timeTrackingService: TimeTrackingService, private router: Router) {
   }
@@ -28,10 +30,26 @@ export class TimeTrackingViewComponent {
   }
 
   public loadData(): void {
-    this.timeTrackingService.getDatasource().subscribe((response: TimetrackExist[]) => {
+   /* this.timeTrackingService.getDatasource().subscribe((response: TimetrackExist[]) => {
+      this.dataSource = response;
+      console.log(response);
+    });*/
+    this.timeTrackingService.getSortedDataSource().subscribe((response: Workday[]) => {
       this.dataSource = response;
       console.log(response);
     });
+  }
+
+  public sortDate(days:Workday[]): Workday[]{
+    let dates : Date[] = [] ;
+    days.forEach(function(day){dates.push(day.date)});
+    dates.sort((a, b) => {
+      console.log("b.date "+Date.parse(b.toString()));
+      console.log("a.date "+Date.parse(a.toString()));
+      return <any>new Date(b) - <any>new Date(a);
+    });
+    console.log(days);
+    return days;
   }
 }
 

@@ -62,4 +62,8 @@ export class TimetrackingFormViewComponent {
   }
   }
 
+  public back(): void {
+    this.router.navigate(['../timetracking']);
+  }
+
 }

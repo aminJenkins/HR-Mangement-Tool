@@ -3,6 +3,7 @@ package com.hsaugsburg.HRManagementTool.controller;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
+import com.hsaugsburg.HRManagementTool.dto.ArbeitstagDTO;
 import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import com.hsaugsburg.HRManagementTool.services.TimeTrackingService;
 import lombok.RequiredArgsConstructor;
@@ -63,15 +64,15 @@ public class TimeTrackingController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/tracks/{id}")
-    public ResponseEntity deleteTimeTrack(Authentication authentication,@PathVariable("id") String timeTrackID) {
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/tracks/sorted")
+    public ResponseEntity<Set<ArbeitstagDTO>> getSortedTimeTracks(Authentication authentication) {
         try {
-            timeTrackingService.deleteTimeTrack(timeTrackID);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(timeTrackingService.getTimeTracksSortedByDate(authentication.getName()));
         }catch (Exception exception){
-            return ResponseEntity.status(500).body(exception.getMessage());
+            return ResponseEntity.status(500).build();
         }
     }
+
 
 }

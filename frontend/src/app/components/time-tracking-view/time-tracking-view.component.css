@@ -1,12 +1,12 @@
 :host {
   display: flex;
   justify-content: center;
-  margin-top: 2%;
+  margin-top: 0;
 }
-mat-table {
-  width: 100%;
-  min-width: 300px;
+.body{
+
 }
+
 .content{
   margin-left: auto;
   margin-right: auto;
@@ -14,5 +14,25 @@ mat-table {
 .mat-success {
   color: #f0fff3;
   background-color: #155724;
+}
+
+.workdays{
+  margin-top: 5%;
+
+  overflow-y:auto
+}
+
+.formDisplayController{
+  position: fixed;
+  left: 90%;
+  width: 100%;
+  height: 23px;
+}
+
+.fixedTab{
+  position: fixed;
+  left: 1300px;
+  width: 100%;
+  height: 23px;
 }
 
