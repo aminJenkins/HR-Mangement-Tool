@@ -70,7 +70,7 @@ export class CalendarViewComponent {
   showAppointmentDetails(appointment: any): void {
     const dialogRef = this.dialog.open(AppointmentDetailsViewComponent, {
       data: appointment,
-      height: '400px',
+      height: '520px',
       width: '600px',
     });
     dialogRef.afterClosed().subscribe((result) => {

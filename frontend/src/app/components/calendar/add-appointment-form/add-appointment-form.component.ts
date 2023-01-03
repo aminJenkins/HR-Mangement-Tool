@@ -8,6 +8,7 @@ import {
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AppointmentService } from 'src/app/services/appointmentService/appointment.service';
 import { AddAppointment, Appointment } from 'src/app/shared/Appointment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /* export function creatDateRangeValidator() {
   return (form: FormGroup): ValidationErrors | null => {
@@ -37,7 +38,8 @@ export class AddAppointmentFormComponent {
     public addAppointmentDialogRef: MatDialogRef<AddAppointmentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private snackbar: MatSnackBar
   ) {
     this.initForms();
   }
@@ -62,7 +64,14 @@ export class AddAppointmentFormComponent {
         .createNewAppointment(this.newAppointment)
         .subscribe((response: Appointment) => {
           this.addAppointmentDialogRef.close('Close!');
+          this.showInfoAppointmentSuccessfulCreated();
         });
     }
+  }
+
+  private showInfoAppointmentSuccessfulCreated(): void {
+    this.snackbar.open('Termin erfolgreich erstellt', 'OK', {
+      duration: 3000,
+    });
   }
 }
