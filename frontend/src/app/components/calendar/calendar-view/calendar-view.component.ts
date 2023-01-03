@@ -7,111 +7,9 @@ import { AppointmentDetailsViewComponent } from '../appointment-details-view/app
 import { MatDialog } from '@angular/material/dialog';
 import { AddAppointmentFormComponent } from '../add-appointment-form/add-appointment-form.component';
 import { Project } from 'src/app/models/Project';
-import { endOfWeek, startOfWeek } from 'date-fns';
+import { addDays, endOfWeek, startOfWeek } from 'date-fns';
+import subDays from 'date-fns/subDays';
 
-const calendarData: CalendarTable = {
-  startOfWeek: '2023-01-02',
-  endOfWeek: '2023-01-06',
-  appointments: [
-    {
-      monday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Interne Besprechung',
-        beginn: '09:30',
-        ende: '10:00',
-        projekt: 'Projekt',
-      },
-      tuesday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Arzttermin',
-        beginn: '12:30',
-        ende: '14:00',
-        projekt: 'Projekt',
-      },
-      wednesday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Arzttermin',
-        beginn: '09:30',
-        ende: '10:00',
-        projekt: 'Projekt',
-      },
-      thursday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Kundengespräch',
-        beginn: '11:00',
-        ende: '15:00',
-        projekt: 'Projekt',
-      },
-      friday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Präsentation',
-        beginn: '09:30',
-        ende: '10:00',
-        projekt: 'Projekt',
-      },
-    },
-    {
-      monday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Kundengespräch',
-        beginn: '09:30',
-        ende: '10:00',
-        projekt: 'Projekt',
-      },
-      friday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Interne Besprechung',
-        beginn: '11:00',
-        ende: '12:00',
-        projekt: 'Projekt',
-      },
-    },
-    {
-      monday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Vorstellungsgespräch',
-        beginn: '14:00',
-        ende: '16:00',
-        projekt: 'Projekt',
-      },
-
-      friday: {
-        titel: 'Titel',
-        datum: new Date(),
-        priority: 'HIGH',
-        teilnehmer: [],
-        beschreibung: 'Schulung',
-        beginn: '13:00',
-        ende: '15:00',
-        projekt: 'Projekt',
-      },
-    },
-  ],
-};
 @Component({
   selector: 'app-calendar-view',
   templateUrl: './calendar-view.component.html',
@@ -119,8 +17,8 @@ const calendarData: CalendarTable = {
 })
 export class CalendarViewComponent {
   calendarData!: CalendarTable;
-  currentStartOfWeek: string | undefined;
-  currentEndOfWeek: string | undefined;
+  currentStartOfWeek!: Date | number;
+  currentEndOfWeek!: Date | number;
 
   displayedColumns: string[] = [
     'Montag',
@@ -146,28 +44,26 @@ export class CalendarViewComponent {
       .getAllProjects()
       .subscribe((response: Project[]) => {
         this.projects = response;
-        console.log(this.projects);
       });
 
     this.appointmentService
       .getAllEmployees()
       .subscribe((response: Employee[]) => {
         this.employees = response;
-        console.log(this.projects);
       });
 
     let currentDate = new Date();
 
     const currentStartDate = startOfWeek(currentDate, { weekStartsOn: 1 });
 
-    const currentEndDate = endOfWeek(currentDate);
+    const currentEndDate = subDays(endOfWeek(currentDate), 1);
 
     this.appointmentService
       .getCalendarWeekData(currentStartDate, currentEndDate)
       .subscribe((response: CalendarTable) => {
-        this.calendarData = calendarData;
-        this.currentStartOfWeek = response.startOfWeek;
-        this.currentEndOfWeek = response.endOfWeek;
+        this.calendarData = response;
+        this.currentStartOfWeek = new Date(response.startOfWeek);
+        this.currentEndOfWeek = new Date(response.endOfWeek);
       });
   }
 
@@ -203,7 +99,26 @@ export class CalendarViewComponent {
   }
 
   showAppointmentsNextWeek(): void {
-    /* console.log(this.currentStartOfWeek);
-    console.log(this.currentEndOfWeek); */
+    this.currentStartOfWeek = addDays(this.currentStartOfWeek, 7);
+    this.currentEndOfWeek = addDays(this.currentEndOfWeek, 7);
+    this.appointmentService
+      .getCalendarWeekData(this.currentStartOfWeek, this.currentEndOfWeek)
+      .subscribe((response: CalendarTable) => {
+        this.calendarData = response;
+        this.currentStartOfWeek = new Date(response.startOfWeek);
+        this.currentEndOfWeek = new Date(response.endOfWeek);
+      });
+  }
+
+  showAppointmentsPreviousWeek(): void {
+    this.currentStartOfWeek = subDays(this.currentStartOfWeek, 7);
+    this.currentEndOfWeek = subDays(this.currentEndOfWeek, 7);
+    this.appointmentService
+      .getCalendarWeekData(this.currentStartOfWeek, this.currentEndOfWeek)
+      .subscribe((response: CalendarTable) => {
+        this.calendarData = response;
+        this.currentStartOfWeek = new Date(response.startOfWeek);
+        this.currentEndOfWeek = new Date(response.endOfWeek);
+      });
   }
 }

@@ -56,13 +56,6 @@ public class CalendarController {
         CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(localStartOfWeek,localEndOfWeek,authentication);
         return ResponseEntity.ok(calendarTableDTO);
     }
-
-
-//    @GetMapping("test")
-//    public ResponseEntity<LocalDate> test(){
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mmyyyy/MM/dd");
-//        return ResponseEntity.ok(LocalDate.now());
-//    }
-
+    
 
 }

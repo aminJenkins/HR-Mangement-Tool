@@ -117,8 +117,8 @@ public class CalendarService {
         }
 
         calendarTableDTO.setAppointments(calendarWeekRowDTOS);
-        calendarTableDTO.setStartOfweek(startOfWeek);
-        calendarTableDTO.setEndOfweek(endOfWeek);
+        calendarTableDTO.setStartOfWeek(startOfWeek);
+        calendarTableDTO.setEndOfWeek(endOfWeek);
 
         return calendarTableDTO;
 

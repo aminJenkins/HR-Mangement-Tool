@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CalendarTableDTO {
 
-    private LocalDate startOfweek;
-    private LocalDate endOfweek;
+    private LocalDate startOfWeek;
+    private LocalDate endOfWeek;
     private List<CalendarWeekRowDTO> appointments = new ArrayList<>();
 }

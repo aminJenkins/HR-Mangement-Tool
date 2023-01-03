@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AppointmentService } from 'src/app/services/appointmentService/appointment.service';
 import { AddAppointment, Appointment } from 'src/app/shared/Appointment';
 
-export function creatDateRangeValidator() {
+/* export function creatDateRangeValidator() {
   return (form: FormGroup): ValidationErrors | null => {
     let start = form.get('beginn')!.value;
     let ende = form.get('ende')!.value;
@@ -21,7 +21,7 @@ export function creatDateRangeValidator() {
       return null;
     }
   };
-}
+} */
 
 @Component({
   selector: 'app-add-appointment-form',
@@ -43,21 +43,16 @@ export class AddAppointmentFormComponent {
   }
 
   initForms(): void {
-    this.addAppointmentFormGroup = this.fb.group(
-      {
-        titel: ['', Validators.required],
-        beschreibung: ['', Validators.required],
-        beginn: ['', Validators.required],
-        ende: ['', Validators.required],
-        datum: ['', Validators.required],
-        priority: ['', Validators.required],
-        projekt: [''],
-        teilnehmer: [[]],
-      },
-      {
-        validators: [creatDateRangeValidator()],
-      }
-    );
+    this.addAppointmentFormGroup = this.fb.group({
+      titel: ['', Validators.required],
+      beschreibung: ['', Validators.required],
+      beginn: ['', Validators.required],
+      ende: ['', Validators.required],
+      datum: ['', Validators.required],
+      priority: ['', Validators.required],
+      projekt: [''],
+      teilnehmer: [[]],
+    });
   }
 
   createAppointment(): void {
@@ -66,7 +61,7 @@ export class AddAppointmentFormComponent {
       this.appointmentService
         .createNewAppointment(this.newAppointment)
         .subscribe((response: Appointment) => {
-          console.log(response);
+          this.addAppointmentDialogRef.close('Close!');
         });
     }
   }
