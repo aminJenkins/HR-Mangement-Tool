@@ -3,7 +3,7 @@
     <div class="example-form-fields">
       <mat-form-field appearance="fill">
         <mat-label>Dauer</mat-label>
-        <input matInput type="number" formControlName="dauer" placeholder="Dauer"  required [(ngModel)]="this.timeTrack.dauer">
+        <input matInput type="number"  step="0.5" formControlName="dauer" placeholder="Dauer"  required [(ngModel)]="this.timeTrack.dauer">
       </mat-form-field>
     </div>
 
