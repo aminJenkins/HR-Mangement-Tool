@@ -1,11 +1,10 @@
 package com.hsaugsburg.HRManagementTool.models;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
-import com.hsaugsburg.HRManagementTool.dto.ProjektDTO;
+import com.hsaugsburg.HRManagementTool.dto.project.ProjektDTO;
 
 public class Projekt {
     public static Set<ProjektDTO> parseEntitiesToDTOs(Set<ProjektEntity> entities){

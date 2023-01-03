@@ -10,9 +10,14 @@ import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +38,10 @@ public class MitarbeiterService {
         return mitarbeiterRepo.findByEmail(userName);
     }
 
+    public MitarbeiterEntity getMitarbeiterEntityById(int id) {
+        return mitarbeiterRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    }
+
     public void createMitarbeiter(MitarbeiterDTO mitarbeiter) {
         AbteilungEntity abteilungEntity = abteilungsRepo.findById(mitarbeiter.getAbteilung());
         ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiter.getEmail()).orElseThrow();
@@ -45,7 +54,7 @@ public class MitarbeiterService {
         ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiterDTO.getEmail()).orElseThrow();
         System.out.println("abteilung: " + abteilungEntity.toString());
         MitarbeiterEntity me = Mitarbeiter.mapDTOToEntity(mitarbeiterDTO, abteilungEntity, zugang);
-        System.out.println("MAEntity: "+ me.toString());
+        System.out.println("MAEntity: " + me.toString());
         MitarbeiterEntity updatedMitarbeiter = mitarbeiterRepo.save(me);
         return Mitarbeiter.mapEntityToDTO(updatedMitarbeiter);
     }
@@ -58,5 +67,11 @@ public class MitarbeiterService {
                 throw new Exception("You can only update your own user information");
             }
         }
+    }
+
+    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<String> userNames) {
+        Set<MitarbeiterEntity> ma = new HashSet<>();
+        userNames.forEach(s -> ma.add(mitarbeiterRepo.findByEmail(s)));
+        return ma;
     }
 }

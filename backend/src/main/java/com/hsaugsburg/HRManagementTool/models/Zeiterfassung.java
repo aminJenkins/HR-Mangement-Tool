@@ -10,7 +10,7 @@ import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
 import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
-import com.hsaugsburg.HRManagementTool.dto.ProjektDTO;
+import com.hsaugsburg.HRManagementTool.dto.project.ProjektDTO;
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
 import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import lombok.AllArgsConstructor;

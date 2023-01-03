@@ -61,10 +61,7 @@ public class MitarbeiterEntity {
             inverseJoinColumns = {@JoinColumn(name = "TERMIN_ID")})
     private Set<TerminEntity> teilnehmerTermine;
 
-    @ManyToMany
-    @JoinTable(name = "PROJEKTVERTEILUNG",
-            joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
+    @ManyToMany(mappedBy = "projektbeteiligte")
     private Set<ProjektEntity> projekte;
 
 }

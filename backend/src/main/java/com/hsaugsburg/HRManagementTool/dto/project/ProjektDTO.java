@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.dto;
+package com.hsaugsburg.HRManagementTool.dto.project;
 
 import java.util.Set;
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
@@ -12,6 +12,10 @@ import lombok.Setter;
 @Setter
 public class ProjektDTO {
     private int id;
+
+    private double stundensatz;
+
+    private double budget;
 
     private int leiterID;
 
