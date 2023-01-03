@@ -12,10 +12,7 @@ import java.util.List;
 @Repository
 public interface TerminRepo extends JpaRepository<TerminEntity,Integer> {
 
-    @Query(value = " SELECT * FROM TERMIN WHERE ERSTELLER_ID = :userId AND (DATUM BETWEEN :startDate AND :endDate)", nativeQuery = true)
-    public List<TerminEntity> findAppointmentsByDateRange(LocalDate startDate, LocalDate endDate, int userId);
-
-    @Query(value = "SELECT * FROM TERMIN WHERE ERSTELLER_ID = :userId AND DATUM = :startDate ORDER BY BEGINN ASC", nativeQuery = true)
+    @Query(value = "SELECT t FROM TERMIN t join t.terminTeilnehmer d WHERE (t.ersteller.id = ?2 OR d.id = ?2) AND t.datum = ?1  ORDER BY t.beginn ASC")
     public List<TerminEntity> findAppointmentsByDate(LocalDate startDate, int userId);
 
 
