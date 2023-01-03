@@ -4,6 +4,7 @@ import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.TerminRepo;
+import com.hsaugsburg.HRManagementTool.dto.calendar.CalendarTableDTO;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarMapper;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -68,6 +71,9 @@ public class CalendarService {
     }
 
 
+    public CalendarTableDTO getCalendarData(Date startDate, Date endDate) {
 
+        return null;
+    }
 }
 

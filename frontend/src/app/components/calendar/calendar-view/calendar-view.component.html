@@ -8,7 +8,16 @@
     Termin anlegen
   </button>
   <h1>Kalendar</h1>
-  <h2>Woche: {{ calendarData.week }}</h2>
+  <h2>{{ calendarData.startOfWeek }} - {{ calendarData.endOfWeek }}</h2>
+
+  <button
+    (click)="showAppointmentsNextWeek()"
+    mat-raised-button
+    color="primary"
+    type="submit"
+  >
+    Nächste Woche
+  </button>
 </div>
 
 <table

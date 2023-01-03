@@ -1,5 +1,6 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import com.hsaugsburg.HRManagementTool.dto.calendar.CalendarTableDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
@@ -13,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,5 +45,19 @@ public class CalendarController {
         return ResponseEntity.ok().build();
     }
 
-
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping
+    public ResponseEntity<CalendarTableDTO> getCalendarData(@RequestParam Date startDate, @RequestParam Date endDate ){
+        CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(startDate,endDate);
+        return ResponseEntity.ok(calendarTableDTO);
     }
+
+
+//    @GetMapping("test")
+//    public ResponseEntity<LocalDate> test(){
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mmyyyy/MM/dd");
+//        return ResponseEntity.ok(LocalDate.now());
+//    }
+
+
+}

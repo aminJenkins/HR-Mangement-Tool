@@ -7,9 +7,11 @@ import { AppointmentDetailsViewComponent } from '../appointment-details-view/app
 import { MatDialog } from '@angular/material/dialog';
 import { AddAppointmentFormComponent } from '../add-appointment-form/add-appointment-form.component';
 import { Project } from 'src/app/models/Project';
+import { endOfWeek, startOfWeek } from 'date-fns';
 
 const calendarData = {
-  week: '19.12.22 - 23.12.22',
+  startOfWeek: '2023-01-02',
+  endOfWeek: '2023-01-06',
   appointments: [
     {
       monday: {
@@ -82,6 +84,8 @@ const calendarData = {
 })
 export class CalendarViewComponent {
   calendarData = calendarData;
+  currentStartOfWeek = new Date(calendarData.startOfWeek);
+  currentEndOfWeek = new Date(calendarData.endOfWeek);
   displayedColumns: string[] = [
     'Montag',
     'Dienstag',
@@ -115,6 +119,22 @@ export class CalendarViewComponent {
         this.employees = response;
         console.log(this.projects);
       });
+
+    let currentDate = new Date();
+    const startDate = startOfWeek(currentDate, { weekStartsOn: 1 });
+    const endDate = endOfWeek(currentDate);
+
+    this.appointmentService
+      .getCalendarWeekData(startDate, endDate)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
+
+    /*     var curr = new Date();
+    const start = startOfWeek(curr, { weekStartsOn: 1 });
+    console.log(start);
+    const end = endOfWeek(curr);
+    console.log(end); */
   }
 
   showAppointmentDetails(appointment: any): void {
@@ -146,5 +166,10 @@ export class CalendarViewComponent {
       console.log('The dialog was closed');
       console.log(result);
     });
+  }
+
+  showAppointmentsNextWeek(): void {
+    console.log(this.currentStartOfWeek);
+    console.log(this.currentEndOfWeek);
   }
 }
