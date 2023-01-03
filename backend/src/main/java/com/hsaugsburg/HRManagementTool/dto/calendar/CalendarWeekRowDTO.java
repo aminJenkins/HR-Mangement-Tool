@@ -1,12 +1,11 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
-@Builder
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CalendarWeekRowDTO {
 
     private TerminDTO monday;

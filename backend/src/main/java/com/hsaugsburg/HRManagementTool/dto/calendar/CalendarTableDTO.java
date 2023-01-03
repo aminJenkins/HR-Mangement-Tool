@@ -1,17 +1,19 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
-@Builder
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CalendarTableDTO {
 
-    private Date startOfweek;
-    private Date endOfweek;
-    private CalendarWeekRowDTO[] appointments;
+    private LocalDate startOfweek;
+    private LocalDate endOfweek;
+    private List<CalendarWeekRowDTO> appointments = new ArrayList<>();
 }

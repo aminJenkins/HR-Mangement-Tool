@@ -157,7 +157,9 @@ export class CalendarViewComponent {
       });
 
     let currentDate = new Date();
+
     const currentStartDate = startOfWeek(currentDate, { weekStartsOn: 1 });
+
     const currentEndDate = endOfWeek(currentDate);
 
     this.appointmentService

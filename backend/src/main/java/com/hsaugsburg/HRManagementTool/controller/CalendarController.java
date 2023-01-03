@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @RestController
@@ -47,8 +48,12 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
-    public ResponseEntity<CalendarTableDTO> getCalendarData(@RequestParam LocalDate startOfWeek, @RequestParam LocalDate endOfWeek ){
-        CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(startOfWeek,endOfWeek);
+    public ResponseEntity<CalendarTableDTO> getCalendarData(@RequestParam Date startOfWeek, @RequestParam Date endOfWeek ,Authentication authentication){
+
+        LocalDate localStartOfWeek= startOfWeek.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localEndOfWeek = endOfWeek.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(localStartOfWeek,localEndOfWeek,authentication);
         return ResponseEntity.ok(calendarTableDTO);
     }
 
