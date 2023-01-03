@@ -1,7 +1,10 @@
 <div *ngIf="!displayUpdateForm">
 <div class="example-button-container">
-  <button mat-mini-fab  color="primary" routerLink="timetracking-form" aria-label="Example icon button with a plus one icon">
+  <button mat-mini-fab  color="primary" title="Add Timetrack" routerLink="timetracking-form" aria-label="Example icon button with a plus one icon">
     <mat-icon>plus_one</mat-icon>
+  </button>
+  <button mat-mini-fab class="mat-success" title="Reload" (click)="this.loadData()" aria-label="Example icon button with a plus one icon">
+    <mat-icon>update</mat-icon>
   </button>
 </div>
 <mat-table  [dataSource]="dataSource">
@@ -16,4 +19,5 @@
 </div>
 <div class="updateForm" *ngIf="displayUpdateForm">
   <app-update-time-tracking-form [timeTrack]="timeTrackToUpdate" ></app-update-time-tracking-form>
+  <button mat-raised-button  style="width: 100%" type="submit" (click)="displayUpdateForm=false" >Back</button>
 </div>

@@ -11,3 +11,7 @@ mat-table {
   margin-left: auto;
   margin-right: auto;
 }
+.mat-success {
+  color: #f0fff3;
+  background-color: #155724;
+}

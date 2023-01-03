@@ -1,6 +1,6 @@
-import {TimeTracker} from "./TimeTracker";
+import {TimeTrack} from "./TimeTrack";
 
-export class TimetrackExist extends TimeTracker{
+export class TimetrackExist extends TimeTrack{
   id : number;
 
   constructor(id:number,projektID: any, kommentar: any, kontingentID: any, dauer: any, datum: any) {

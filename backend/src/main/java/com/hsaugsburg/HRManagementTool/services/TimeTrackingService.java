@@ -7,6 +7,7 @@ import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.ZeiterfassungRepo;
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
+import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import com.hsaugsburg.HRManagementTool.models.Zeiterfassung;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,22 @@ public class TimeTrackingService {
         return Zeiterfassung.parseEntitiestoDTOs(timeTrackingRepo.findTimeTracksForEmploye(userEmail));
     }
 
+    public void updateTimeTrack(String mail,AngelegteZeiterfassungDTO timetrack){
+        ZeiterfassungEntity entity = buildTimeTrackEntity(mail,timetrack);
+        entity.setId(timetrack.getId());
+        timeTrackingRepo.save(entity);
+    }
 
-    public void createTimeTrack(String mail, AngelegteZeiterfassungDTO zeiterfassungDTO) {
+    public void deleteTimeTrack(String id){
+
+        timeTrackingRepo.deleteById(Integer.valueOf(id));
+    }
+
+    public void createTimeTrack(String mail, ZeiterfassungDTO zeiterfassungDTO) {
+        timeTrackingRepo.save(buildTimeTrackEntity(mail,zeiterfassungDTO));
+    }
+
+    public ZeiterfassungEntity buildTimeTrackEntity(String mail, ZeiterfassungDTO zeiterfassungDTO){
         MitarbeiterEntity maEntity = mitarbeiterService.getMitarbeiterEntity(mail);
 
         ProjektEntity projektEntity = projektService.getProjektEntity(zeiterfassungDTO.getProjektID());
@@ -42,9 +57,7 @@ public class TimeTrackingService {
 
         ZeiterfassungEntity entity =  Zeiterfassung.mapDTOToEntity(zeiterfassungDTO,projektEntity,kontingentEntity,maEntity);
 
-        entity.setMitarbeiter(maEntity);
-
-        timeTrackingRepo.save(entity);
+        return entity;
     }
 
 

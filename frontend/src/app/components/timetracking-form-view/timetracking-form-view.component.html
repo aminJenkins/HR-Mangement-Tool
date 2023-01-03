@@ -2,7 +2,8 @@
   <form [formGroup]="elements" (ngSubmit)="onSubmit()">
     <div class="example-form-fields">
       <mat-form-field appearance="fill">
-        <input matInput type="number" formControlName="dauer" placeholder="Dauer" required>
+        <mat-label>Dauer</mat-label>
+        <input matInput step="0.5" type="number" formControlName="dauer" placeholder="Dauer" required>
       </mat-form-field>
     </div>
 
@@ -43,6 +44,7 @@
       </div>
       <div>
         <mat-form-field appearance="fill">
+          <mat-label>Beschreibung</mat-label>
           <input matInput  formControlName="kommentar" placeholder="Beschreibung" required>
         </mat-form-field>
       </div>

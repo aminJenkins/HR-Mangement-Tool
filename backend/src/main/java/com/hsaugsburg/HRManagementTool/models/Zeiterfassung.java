@@ -12,6 +12,7 @@ import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.dto.ProjektDTO;
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
+import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,13 +44,19 @@ public class Zeiterfassung {
         return dto;
     }
 
-    public static ZeiterfassungEntity mapDTOToEntity(AngelegteZeiterfassungDTO dto, ProjektEntity projektEntity,KontingentEntity kontingentEntity,
+    public static ZeiterfassungEntity mapDTOToEntity(AngelegteZeiterfassungDTO timeTrackDto){
+        ZeiterfassungEntity zeiterfassungEntity = mapDTOToEntity(timeTrackDto);
+        zeiterfassungEntity.setId(timeTrackDto.getId());
+        return zeiterfassungEntity;
+
+    }
+
+    public static ZeiterfassungEntity mapDTOToEntity(ZeiterfassungDTO dto, ProjektEntity projektEntity,KontingentEntity kontingentEntity,
             MitarbeiterEntity mitarbeiterEntity){
         ZeiterfassungEntity entity = new ZeiterfassungEntity();
         entity.setProjekt(projektEntity);
         entity.setKontingent(kontingentEntity);
         entity.setKommentar(dto.getKommentar());
-        entity.setId(dto.getId());
         entity.setDauer(dto.getDauer());
         entity.setDatum(dto.getDatum());
         entity.setMitarbeiter(mitarbeiterEntity);

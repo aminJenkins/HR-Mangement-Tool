@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TimeTrackingService} from "../../services/time-tracking-service";
 import { Router } from '@angular/router';
-import {TimeTracker} from "../../shared/TimeTracker";
+import {TimeTrack} from "../../shared/TimeTrack";
 import {Contingent} from "../../shared/Contingent";
 import {Project} from "../../models/Project";
 
@@ -54,7 +54,7 @@ export class TimetrackingFormViewComponent {
   public onSubmit(): void{
     if (this.elements.valid) {
     let values = this.elements.getRawValue();
-    let timeTrack = new TimeTracker(this.elements.value.projects,this.elements.value.kommentar,this.elements.value.contingent,this.elements.value.dauer,this.elements.value.date);
+    let timeTrack = new TimeTrack(this.elements.value.projects,this.elements.value.kommentar,this.elements.value.contingent,this.elements.value.dauer,this.elements.value.date);
     this.timeTrackingService.sendTimeTrack(timeTrack).subscribe(value => console.log(" termi antwort:", value));
     console.log(timeTrack);
     //console.log(this.elements.value.kommentar);
