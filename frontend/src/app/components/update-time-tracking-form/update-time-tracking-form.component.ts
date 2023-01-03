@@ -61,7 +61,7 @@ export class UpdateTimeTrackingFormComponent {
       let timeTrack = this.parseToTimeTrackExist();
       console.log(""+timeTrack);
       this.timeTrackingService.updateTimeTrack(timeTrack).subscribe();
-      this.router.navigate(['../timetracking']);
+      this.leaveStatus=true;
       //console.log(this.elements.value.kommentar);
 
     }

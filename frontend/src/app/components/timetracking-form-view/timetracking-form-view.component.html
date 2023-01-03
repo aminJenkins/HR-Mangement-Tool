@@ -1,5 +1,5 @@
 <div class="example-container">
-  <form [formGroup]="elements" (ngSubmit)="onSubmit()">
+  <form [formGroup]="elements" >
     <div class="example-form-fields">
       <mat-form-field appearance="fill">
         <mat-label>Dauer</mat-label>
@@ -50,5 +50,5 @@
       </div>
     <!--<mat-checkbox [formControl]="hideRequiredControl">Hide required marker</mat-checkbox>-->
   </form>
-  <button mat-raised-button color="primary" style="width: 100%" type="submit">Submit</button>
+  <button mat-raised-button color="primary" style="width: 100%" type="submit" (click)="onSubmit()">Submit</button>
 </div>
