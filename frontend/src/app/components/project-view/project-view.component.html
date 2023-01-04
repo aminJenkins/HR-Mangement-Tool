@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>Projektübersicht</mat-card-title>
+  <mat-card-content>
+    <div>
+      <div *ngFor="let project of allProjects; let index=index;" class="list-item">
+        <div class="row">
+          <mat-list-item>
+            <span matListItemTitle>{{project.bezeichnung}}</span>
+            <span matListItemLine>Auftraggeber: {{project.auftragsgeber}}</span>
+          </mat-list-item>
+          <div class="row" style="width: 12%">
+            <button mat-icon-button color="primary" (click)="openUpdateProjectDialog(project)">
+              <mat-icon fontIcon="mode_edit"></mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="openDeleteProjectDialog(project.id)">
+              <mat-icon fontIcon="delete"></mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+    <div class="row" style="justify-content: flex-end; padding-top: 2%">
+      <button mat-fab color="primary" (click)="openCreateProjectDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+

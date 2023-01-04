@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -73,5 +74,9 @@ public class MitarbeiterService {
         Set<MitarbeiterEntity> ma = new HashSet<>();
         userNames.forEach(s -> ma.add(mitarbeiterRepo.findByEmail(s)));
         return ma;
+    }
+
+    public Set<MitarbeiterDTO> getAllEmployees() {
+        return Mitarbeiter.mapEntitiesToDTOs(new HashSet<>(mitarbeiterRepo.findAll()));
     }
 }

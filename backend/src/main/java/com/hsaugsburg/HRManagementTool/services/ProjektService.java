@@ -3,7 +3,6 @@ package com.hsaugsburg.HRManagementTool.services;
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
-import com.hsaugsburg.HRManagementTool.database.repository.KontingentRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.ProjektRepo;
 import com.hsaugsburg.HRManagementTool.dto.project.CreateProjectDTO;
 import com.hsaugsburg.HRManagementTool.dto.project.ProjektDTO;
@@ -12,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -34,12 +34,24 @@ public class ProjektService {
                 projektRepo.findByMitarbeiterID(mitarbeiterService.getMitarbeiterDTO(userMail).getId()));
     }
 
-    public void createProject(CreateProjectDTO createProjectDto) {
+    public ProjektDTO createProject(CreateProjectDTO createProjectDto) {
         MitarbeiterEntity leiter = mitarbeiterService.getMitarbeiterEntityById(createProjectDto.getLeiterID());
         Set<MitarbeiterEntity> beteiligte = mitarbeiterService.getMitarbeiterEntities(createProjectDto.getProjektbeteiligte());
         Set<KontingentEntity> kontingente = kontingentService.getKontingentEntitiesById(createProjectDto.getKontingente());
 
         ProjektEntity newProjekt = createProjectDto.parseToEntity(leiter, beteiligte, kontingente);
-        projektRepo.save(newProjekt);
+        return Projekt.parseEntityToDTO(projektRepo.save(newProjekt));
+    }
+
+    public Set<ProjektDTO> getAllProjects() {
+        return Projekt.parseEntitiesToDTOs(new HashSet<>(projektRepo.findAll()));
+    }
+
+    public ProjektDTO updateProject(ProjektDTO projektDTO) {
+        MitarbeiterEntity leiter = mitarbeiterService.getMitarbeiterEntityById(projektDTO.getLeiterID());
+        Set<MitarbeiterEntity> beteiligte = mitarbeiterService.getMitarbeiterEntities(projektDTO.getProjektbeteiligte());
+        Set<KontingentEntity> kontingente = kontingentService.getKontingentEntitiesById(projektDTO.getKontingente());
+        ProjektEntity newProjekt = projektDTO.parseToEntity(leiter, beteiligte, kontingente);
+       return Projekt.parseEntityToDTO(projektRepo.save(newProjekt));
     }
 }

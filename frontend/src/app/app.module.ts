@@ -19,6 +19,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {AuthInterceptor} from './services/authInterceptor/auth.interceptor';
 import {FormsModule} from '@angular/forms';
 import { UpdateTimeTrackingFormComponent } from './components/update-time-tracking-form/update-time-tracking-form.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
+import { CreateProjectViewComponent } from './components/create-project-view/create-project-view.component';
 
 
 // @ts-ignore
@@ -34,6 +36,8 @@ import { UpdateTimeTrackingFormComponent } from './components/update-time-tracki
     ProfileComponent,
     AppComponent,
     UpdateTimeTrackingFormComponent,
+    ProjectViewComponent,
+    CreateProjectViewComponent,
   ],
   imports: [
     BrowserModule,

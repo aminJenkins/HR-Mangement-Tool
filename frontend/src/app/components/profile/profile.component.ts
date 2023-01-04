@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProfileService} from '../../services/profile.service';
+import {ProfileService} from '../../services/profileService/profile.service';
 import {throwError} from 'rxjs';
 import {Employee, UpdateEmployee} from '../../shared/employee/Employee';
 import {MatSnackBar} from '@angular/material/snack-bar';

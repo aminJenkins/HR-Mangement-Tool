@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/employee")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -25,9 +27,15 @@ public class MitarbeiterController {
     public ResponseEntity<MitarbeiterDTO> getEmployee(Authentication authentication) {
         try {
             return ResponseEntity.ok(maService.getMitarbeiterDTO(authentication.getName()));
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return ResponseEntity.status(500).body(null);
         }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/all")
+    public ResponseEntity<Set<MitarbeiterDTO>> getAllEmployee() {
+        return ResponseEntity.ok(maService.getAllEmployees());
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -35,10 +43,10 @@ public class MitarbeiterController {
     public ResponseEntity<MitarbeiterDTO> updateEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
         try {
             maService.checkAuthority(authentication, mitarbeiterDTO.getEmail());
-            MitarbeiterDTO m =  maService.updateEmployee(mitarbeiterDTO);
+            MitarbeiterDTO m = maService.updateEmployee(mitarbeiterDTO);
             System.out.println("nach update:" + m.toString());
             return ResponseEntity.status(HttpStatus.OK).body(m);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Irgendetwas stimmt nicht");
         }
     }
@@ -49,7 +57,7 @@ public class MitarbeiterController {
         try {
             maService.createMitarbeiter(mitarbeiterDTO);
             return ResponseEntity.ok("Der Mitarbeiter wurde erfolgreich angelegt");
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return ResponseEntity.status(500).body(exception.getMessage());
         }
     }

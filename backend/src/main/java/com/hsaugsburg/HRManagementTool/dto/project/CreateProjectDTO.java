@@ -3,6 +3,8 @@ package com.hsaugsburg.HRManagementTool.dto.project;
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
+import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

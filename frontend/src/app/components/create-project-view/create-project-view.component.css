@@ -1,0 +1,18 @@
+.first-row {
+  margin-top: 2%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-form-field {
+  padding-left: 1%;
+  padding-right: 1%;
+}
