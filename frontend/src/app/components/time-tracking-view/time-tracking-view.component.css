@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   margin-top: 0;
-  overflow: hidden;
 }
 .body{
 
@@ -34,6 +33,15 @@
   left: 1050px;
   margin-top: 0%;
 }
+
+.timeTrackingFormView{
+  top: 0;
+
+}
+html, body {
+  overflow: visible;
+}
+
 
 .fixedTab{
   position: fixed;

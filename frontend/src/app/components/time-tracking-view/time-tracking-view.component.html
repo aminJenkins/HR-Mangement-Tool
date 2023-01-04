@@ -18,7 +18,7 @@
           <button class="hideForm" mat-mini-fab color="black" [hidden]="!displayCreateForm" (click)="displayCreateForm=false">
             <mat-icon>visibility_off</mat-icon>
           </button>
-          <app-timetracking-form-view [hidden]="displayCreateForm"></app-timetracking-form-view>
+          <app-timetracking-form-view class="timeTrackingFormView" [hidden]="displayCreateForm"></app-timetracking-form-view>
         </div>
     <div *ngFor="let data of dataSource">
       <div class="workdays">
