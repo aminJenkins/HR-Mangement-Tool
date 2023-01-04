@@ -1,6 +1,6 @@
 package com.hsaugsburg.HRManagementTool.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +13,5 @@ public class ZeiterfassungDTO {
     private int kontingentID;
     private String kommentar;
     private double dauer;
-    private Date datum;
+    private LocalDateTime datum;
 }

@@ -51,7 +51,7 @@ export class UpdateTimeTrackingFormComponent {
       console.log(response);
     });
 
-    this.prefillForm();
+    this.prefillForm(this.timeTrack);
     //console.log("testdaten:" + this.dataFromComponent)
   }
 
@@ -67,8 +67,8 @@ export class UpdateTimeTrackingFormComponent {
     }
   }
 
-  private prefillForm():void{
-    console.log("Timetrack from Form: "+this.timeTrack.id);
+  private prefillForm(timeTrack:TimetrackExist):void{
+    console.log("Timetrack from Form: "+timeTrack.id);
       this.elements.value.kommentar = this.timeTrack.kommentar;
       this.elements.value.dauer = this.timeTrack.dauer.toString();
       this.elements.value.date = this.timeTrack.datum;

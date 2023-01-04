@@ -3,6 +3,7 @@ package com.hsaugsburg.HRManagementTool.database.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -50,6 +51,6 @@ public class ZeiterfassungEntity {
     @Column(name = "DAUER", nullable = false)
     private double dauer;
 
-    @Column(name = "DATUM", nullable = false)
-    private Date datum;
+    @Column(name = "DATUM", nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime datum;
 }

@@ -9,6 +9,7 @@ import {AuthenticationResponse} from "../shared/AuthenticationResponse";
 import {Project} from "../models/Project";
 import {TimetrackExist} from "../shared/TimetrackExist";
 import {UpdateTimeTrackForm} from "../shared/UpdateTimeTrackForm";
+import {Workday} from "../shared/Workday";
 
 
 @Injectable({
@@ -19,9 +20,9 @@ export class TimeTrackingService {
 
   constructor(private  http: HttpClient) { }
 
-  public getDatasource(): Observable<TimetrackExist[]> {
-    return this.http.get<TimetrackExist[]>(environment.TIME_TRACKING_URL);
-  }
+  public getSortedDataSource(): Observable<Workday[]> {
+  return this.http.get<Workday[]>(environment.TIME_TRACKING_URL);
+}
 
   public getContingents(): Observable<Contingent[]>{
     return this.http.get<Contingent[]>(environment.CONTINGENTS_URL,);
