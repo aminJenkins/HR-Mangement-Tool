@@ -16,7 +16,7 @@
             formControlName="email"
             readonly
             style="color: gray"
-            />
+          />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -74,7 +74,8 @@
     <hr style="height: 50%; background-color: gray">
 
     <!-- Password reset         -->
-    <form [formGroup]="changePasswordFormGroup" (ngSubmit)="changePassword()" class="column">
+    <form [formGroup]="changePasswordFormGroup" (ngSubmit)="changePassword(formDirective)" #formDirective="ngForm"
+          class="column">
       <mat-form-field appearance="outline">
         <mat-label>Old Password</mat-label>
         <input
@@ -83,6 +84,7 @@
           id="inputPassword4"
           formControlName="oldPassword"/>
       </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>New Password</mat-label>
         <input
@@ -90,7 +92,9 @@
           type="password"
           id="inputPassword5"
           formControlName="newPassword"/>
+        <mat-error *ngIf="isNewPasswordMissing">Password field id required</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Confirm Password</mat-label>
         <input
@@ -98,7 +102,17 @@
           type="password"
           id="inputPassword6"
           formControlName="confirmPassword"/>
+        <mat-error *ngIf="isConfirmPasswordMissing" class="form-error">
+          Confirm Password is required
+        </mat-error>
+        <mat-error *ngIf="doesConfirmPasswordMatch">
+          Password and Confirm Password must match
+        </mat-error>
       </mat-form-field>
+
+      <p *ngIf="errorMessage" class="error">
+        {{ errorMessage}}
+      </p>
 
       <button mat-raised-button color="primary" type="submit">Change Password</button>
     </form>
