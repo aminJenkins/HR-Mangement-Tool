@@ -1,19 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {AuthenticationResponse} from '../../shared/AuthenticationResponse';
-
+import { Token } from './../../models/Token';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthenticationResponse } from '../../shared/AuthenticationResponse';
+import jwt_decode from 'jwt-decode';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   public static TOKEN_ID = 'token';
 
-  constructor(private router: Router, private http: HttpClient) {
-  }
-
+  constructor(private router: Router, private http: HttpClient) {}
 
   logOut(): void {
     this.clearLocalStorage();
@@ -21,7 +19,10 @@ export class AuthService {
   }
 
   logIn(email: string, password: string): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>('http://localhost:8090/api/login', {email, password});
+    return this.http.post<AuthenticationResponse>(
+      'http://localhost:8090/api/login',
+      { email, password }
+    );
     // response.subscribe(
     //   (authResponse) => {
     //     console.log('token: ' + authResponse.token);
@@ -46,5 +47,14 @@ export class AuthService {
 
   private clearLocalStorage(): void {
     localStorage.removeItem(AuthService.TOKEN_ID);
+  }
+
+  getDecodedAccessToken(): Token | null {
+    const token = localStorage.getItem(AuthService.TOKEN_ID) || '{}';
+    try {
+      return jwt_decode(token);
+    } catch (Error) {
+      return null;
+    }
   }
 }

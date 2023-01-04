@@ -9,6 +9,7 @@ import { AddAppointmentFormComponent } from '../add-appointment-form/add-appoint
 import { Project } from 'src/app/models/Project';
 import { addDays, endOfWeek, startOfWeek } from 'date-fns';
 import subDays from 'date-fns/subDays';
+import { AuthService } from 'src/app/services/authService/auth.service';
 
 @Component({
   selector: 'app-calendar-view',
@@ -33,7 +34,8 @@ export class CalendarViewComponent {
 
   constructor(
     public dialog: MatDialog,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private authService: AuthService
   ) {
     this.projects = [];
     this.employees = [];
@@ -65,6 +67,8 @@ export class CalendarViewComponent {
         this.currentStartOfWeek = new Date(response.startOfWeek);
         this.currentEndOfWeek = new Date(response.endOfWeek);
       });
+
+    console.log(this.authService.getDecodedAccessToken()?.sub);
   }
 
   showAppointmentDetails(appointment: any): void {
