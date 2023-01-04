@@ -1,4 +1,4 @@
-package com.hsaugsburg.HRManagementTool.dto;
+package com.hsaugsburg.HRManagementTool.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,6 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
-
-    private String email;
-    private String password;
-
+public class AuthenticationResponse {
+    private String token;
 }
