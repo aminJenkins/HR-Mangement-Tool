@@ -1,3 +1,6 @@
 .row {
   display: flex;
 }
+::ng-deep .mat-sidenav-container{
+  height: 91.1% !important;
+}

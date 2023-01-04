@@ -18,19 +18,15 @@
         <p routerLink="profile" (click)="sidenav.toggle()" style="padding-top: 15px">Profil</p>
       </mat-list-item>
       <a mat-list-item routerLink="projects" (click)="sidenav.toggle()">Projekte</a>
-
     </mat-nav-list>
     <div class="row" style="padding-left: 10px">
       <button (click)="sidenav.toggle(); logout()" mat-flat-button color="primary">Logout
         <mat-icon fontIcon="logout"></mat-icon>
       </button>
     </div>
-
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="sidenav-content">
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
