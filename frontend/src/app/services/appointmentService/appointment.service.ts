@@ -16,8 +16,8 @@ export class AppointmentService {
   public getAllProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(environment.PROJECTS_URL + 'all');
   }
-  public getAllEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(environment.EMPLOYEE_URL + 'all');
+  public getAllPossibleParticipants(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(environment.CALENDAR_URL + 'participants');
   }
 
   public createNewAppointment(

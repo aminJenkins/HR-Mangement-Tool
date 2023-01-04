@@ -57,10 +57,5 @@ public class MitarbeiterController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/all")
-    public ResponseEntity<Set<MitarbeiterDTO>>getAllEmployees() {
-        return ResponseEntity.ok(maService.getAllEmployees());
-    }
-
+ 
 }

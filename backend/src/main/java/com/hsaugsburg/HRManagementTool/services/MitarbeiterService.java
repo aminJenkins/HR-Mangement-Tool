@@ -67,12 +67,8 @@ public class MitarbeiterService {
         }
     }
 
-    public Set<MitarbeiterDTO> getAllEmployees() {
-        List<MitarbeiterEntity> allEmployees = this.mitarbeiterRepo.findAll();
-        return Mitarbeiter.parseEntitiestoDTOs(new HashSet<>(allEmployees));
+    public Set<MitarbeiterEntity> getEmployees(Set<String> emailsOfEmployees){
+        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(emailsOfEmployees));
     }
 
-    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<String> mitarbeiterEmails){
-        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(mitarbeiterEmails));
-    }
 }

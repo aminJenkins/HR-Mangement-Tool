@@ -1,5 +1,6 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.CalendarTableDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,6 +58,13 @@ public class CalendarController {
         CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(localStartOfWeek,localEndOfWeek,authentication);
         return ResponseEntity.ok(calendarTableDTO);
     }
-    
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/participants")
+    public ResponseEntity<Set<MitarbeiterDTO>> getAllPossibleParticipants(Authentication authentication) {
+        return ResponseEntity.ok(this.calendarService.getAllPossibleParticipants(authentication));
+    }
+
+
 
 }

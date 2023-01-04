@@ -49,7 +49,7 @@ export class CalendarViewComponent {
       });
 
     this.appointmentService
-      .getAllEmployees()
+      .getAllPossibleParticipants()
       .subscribe((response: Employee[]) => {
         this.employees = response;
       });

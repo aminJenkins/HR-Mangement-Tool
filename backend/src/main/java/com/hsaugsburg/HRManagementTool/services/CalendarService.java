@@ -3,12 +3,15 @@ package com.hsaugsburg.HRManagementTool.services;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
+import com.hsaugsburg.HRManagementTool.database.repository.MitarbeiterRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.TerminRepo;
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.CalendarTableDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.CalendarWeekRowDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarApiMapper;
 import com.hsaugsburg.HRManagementTool.mapper.calendar.CalendarMapper;
+import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class CalendarService {
 
     private final TerminRepo terminRepo;
+    private final MitarbeiterRepo mitarbeiterRepo;
     private final MitarbeiterService mitarbeiterService;
     private final CalendarMapper calendarMapper;
     private final CalendarApiMapper calendarApiMapper;
@@ -33,7 +37,7 @@ public class CalendarService {
 
     public Termin createNewTermin(Termin newTermin, Authentication authentication) {
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
-        Set<MitarbeiterEntity> teilnehmerOfTermin = this.mitarbeiterService.getMitarbeiterEntities(newTermin.getTeilnehmer());
+        Set<MitarbeiterEntity> teilnehmerOfTermin = this.mitarbeiterService.getEmployees(newTermin.getTeilnehmer());
         Optional<ProjektEntity> projektOfTermin = this.projektService.getProjectEntity(newTermin.getProjekt());
         TerminEntity terminToBeSaved = calendarMapper.mapToTerminEntity(newTermin, teilnehmerOfTermin, erstellerOfTermin, projektOfTermin);
         this.terminRepo.save(terminToBeSaved);
@@ -56,7 +60,7 @@ public class CalendarService {
         }
         terminToBeUpdated.update(terminUpdate);
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
-        Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getMitarbeiterEntities(terminUpdate.getTeilnehmer());
+        Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getEmployees(terminUpdate.getTeilnehmer());
         Optional<ProjektEntity> projectOfTermin = this.projektService.getProjectEntity(terminToBeUpdated.getProjekt());
         TerminEntity terminToBeUpdatedEntity = calendarMapper.mapToTerminEntity(terminToBeUpdated, teilnehmerOfUpdatedTermin, erstellerOfTermin, projectOfTermin);
         this.terminRepo.save(terminToBeUpdatedEntity);
@@ -130,6 +134,16 @@ public class CalendarService {
 
         return terminDTOS;
     }
+
+    public Set<MitarbeiterDTO> getAllPossibleParticipants(Authentication authentication) {
+        List<MitarbeiterEntity> allEmployees = this.mitarbeiterRepo.findAll();
+        MitarbeiterEntity loggedInUser = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
+        List<MitarbeiterEntity> possibleParticipants = allEmployees.stream().filter(employee -> employee.getId() != loggedInUser.getId()).collect(Collectors.toList());
+
+        return Mitarbeiter.parseEntitiestoDTOs(new HashSet<>(possibleParticipants));
+    }
+
+
 
 }
 
