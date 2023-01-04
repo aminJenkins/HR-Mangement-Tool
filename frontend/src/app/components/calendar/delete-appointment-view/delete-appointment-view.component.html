@@ -1,0 +1,28 @@
+<mat-card style="padding: 20px; height: 100%">
+  <mat-card-title>Termin löschen</mat-card-title>
+  <mat-card-content>
+    <p>
+      Möchtest du wirklich den Termin <b> {{ data.titel }} </b> wirklich
+      löschen?
+    </p>
+
+    <button
+      style="display: inline; margin-right: 5px"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="deleteAppointment(data.id)"
+    >
+      Termin löschen
+    </button>
+
+    <button
+      (click)="cancelDeletion()"
+      mat-raised-button
+      color="primary"
+      type="submit"
+    >
+      Abbrechen
+    </button>
+  </mat-card-content>
+</mat-card>
