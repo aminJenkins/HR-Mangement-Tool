@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
 })
 export class AppointmentComponent {
   @Input() appointment: any;
+  @Input() loggedInUser: string | undefined;
   constructor() {}
 }

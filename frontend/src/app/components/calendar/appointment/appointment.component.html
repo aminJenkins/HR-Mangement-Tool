@@ -1,8 +1,12 @@
-<div>
-  <div *ngIf="appointment">
-    <span>
-      {{ appointment.titel }}
-    </span>
+<div *ngIf="appointment">
+  <mat-icon
+    *ngIf="loggedInUser === appointment.ersteller"
+    style="float: right"
+    aria-hidden="false"
+    fontIcon="delete"
+  ></mat-icon>
+  <div>
+    <span> {{ appointment.titel }} </span>
     <br />
     <span> Beginn: {{ appointment.beginn }} </span>
     <br />

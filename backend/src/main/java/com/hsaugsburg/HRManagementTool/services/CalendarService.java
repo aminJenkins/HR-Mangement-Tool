@@ -56,9 +56,9 @@ public class CalendarService {
 
     public Termin updateTermin(TerminUpdate terminUpdate, Authentication authentication) {
         Termin terminToBeUpdated = getTermin(terminUpdate.getId());
-        if (!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErstellerId(), authentication)) {
-            throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
-        }
+//        if (!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErstellerId(), authentication)) {
+//            throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
+//        }
         terminToBeUpdated.update(terminUpdate);
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
         Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getEmployees(terminUpdate.getTeilnehmer());
