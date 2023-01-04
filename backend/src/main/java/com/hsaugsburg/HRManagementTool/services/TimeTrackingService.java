@@ -5,9 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,7 +59,7 @@ public class TimeTrackingService {
         timeTrackingRepo.deleteById(Integer.valueOf(id));
     }
 
-    public Set<ArbeitstagDTO> getTimeTracksSortedByDate(String mail){
+    public List<ArbeitstagDTO> getTimeTracksSortedByDate(String mail){
         Map<LocalDateTime,ArbeitstagDTO> workdays = new HashMap();
 
         Zeiterfassung.parseEntitiestoDTOs(timeTrackingRepo.getAllSortedByDate(mail)).forEach(e->{
@@ -77,8 +81,9 @@ public class TimeTrackingService {
                 workdays.get(datum).getTimeTracks().add(e);
             }
         });
-        Set<ArbeitstagDTO> arbeitstagDTOsSet = new HashSet<>();
+        List<ArbeitstagDTO> arbeitstagDTOsSet = new ArrayList<>();
         workdays.values().forEach(e->arbeitstagDTOsSet.add(e));
+        Collections.sort(arbeitstagDTOsSet,Collections.reverseOrder());
         return arbeitstagDTOsSet;
     }
 

@@ -20,12 +20,8 @@ export class TimeTrackingService {
 
   constructor(private  http: HttpClient) { }
 
-  public getDatasource(): Observable<TimetrackExist[]> {
-    return this.http.get<TimetrackExist[]>(environment.TIME_TRACKING_URL);
-  }
-
   public getSortedDataSource(): Observable<Workday[]> {
-  return this.http.get<Workday[]>(environment.TIME_TRACKING_URL+"/sorted");
+  return this.http.get<Workday[]>(environment.TIME_TRACKING_URL);
 }
 
   public getContingents(): Observable<Contingent[]>{

@@ -36,20 +36,16 @@ export class TimeTrackingViewComponent {
     });*/
     this.timeTrackingService.getSortedDataSource().subscribe((response: Workday[]) => {
       this.dataSource = response;
-      console.log(response);
+      console.log("Response "+response);
     });
   }
+  public callUpdateForm(row:TimetrackExist):void{
+    let timeTrack : TimetrackExist = row;
+    console.log(timeTrack)
+    this.timeTrackToUpdate=timeTrack;
+    this.displayUpdateForm=true;
+    console.log(this.displayUpdateForm);
 
-  public sortDate(days:Workday[]): Workday[]{
-    let dates : Date[] = [] ;
-    days.forEach(function(day){dates.push(day.date)});
-    dates.sort((a, b) => {
-      console.log("b.date "+Date.parse(b.toString()));
-      console.log("a.date "+Date.parse(a.toString()));
-      return <any>new Date(b) - <any>new Date(a);
-    });
-    console.log(days);
-    return days;
   }
 }
 

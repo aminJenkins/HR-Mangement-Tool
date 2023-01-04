@@ -1,5 +1,6 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
@@ -31,15 +32,15 @@ public class TimeTrackingController {
     private  TimeTrackingService timeTrackingService;
 
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-    @GetMapping("/tracks")
-    public ResponseEntity<Set<AngelegteZeiterfassungDTO>> getTimeTracks(Authentication authentication) {
-        try {
-            return ResponseEntity.ok(timeTrackingService.getTimeTracks(authentication.getName()));
-        }catch (Exception exception){
-            return ResponseEntity.status(500).body(null);
-        }
-    }
+//    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+//    @GetMapping("/tracks")
+//    public ResponseEntity<Set<AngelegteZeiterfassungDTO>> getTimeTracks(Authentication authentication) {
+//        try {
+//            return ResponseEntity.ok(timeTrackingService.getTimeTracks(authentication.getName()));
+//        }catch (Exception exception){
+//            return ResponseEntity.status(500).body(null);
+//        }
+//    }
 
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
     @PostMapping("/tracks")
@@ -65,8 +66,8 @@ public class TimeTrackingController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/tracks/sorted")
-    public ResponseEntity<Set<ArbeitstagDTO>> getSortedTimeTracks(Authentication authentication) {
+    @GetMapping("/tracks")
+    public ResponseEntity<List<ArbeitstagDTO>> getSortedTimeTracks(Authentication authentication) {
         try {
             return ResponseEntity.ok(timeTrackingService.getTimeTracksSortedByDate(authentication.getName()));
         }catch (Exception exception){
