@@ -61,6 +61,6 @@
   </div>
   <div *ngIf="displayUpdateForm">
     <app-update-time-tracking-form [timeTrack]="timeTrackToUpdate"></app-update-time-tracking-form>
-    <button mat-raised-button style="width: 100%" type="submit" (click)="displayUpdateForm=false">Back</button>
+    <button mat-raised-button style="width: 100%" type="submit" (click)="displayUpdateForm=false;loadData()">Back</button>
   </div>
 </div>

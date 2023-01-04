@@ -75,5 +75,16 @@ public class TimeTrackingController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/tracks/{id}")
+    public ResponseEntity deleteTimeTrack(Authentication authentication,@PathVariable("id") String timeTrackID) {
+        try {
+            timeTrackingService.deleteTimeTrack(timeTrackID);
+            return ResponseEntity.ok().build();
+        }catch (Exception exception){
+            return ResponseEntity.status(500).body(exception.getMessage());
+        }
+    }
+
 
 }

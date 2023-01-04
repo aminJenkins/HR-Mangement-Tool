@@ -19,11 +19,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
   declarations: [],
   imports: [
+    MatDatepickerModule,
+    MatMomentDateModule,
     CommonModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -52,6 +56,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     MatSnackBarModule,
   ],
   exports: [
+    MatDatepickerModule,
+    MatMomentDateModule,
     CommonModule,
     MatSidenavModule,
     MatToolbarModule,

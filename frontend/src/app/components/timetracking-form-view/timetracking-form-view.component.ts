@@ -1,10 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, NgModule} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TimeTrackingService} from "../../services/time-tracking-service";
 import { Router } from '@angular/router';
 import {TimeTrack} from "../../shared/TimeTrack";
 import {Contingent} from "../../shared/Contingent";
 import {Project} from "../../models/Project";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from "@angular/material-moment-adapter";
 
 
 @Component({
