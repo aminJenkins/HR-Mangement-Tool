@@ -2,6 +2,8 @@ import { DeleteAppointmentViewComponent } from './../delete-appointment-view/del
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppointmentDetailsViewComponent } from '../appointment-details-view/appointment-details-view.component';
+import { Project } from 'src/app/models/Project';
+import { Employee } from 'src/app/shared/employee/Employee';
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
@@ -10,7 +12,13 @@ import { AppointmentDetailsViewComponent } from '../appointment-details-view/app
 export class AppointmentComponent {
   @Input() appointment: any;
   @Input() loggedInUser: string | undefined;
-  constructor(public dialog: MatDialog) {}
+  @Input() projects: Project[];
+  @Input() employees: Employee[];
+
+  constructor(public dialog: MatDialog) {
+    this.projects = [];
+    this.employees = [];
+  }
 
   deleteAppointment(appointment: any): void {
     const deleteDialogRef = this.dialog.open(DeleteAppointmentViewComponent, {
@@ -21,7 +29,11 @@ export class AppointmentComponent {
   }
   showAppointmentDetails(appointment: any): void {
     const dialogRef = this.dialog.open(AppointmentDetailsViewComponent, {
-      data: appointment,
+      data: {
+        appointment: appointment,
+        projects: this.projects,
+        employees: this.employees,
+      },
       height: '520px',
       width: '600px',
     });

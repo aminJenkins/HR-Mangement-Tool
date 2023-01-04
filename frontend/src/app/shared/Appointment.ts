@@ -20,6 +20,18 @@ export interface Appointment {
   projekt: string;
 }
 
+export interface UpdateAppointment {
+  id: number;
+  titel: string;
+  beschreibung: string;
+  priority: string;
+  beginn: string;
+  ende: string;
+  datum: Date;
+  teilnehmer: [];
+  projekt: string;
+}
+
 export interface CalendarTable {
   startOfWeek: string;
   endOfWeek: string;

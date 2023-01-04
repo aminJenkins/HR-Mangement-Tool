@@ -1,3 +1,4 @@
+import { UpdateAppointment } from './../../shared/Appointment';
 import { startOfWeek, endOfWeek } from 'date-fns';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -32,6 +33,15 @@ export class AppointmentService {
   deleteAppointment(appointmentId: number): Observable<void> {
     return this.http.delete<void>(
       environment.CALENDAR_URL + 'termin/' + appointmentId
+    );
+  }
+
+  updateAppointment(
+    updateAppointment: UpdateAppointment
+  ): Observable<Appointment> {
+    return this.http.put<UpdateAppointment>(
+      environment.CALENDAR_URL + 'termin',
+      updateAppointment
     );
   }
 

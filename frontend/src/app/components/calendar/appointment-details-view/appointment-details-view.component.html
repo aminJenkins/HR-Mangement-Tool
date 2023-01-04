@@ -2,16 +2,38 @@
   <mat-card-title>Termindetails</mat-card-title>
 
   <mat-card-content>
-    <form>
-      <mat-form-field style="width: 80%" appearance="outline">
-        <mat-label>Beschreibung</mat-label>
-        <textarea
-          name="beschreibung"
+    <form
+      (ngSubmit)="updatingAppointment()"
+      id="update-appointment-form"
+      [formGroup]="updateAppointmentFormGroup"
+    >
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Titel</mat-label>
+        <input
+          name="titel"
           matInput
+          formControlName="titel"
           style="color: gray"
-          [value]="data.beschreibung"
-          readonly
-        ></textarea>
+          [value]="data.appointment.titel"
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+        />
+      </mat-form-field>
+
+      <mat-form-field appearence="outline">
+        <mat-label>Priorität</mat-label>
+        <mat-select
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          [value]="data.appointment.priority"
+          formControlName="priority"
+        >
+          <mat-option value="LOW">LOW</mat-option>
+          <mat-option value="MIDDLE">MIDDLE</mat-option>
+          <mat-option value="HIGH">HIGH</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field style="margin-right: 10px" appearance="outline">
@@ -21,10 +43,12 @@
           name="begin"
           matInput
           style="color: gray"
-          [value]="data.beginn"
-          readonly
+          [value]="data.appointment.beginn"
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          formControlName="beginn"
         />
-        <mat-error>Test </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -34,53 +58,91 @@
           type="time"
           matInput
           style="color: gray"
-          [value]="data.ende"
-          readonly
+          [value]="data.appointment.ende"
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          formControlName="ende"
         />
       </mat-form-field>
 
       <mat-form-field style="margin-right: 10px" appearance="outline">
         <mat-label>Datum</mat-label>
         <input
-          name="datum"
           matInput
-          style="color: gray"
-          [value]="data.datum"
-          readonly
+          [value]="data.appointment.datum"
+          formControlName="datum"
+          [matDatepicker]="picker"
         />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field
-        *ngIf="data.projekt"
-        style="margin-right: 10px"
-        appearance="outline"
-      >
+      <mat-form-field appearence="outline">
         <mat-label>Projekt</mat-label>
-        <input
-          name="projekt"
-          matInput
-          style="color: gray"
-          [value]="data.projekt"
-          readonly
-        />
+        <mat-select
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          [value]="data.appointment.projekt"
+          formControlName="projekt"
+        >
+          <mat-option [value]="null">Kein Projekt</mat-option>
+          <mat-option
+            *ngFor="let projekt of data.projects"
+            [value]="projekt.bezeichnung"
+          >
+            {{ projekt.bezeichnung }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field style="margin-right: 10px" appearance="outline">
-        <mat-label>Priorität</mat-label>
-        <input
-          name="projekt"
+      <mat-form-field style="width: 80%" appearance="outline">
+        <mat-label>Beschreibung</mat-label>
+        <textarea
+          name="beschreibung"
           matInput
           style="color: gray"
-          [value]="data.priority"
-          readonly
-        />
+          [value]="data.appointment.beschreibung"
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          formControlName="beschreibung"
+        ></textarea>
       </mat-form-field>
 
-      <div *ngIf="data.teilnehmer.length > 0">
-        Teilnehmer:
-        <mat-chip-listbox *ngFor="let teilnehmer of data.teilnehmer">
-          <mat-chip-option disabled>{{ teilnehmer }}</mat-chip-option>
-        </mat-chip-listbox>
+      <mat-form-field appearance="outline">
+        <mat-label>Teilnehmer</mat-label>
+        <mat-select
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          [value]="data.appointment.teilnehmer"
+          formControlName="teilnehmer"
+          multiple
+        >
+          <mat-option
+            *ngFor="let employee of data.employees"
+            [value]="employee.email"
+            >{{ employee.email }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button
+          [disabled]="
+            !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
+          "
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Termin aktualisieren
+        </button>
       </div>
     </form>
   </mat-card-content>
