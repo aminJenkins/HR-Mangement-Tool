@@ -1,12 +1,43 @@
-<div class="calendar-header">
-  <h1>Kalendar</h1>
-  <h2>Woche: {{ calendarData.week }}</h2>
-</div>
+<div>
+  <button
+    style="margin-right: 5px"
+    mat-raised-button
+    (click)="showAddAppointmentForm()"
+    color="primary"
+    type="submit"
+  >
+    Termin anlegen
+  </button>
 
+  <button
+    style="margin-right: 5px"
+    (click)="showAppointmentsPreviousWeek()"
+    mat-raised-button
+    color="primary"
+    type="submit"
+  >
+    Vorherige Woche
+  </button>
+
+  <button
+    (click)="showAppointmentsNextWeek()"
+    mat-raised-button
+    color="primary"
+    type="submit"
+  >
+    Nächste Woche
+  </button>
+
+  <h1>Kalendar</h1>
+  <h2 *ngIf="calendarData">
+    {{ calendarData.startOfWeek }} - {{ calendarData.endOfWeek }}
+  </h2>
+</div>
 <table
   mat-table
   [dataSource]="calendarData.appointments"
   class="mat-elevation-z8"
+  *ngIf="calendarData"
 >
   <ng-container matColumnDef="Montag">
     <th class="bold" mat-header-cell *matHeaderCellDef>Montag</th>

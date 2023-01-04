@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -54,6 +56,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     MatInputModule,
     MatCardModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatChipsModule,
   ],
   exports: [
     MatDatepickerModule,
@@ -75,7 +79,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     ReactiveFormsModule,
     MatCardModule,
     MatDialogModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+    MatChipsModule,
+  ],
 })
 export class MaterialModule {}

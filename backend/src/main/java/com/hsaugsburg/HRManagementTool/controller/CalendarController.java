@@ -1,5 +1,7 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
+import com.hsaugsburg.HRManagementTool.dto.calendar.CalendarTableDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.NewTerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
@@ -13,6 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,18 +36,34 @@ public class CalendarController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/termin")
-    public ResponseEntity<TerminUpdateDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO){
-        this.calendarService.updateTermin(terminUpdateDTO);
-        return null;
+    public ResponseEntity<TerminDTO> updateTermin(@RequestBody @Valid final TerminUpdateDTO terminUpdateDTO, Authentication authentication){
+        Termin updatedTermin = this.calendarService.updateTermin(this.calendarApiMapper.map(terminUpdateDTO),authentication);
+        return ResponseEntity.ok(this.calendarApiMapper.map(updatedTermin));
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @DeleteMapping("/{terminId}")
-    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId){
-        this.calendarService.deleteTermin(terminId);
+    @DeleteMapping("/termin/{terminId}")
+    public ResponseEntity<Void> deleteTermin(@PathVariable("terminId") final int terminId,Authentication authentication) {
+        this.calendarService.deleteTermin(terminId, authentication);
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping
+    public ResponseEntity<CalendarTableDTO> getCalendarData(@RequestParam Date startOfWeek, @RequestParam Date endOfWeek ,Authentication authentication){
+
+        LocalDate localStartOfWeek= startOfWeek.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localEndOfWeek = endOfWeek.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        CalendarTableDTO calendarTableDTO = this.calendarService.getCalendarData(localStartOfWeek,localEndOfWeek,authentication);
+        return ResponseEntity.ok(calendarTableDTO);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/participants")
+    public ResponseEntity<Set<MitarbeiterDTO>> getAllPossibleParticipants(Authentication authentication) {
+        return ResponseEntity.ok(this.calendarService.getAllPossibleParticipants(authentication));
+    }
 
 
 

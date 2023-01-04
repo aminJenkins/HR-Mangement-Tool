@@ -2,8 +2,12 @@
   height: 10vh;
 }
 
-.calendar-header {
+/* .calendar-header {
   text-align: center;
   width: 80%;
   margin: 0 auto 0;
+} */
+
+.calendar-buttons {
+  display: inline;
 }

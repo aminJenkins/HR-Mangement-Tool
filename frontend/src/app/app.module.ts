@@ -12,8 +12,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TimetrackingFormViewComponent } from './components/timetracking-form-view/timetracking-form-view.component';
 import {DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoginComponent } from './components/login/login.component';
-import { AppointmentComponent } from './components/appointment/appointment.component';
-import { AppointmentDetailsViewComponent } from './components/appointment-details-view/appointment-details-view.component';
+import { AppointmentComponent } from './components/calendar/appointment/appointment.component';
+import { AppointmentDetailsViewComponent } from './components/calendar/appointment-details-view/appointment-details-view.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthInterceptor} from './services/authInterceptor/auth.interceptor';
 import {FormsModule} from '@angular/forms';
@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './material/MomentUtcDateAdapter';
 
+import { AddAppointmentFormComponent } from './components/calendar/add-appointment-form/add-appointment-form.component';
 
 // @ts-ignore
 @NgModule({
@@ -36,6 +37,7 @@ import { MomentUtcDateAdapter } from './material/MomentUtcDateAdapter';
     ProfileComponent,
     AppComponent,
     UpdateTimeTrackingFormComponent,
+    AddAppointmentFormComponent
   ],
   providers: [TimeTrackingService, MatDatepickerModule, MatNativeDateModule,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,},
