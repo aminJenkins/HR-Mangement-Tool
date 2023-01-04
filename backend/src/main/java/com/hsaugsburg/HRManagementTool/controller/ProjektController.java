@@ -34,13 +34,14 @@ public class ProjektController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
-    public ResponseEntity<Set<ProjektDTO>> getAllProjects() {
+    public ResponseEntity<List<ProjektDTO>> getAllProjects() {
         return ResponseEntity.ok(projektService.getAllProjects());
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/")
     public ResponseEntity<ProjektDTO> createProject(@RequestBody CreateProjectDTO createProjectDto) {
+        System.out.println("projekte: " + createProjectDto.getKontingente());
         return ResponseEntity.ok(projektService.createProject(createProjectDto));
     }
 

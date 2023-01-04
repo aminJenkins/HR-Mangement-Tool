@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {throwError} from 'rxjs';
-import {Project} from '../../shared/Project';
-import {ProjectService} from '../../services/projectService/project.service';
+import {Project} from '../../../shared/Project';
+import {ProjectService} from '../../../services/projectService/project.service';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateProjectViewComponent} from '../create-project-view/create-project-view.component';
+import {UpdateProjectViewComponent} from '../update-project-view/update-project-view.component';
 
 @Component({
   selector: 'app-project-view',
@@ -29,7 +30,12 @@ export class ProjectViewComponent {
   }
 
   openUpdateProjectDialog(project: Project) {
-
+    const createDialogRef = this.dialog.open(UpdateProjectViewComponent, {data: project});
+    createDialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.showProjectSuccessfulUpdated();
+      }
+    })
   }
 
   openDeleteProjectDialog(id: number | undefined) {
@@ -48,6 +54,10 @@ export class ProjectViewComponent {
 
   private showProjectSuccessfulCreated(): void {
     this.snackbar.open('Projekt erfolgreich erstellt', 'OK', {duration: 3000});
+  }
+
+  private showProjectSuccessfulUpdated(): void {
+    this.snackbar.open('Projekt erfolgreich aktualisiert', 'OK', {duration: 3000});
   }
 
 }

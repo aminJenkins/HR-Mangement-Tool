@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Project} from '../../shared/Project';
-import {ProjectService} from '../../services/projectService/project.service';
-import {Contingent} from '../../shared/Contingent';
-import {Employee} from '../../shared/employee/Employee';
+import {Project} from '../../../shared/Project';
+import {ProjectService} from '../../../services/projectService/project.service';
+import {Contingent} from '../../../shared/Contingent';
+import {Employee} from '../../../shared/employee/Employee';
 import {throwError} from 'rxjs';
-import {ContingentService} from '../../services/contingentService/contingent.service';
+import {ContingentService} from '../../../services/contingentService/contingent.service';
 
 @Component({
   selector: 'app-create-project-view',
@@ -57,9 +57,9 @@ export class CreateProjectViewComponent {
   createProject() {
     if (this.createProjectFormGroup.valid) {
       const value = this.createProjectFormGroup.value;
-      this.project.kontingente = value.kontingente.map((k:Contingent) => k.id);
-      this.project.leiterID = value.projektleiter.id;
-      this.project.projektbeteiligte = value.teilnehmer.map((m:Employee) => m.email);
+      this.project.kontingente = value.kontingente;
+      this.project.leiterID = value.projektleiter;
+      this.project.projektbeteiligte = value.teilnehmer;
       console.log(this.project);
       this.projectService.createProject(this.project).subscribe(result => {
         console.log('create result:', result);

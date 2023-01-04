@@ -57,21 +57,21 @@
     <mat-form-field appearance="outline">
       <mat-label>Projektleiter</mat-label>
       <mat-select formControlName="projektleiter" required="true">
-        <mat-option *ngFor="let teilnehmer of allMitarbeiter" [value]="teilnehmer">{{teilnehmer.email}}</mat-option>
+        <mat-option *ngFor="let teilnehmer of allMitarbeiter" [value]="teilnehmer.id">{{teilnehmer.email}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Kontingente</mat-label>
       <mat-select formControlName="kontingente" multiple required="true">
-        <mat-option *ngFor="let contingent of contingents" [value]="contingent">{{contingent.bezeichnung}}</mat-option>
+        <mat-option *ngFor="let contingent of contingents" [value]="contingent.id">{{contingent.bezeichnung}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Projektteilnehmer</mat-label>
       <mat-select formControlName="teilnehmer" multiple required="true">
-        <mat-option *ngFor="let teilnehmer of allMitarbeiter" [value]="teilnehmer">{{teilnehmer.email}}</mat-option>
+        <mat-option *ngFor="let teilnehmer of allMitarbeiter" [value]="teilnehmer.email">{{teilnehmer.email}}</mat-option>
       </mat-select>
     </mat-form-field>
     </div>

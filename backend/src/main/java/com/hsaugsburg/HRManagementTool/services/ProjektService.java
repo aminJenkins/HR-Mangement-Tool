@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -40,11 +41,11 @@ public class ProjektService {
         Set<KontingentEntity> kontingente = kontingentService.getKontingentEntitiesById(createProjectDto.getKontingente());
 
         ProjektEntity newProjekt = createProjectDto.parseToEntity(leiter, beteiligte, kontingente);
-        return Projekt.parseEntityToDTO(projektRepo.save(newProjekt));
+        return ProjektDTO.parseFromEntity(projektRepo.save(newProjekt));
     }
 
-    public Set<ProjektDTO> getAllProjects() {
-        return Projekt.parseEntitiesToDTOs(new HashSet<>(projektRepo.findAll()));
+    public List<ProjektDTO> getAllProjects() {
+        return ProjektDTO.parseFromEntities(projektRepo.findAll());
     }
 
     public ProjektDTO updateProject(ProjektDTO projektDTO) {

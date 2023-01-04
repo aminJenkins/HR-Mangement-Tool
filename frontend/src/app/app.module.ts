@@ -19,8 +19,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {AuthInterceptor} from './services/authInterceptor/auth.interceptor';
 import {FormsModule} from '@angular/forms';
 import { UpdateTimeTrackingFormComponent } from './components/update-time-tracking-form/update-time-tracking-form.component';
-import { ProjectViewComponent } from './components/project-view/project-view.component';
-import { CreateProjectViewComponent } from './components/create-project-view/create-project-view.component';
+import { ProjectViewComponent } from './components/project/project-view/project-view.component';
+import { CreateProjectViewComponent } from './components/project/create-project-view/create-project-view.component';
+import { UpdateProjectViewComponent } from './components/project/update-project-view/update-project-view.component';
 
 
 // @ts-ignore
@@ -38,6 +39,7 @@ import { CreateProjectViewComponent } from './components/create-project-view/cre
     UpdateTimeTrackingFormComponent,
     ProjectViewComponent,
     CreateProjectViewComponent,
+    UpdateProjectViewComponent,
   ],
   imports: [
     BrowserModule,
