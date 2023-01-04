@@ -1,0 +1,87 @@
+<mat-card style="padding: 20px; height: 100%">
+  <mat-card-title>Termindetails</mat-card-title>
+
+  <mat-card-content>
+    <form>
+      <mat-form-field style="width: 80%" appearance="outline">
+        <mat-label>Beschreibung</mat-label>
+        <textarea
+          name="beschreibung"
+          matInput
+          style="color: gray"
+          [value]="data.beschreibung"
+          readonly
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Beginn</mat-label>
+        <input
+          type="time"
+          name="begin"
+          matInput
+          style="color: gray"
+          [value]="data.beginn"
+          readonly
+        />
+        <mat-error>Test </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ende</mat-label>
+        <input
+          name="ende"
+          type="time"
+          matInput
+          style="color: gray"
+          [value]="data.ende"
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Datum</mat-label>
+        <input
+          name="datum"
+          matInput
+          style="color: gray"
+          [value]="data.datum"
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="data.projekt"
+        style="margin-right: 10px"
+        appearance="outline"
+      >
+        <mat-label>Projekt</mat-label>
+        <input
+          name="projekt"
+          matInput
+          style="color: gray"
+          [value]="data.projekt"
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Priorität</mat-label>
+        <input
+          name="projekt"
+          matInput
+          style="color: gray"
+          [value]="data.priority"
+          readonly
+        />
+      </mat-form-field>
+
+      <div *ngIf="data.teilnehmer.length > 0">
+        Teilnehmer:
+        <mat-chip-listbox *ngFor="let teilnehmer of data.teilnehmer">
+          <mat-chip-option disabled>{{ teilnehmer }}</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

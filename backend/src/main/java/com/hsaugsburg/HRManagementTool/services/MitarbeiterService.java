@@ -14,6 +14,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class MitarbeiterService {
@@ -59,4 +66,9 @@ public class MitarbeiterService {
             }
         }
     }
+
+    public Set<MitarbeiterEntity> getEmployees(Set<String> emailsOfEmployees){
+        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(emailsOfEmployees));
+    }
+
 }

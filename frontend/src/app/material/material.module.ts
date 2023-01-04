@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,8 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [],
@@ -50,6 +51,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     MatCardModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatChipsModule,
   ],
   exports: [
     CommonModule,
@@ -69,7 +72,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatCardModule,
     MatDialogModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+    MatChipsModule,
+  ],
 })
 export class MaterialModule {}

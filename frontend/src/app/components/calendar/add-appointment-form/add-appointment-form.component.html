@@ -1,0 +1,102 @@
+<mat-card style="padding: 20px">
+  <mat-card-title>Termin anlegen</mat-card-title>
+  <mat-card-content>
+    <form
+      id="create-appointment-form"
+      (ngSubmit)="createAppointment()"
+      style="padding: 10px"
+      [formGroup]="addAppointmentFormGroup"
+    >
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Titel</mat-label>
+        <input
+          name="titel"
+          matInput
+          style="color: gray"
+          formControlName="titel"
+        />
+      </mat-form-field>
+      <mat-form-field appearence="outline">
+        <mat-label>Priorität</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="LOW">LOW</mat-option>
+          <mat-option value="MIDDLE">MIDDLE</mat-option>
+          <mat-option value="HIGH">HIGH</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Beginn</mat-label>
+        <input
+          type="time"
+          name="begin"
+          formControlName="beginn"
+          matInput
+          style="color: gray"
+        />
+        <mat-error>Test </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ende</mat-label>
+        <input
+          name="ende"
+          type="time"
+          formControlName="ende"
+          matInput
+          style="color: gray"
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Datum</mat-label>
+        <input matInput formControlName="datum" [matDatepicker]="picker" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearence="outline">
+        <mat-label>Projekt</mat-label>
+        <mat-select formControlName="projekt">
+          <mat-option [value]="null">Kein Projekt</mat-option>
+          <mat-option
+            *ngFor="let projekt of data.projects"
+            [value]="projekt.bezeichnung"
+          >
+            {{ projekt.bezeichnung }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 80%" appearance="outline">
+        <mat-label>Beschreibung</mat-label>
+        <textarea
+          formControlName="beschreibung"
+          name="beschreibung"
+          matInput
+          style="color: gray"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Teilnehmer</mat-label>
+        <mat-select formControlName="teilnehmer" multiple>
+          <mat-option
+            *ngFor="let employee of data.employees"
+            [value]="employee.email"
+            >{{ employee.email }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" type="submit">
+          Termin anlegen
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

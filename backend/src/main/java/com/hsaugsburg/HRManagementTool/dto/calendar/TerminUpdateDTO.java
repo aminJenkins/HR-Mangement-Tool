@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
-import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.CalenderMitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.models.Priority;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +24,7 @@ public class TerminUpdateDTO {
     @NotNull
     private String titel;
 
+    @NotNull
     private String beschreibung;
 
     @NotNull
@@ -37,10 +37,15 @@ public class TerminUpdateDTO {
     private Date datum;
 
     @NotNull
-    private Set<CalenderMitarbeiterDTO> teilnehmer;
+    private Set<String> teilnehmer;
 
     @NotNull
     private Priority priority;
+
+    @NotNull
+    private String projekt;
+
+
 
 
 }

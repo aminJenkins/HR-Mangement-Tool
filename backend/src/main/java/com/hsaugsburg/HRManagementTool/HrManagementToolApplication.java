@@ -21,8 +21,9 @@ public class HrManagementToolApplication {
 	 * If this method is uncommented, the db will be filled with the user data below. So this should only be used when the db does not already
 	 * have the below users.
 	 * After initializing the db the method needs to be commented again.
+	 *
 	 * @param zugangsRepo
-	 * @param encoder to encode the passwords
+	 * @param encoder     to encode the passwords
 	 * @return
 	 */
 	@Bean
@@ -49,5 +50,4 @@ public class HrManagementToolApplication {
 
 		};
 	}
-
 }
