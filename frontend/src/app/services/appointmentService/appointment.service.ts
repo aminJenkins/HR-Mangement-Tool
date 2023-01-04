@@ -29,6 +29,12 @@ export class AppointmentService {
     );
   }
 
+  deleteAppointment(appointmentId: number): Observable<void> {
+    return this.http.delete<void>(
+      environment.CALENDAR_URL + 'termin/' + appointmentId
+    );
+  }
+
   public getCalendarWeekData(
     startOfWeek: Date,
     endOfWeek: Date

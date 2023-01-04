@@ -4,8 +4,9 @@
     style="float: right"
     aria-hidden="false"
     fontIcon="delete"
+    (click)="deleteAppointment(appointment)"
   ></mat-icon>
-  <div>
+  <div (click)="showAppointmentDetails(appointment)">
     <span> {{ appointment.titel }} </span>
     <br />
     <span> Beginn: {{ appointment.beginn }} </span>
