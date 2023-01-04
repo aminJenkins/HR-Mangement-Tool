@@ -37,7 +37,7 @@ public class MitarbeiterController {
     @PostMapping("/update")
     public ResponseEntity<MitarbeiterDTO> updateEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
         try {
-            maService.checkAuthority(authentication, mitarbeiterDTO.getEmail());
+            maService.checkIsAdminOrCorrectUser(authentication, mitarbeiterDTO.getEmail());
             MitarbeiterDTO m =  maService.updateEmployee(mitarbeiterDTO);
             System.out.println("nach update:" + m.toString());
             return ResponseEntity.status(HttpStatus.OK).body(m);

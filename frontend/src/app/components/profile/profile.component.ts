@@ -1,34 +1,34 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from '../../services/profile.service';
-import { throwError } from 'rxjs';
-import { Employee, UpdateEmployee } from '../../shared/employee/Employee';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component, Input} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {ProfileService} from '../../services/profile.service';
+import {throwError} from 'rxjs';
+import {Employee, UpdateEmployee} from '../../shared/employee/Employee';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {PasswordReset} from '../../shared/PasswordReset';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  employee: Employee;
 
+
+  employee: Employee;
+  errorMessage: string | undefined;
   profileInfoFormGroup!: FormGroup;
   changePasswordFormGroup!: FormGroup;
 
-  constructor(
-    private profileService: ProfileService,
-    private fb: FormBuilder,
-    private snackbar: MatSnackBar
-  ) {
+  constructor(private profileService: ProfileService, private fb: FormBuilder, private snackbar: MatSnackBar) {
     this.employee = new Employee(0, '', '', '', '', '', 0);
-    console.log('emp: ', this.employee);
-    profileService.getProfileInfo().subscribe(
-      (emp) => {
-        this.employee = emp;
-      },
-      (error) => throwError(error)
-    );
+    profileService.getProfileInfo()
+      .subscribe(
+        (emp) => {
+          this.employee = emp;
+        },
+        (error => throwError(error))
+      );
     this.initForms();
   }
 
@@ -38,46 +38,93 @@ export class ProfileComponent {
       firstname: [''],
       lastname: [''],
       address: [''],
-      telNumber: ['', Validators.pattern('[0-9 ]{11}')],
+      telNumber: ['', Validators.pattern('[0-9 ]{11}')]
     });
 
     this.changePasswordFormGroup = this.fb.group({
       newPassword: ['', Validators.required],
       oldPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-    });
+    }, {validators: this.confirmedValidator('newPassword', 'confirmPassword')});
   }
 
   updateProfileInfo(): void {
     if (this.profileInfoFormGroup.valid) {
+
       const value: UpdateEmployee = this.profileInfoFormGroup.value;
-      console.log(typeof this.employee);
       const emp = this.fromUpdateEmployee(value);
 
       this.profileInfoFormGroup.reset();
-      this.profileService.updateProfile(emp).subscribe((value1) => {
-        this.showInfoUserSuccessfulUpdated();
+      this.profileService.updateProfile(emp).subscribe(value1 => {
+        this.showInfoUserUpdated();
         console.log('update info: ', value1);
         this.employee = value1;
       });
     }
   }
 
-  changePassword(): void {
+  changePassword(formDirective: FormGroupDirective): void {
     console.log('clicked changePW');
     if (this.changePasswordFormGroup.valid) {
       console.log('pw valid');
-      // todo send change password request and wait on response
-      this.changePasswordFormGroup.reset();
+      const formValue: PasswordReset = this.changePasswordFormGroup.value;
+      console.log('password values', formValue);
+
+      this.profileService.resetPassword(formValue).subscribe(() => {
+        this.errorMessage = undefined;
+        this.changePasswordFormGroup.reset();
+        formDirective.resetForm();
+        this.changePasswordFormGroup.markAsUntouched();
+        this.showInfoPasswordReset();
+      }, (error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          this.errorMessage = 'Password was not confirmed correctly';
+        } else if (error.status === 403) {
+          this.errorMessage = 'Old password is not correct';
+        } else {
+          this.errorMessage = error.message;
+        }
+      });
     } else {
       console.log('pw not valid');
     }
   }
 
-  private showInfoUserSuccessfulUpdated(): void {
-    this.snackbar.open('User information successfully updated', 'OK', {
-      duration: 3000,
-    });
+  get isNewPasswordMissing(): boolean {
+    if (this.pwForm().newPassword.touched && this.pwForm().newPassword.invalid && this.pwForm().newPassword.errors) {
+      return this.pwForm().newPassword.errors?.required;
+    }
+    return false;
+  }
+
+  get isConfirmPasswordMissing(): boolean {
+    if (this.hasConfirmPasswordErrors()) {
+      return this.pwForm().confirmPassword.errors?.required;
+    }
+    return false;
+  }
+
+  get doesConfirmPasswordMatch(): boolean {
+    if (this.hasConfirmPasswordErrors()) {
+      return this.pwForm().confirmPassword.errors?.confirmedValidator;
+    }
+    return false;
+  }
+
+  hasConfirmPasswordErrors(): boolean {
+    return !!(this.pwForm().confirmPassword.touched && this.pwForm().confirmPassword.invalid && this.pwForm().confirmPassword.errors);
+  }
+
+  pwForm(): { [p: string]: AbstractControl<any, any> } {
+    return this.changePasswordFormGroup.controls;
+  }
+
+  private showInfoUserUpdated(): void {
+    this.snackbar.open('User information successfully updated', 'OK', {duration: 3000});
+  }
+
+  private showInfoPasswordReset(): void {
+    this.snackbar.open('Password successfully changed', 'OK', {duration: 5000});
   }
 
   private fromUpdateEmployee(updateEmp: UpdateEmployee): Employee {
@@ -88,7 +135,22 @@ export class ProfileComponent {
       updateEmp.lastname ? updateEmp.lastname : this.employee.nachname,
       updateEmp.address ? updateEmp.address : this.employee.anschrift,
       updateEmp.telNumber ? updateEmp.telNumber : this.employee.telnr,
-      this.employee.abteilung
+      this.employee.abteilung,
     );
+  }
+
+  private confirmedValidator(controlName: string, matchingControlName: string): (formGroup: FormGroup) => void {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+      if (matchingControl.errors && !matchingControl.errors.confirmedValidator) {
+        return;
+      }
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({confirmedValidator: true});
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 }

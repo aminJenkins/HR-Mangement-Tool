@@ -57,7 +57,7 @@ public class MitarbeiterService {
         return Mitarbeiter.mapEntityToDTO(updatedMitarbeiter);
     }
 
-    public void checkAuthority(Authentication authentication, String email) throws Exception {
+    public void checkIsAdminOrCorrectUser(Authentication authentication, String email) throws Exception {
         SimpleGrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
         if (!authentication.getAuthorities().contains(roleAdmin)) {
             if (!authentication.getName().equals(email)) {

@@ -15,6 +15,7 @@ import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
