@@ -77,4 +77,8 @@ export class AddAppointmentFormComponent {
       duration: 3000,
     });
   }
+
+  cancelAppointmentCreation(): void {
+    this.addAppointmentDialogRef.close('Close!');
+  }
 }

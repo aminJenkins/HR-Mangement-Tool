@@ -93,8 +93,22 @@
       </mat-form-field>
 
       <div>
-        <button mat-raised-button color="primary" type="submit">
+        <button
+          style="display: inline; margin-right: 5px"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
           Termin anlegen
+        </button>
+
+        <button
+          (click)="cancelAppointmentCreation()"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Abbrechen
         </button>
       </div>
     </form>
