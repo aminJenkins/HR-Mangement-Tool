@@ -41,3 +41,7 @@ body {
 #update-appointment-form .mat-mdc-form-field {
   width: 212px;
 }
+
+.mdc-data-table__cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}

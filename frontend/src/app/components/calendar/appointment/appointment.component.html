@@ -9,8 +9,8 @@
   <div (click)="showAppointmentDetails(appointment)">
     <span> {{ appointment.titel }} </span>
     <br />
-    <span> Beginn: {{ appointment.beginn }} </span>
+    <span> Beginn: {{ appointment.beginn.substring(0, 5) }} </span>
     <br />
-    <span> Ende: {{ appointment.ende }} </span>
+    <span> Ende: {{ appointment.ende.substring(0, 5) }} </span>
   </div>
 </div>

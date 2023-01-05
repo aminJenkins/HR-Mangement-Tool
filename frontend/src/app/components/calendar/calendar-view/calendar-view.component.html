@@ -1,37 +1,28 @@
-<div>
+<div style="margin-bottom: 10px">
+  <h1>Kalender</h1>
   <button
-    style="margin-right: 5px"
-    mat-raised-button
-    (click)="showAddAppointmentForm()"
-    color="primary"
-    type="submit"
-  >
-    Termin anlegen
-  </button>
-
-  <button
-    style="margin-right: 5px"
+    style="margin-right: 5px; display: inline"
     (click)="showAppointmentsPreviousWeek()"
     mat-raised-button
     color="primary"
     type="submit"
   >
-    Vorherige Woche
+    <mat-icon aria-hidden="false" fontIcon="arrow_back"></mat-icon>
   </button>
 
+  <h2 style="display: inline" *ngIf="calendarData">
+    {{ calendarData.startOfWeek }} - {{ calendarData.endOfWeek }}
+  </h2>
+
   <button
+    style="display: inline"
     (click)="showAppointmentsNextWeek()"
     mat-raised-button
     color="primary"
     type="submit"
   >
-    Nächste Woche
+    <mat-icon aria-hidden="false" fontIcon="arrow_forward"></mat-icon>
   </button>
-
-  <h1>Kalendar</h1>
-  <h2 *ngIf="calendarData">
-    {{ calendarData.startOfWeek }} - {{ calendarData.endOfWeek }}
-  </h2>
 </div>
 <table
   mat-table
@@ -107,3 +98,13 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<button
+  style="margin-right: 5px; float: right; margin-top: 10px"
+  mat-raised-button
+  (click)="showAddAppointmentForm()"
+  color="primary"
+  type="submit"
+>
+  Termin anlegen
+</button>
