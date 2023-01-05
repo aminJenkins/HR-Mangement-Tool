@@ -28,4 +28,8 @@ export class ProjectService {
     return this.http.get<Employee[]>('http://localhost:8090/api/employee/all');
   }
 
+  deleteProject(projectId: number | undefined): Observable<void> {
+    return this.http.delete<void>(`http://localhost:8090/api/projects/${projectId}`);
+  }
+
 }

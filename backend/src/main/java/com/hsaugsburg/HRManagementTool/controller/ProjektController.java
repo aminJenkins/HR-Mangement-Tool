@@ -1,5 +1,6 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.dto.project.CreateProjectDTO;
 import com.hsaugsburg.HRManagementTool.dto.project.ProjektDTO;
 import com.hsaugsburg.HRManagementTool.services.ProjektService;
@@ -22,7 +23,7 @@ public class ProjektController {
     @Autowired
     ProjektService projektService;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/")
     public ResponseEntity<Set<ProjektDTO>> getProjects(Authentication authentication) {
         try {
@@ -47,7 +48,14 @@ public class ProjektController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/update")
-    public ResponseEntity<ProjektDTO> update(@RequestBody ProjektDTO projektDTO) {
+    public ResponseEntity<ProjektDTO> updateProject(@RequestBody ProjektDTO projektDTO) {
         return ResponseEntity.ok( projektService.updateProject(projektDTO));
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<ProjektDTO> deleteProject( @PathVariable int projectId) {
+        projektService.deleteProject(projectId);
+        return ResponseEntity.ok().build();
     }
 }

@@ -22,6 +22,7 @@ import { UpdateTimeTrackingFormComponent } from './components/update-time-tracki
 import { ProjectViewComponent } from './components/project/project-view/project-view.component';
 import { CreateProjectViewComponent } from './components/project/create-project-view/create-project-view.component';
 import { UpdateProjectViewComponent } from './components/project/update-project-view/update-project-view.component';
+import { DeleteProjectViewComponent } from './components/project/delete-project-view/delete-project-view.component';
 
 
 // @ts-ignore
@@ -40,6 +41,7 @@ import { UpdateProjectViewComponent } from './components/project/update-project-
     ProjectViewComponent,
     CreateProjectViewComponent,
     UpdateProjectViewComponent,
+    DeleteProjectViewComponent,
   ],
   imports: [
     BrowserModule,

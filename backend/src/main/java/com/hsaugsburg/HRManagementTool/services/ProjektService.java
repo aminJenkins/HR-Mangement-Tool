@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +52,15 @@ public class ProjektService {
         Set<MitarbeiterEntity> beteiligte = mitarbeiterService.getMitarbeiterEntities(projektDTO.getProjektbeteiligte());
         Set<KontingentEntity> kontingente = kontingentService.getKontingentEntitiesById(projektDTO.getKontingente());
         ProjektEntity newProjekt = projektDTO.parseToEntity(leiter, beteiligte, kontingente);
-       return Projekt.parseEntityToDTO(projektRepo.save(newProjekt));
+        return Projekt.parseEntityToDTO(projektRepo.save(newProjekt));
+    }
+
+    public void deleteProject(int projectId) {
+//        ProjektEntity p = projektRepo.findById(projectId).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Projekt nicht gefunden"));
+//        System.out.println("leiter: "+p.getLeiter());
+        if (projektRepo.existsById(projectId)) {
+            projektRepo.deleteById(projectId);
+
+        }
     }
 }

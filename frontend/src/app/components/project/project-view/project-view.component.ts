@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {Component} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {throwError} from 'rxjs';
 import {Project} from '../../../shared/Project';
@@ -23,10 +22,9 @@ export class ProjectViewComponent {
     projectService.getAllProjects().subscribe(
       (projects) => {
         this.allProjects = projects;
-        console.log("projekte:", this.allProjects);
       },
       (error) => throwError(error)
-    )
+    );
   }
 
   openUpdateProjectDialog(project: Project) {
@@ -35,16 +33,20 @@ export class ProjectViewComponent {
       if (result) {
         this.showProjectSuccessfulUpdated();
       }
-    })
+    });
   }
 
   openDeleteProjectDialog(id: number | undefined) {
-
+    this.projectService.deleteProject(id).subscribe(() => {
+      this.allProjects = this.allProjects.filter(project => project.id != id);
+    }, error => {
+      throwError(error);
+    });
   }
 
   openCreateProjectDialog(): void {
     const createDialogRef = this.dialog.open(CreateProjectViewComponent);
-    createDialogRef.afterClosed().subscribe( result => {
+    createDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.allProjects.push(result);
         this.showProjectSuccessfulCreated();

@@ -40,13 +40,14 @@ public class ProjektEntity {
     private Set<TerminEntity> termine;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany
     @JoinTable(name = "KONTINGENT_PROJEKT",
             joinColumns = {@JoinColumn(name = "PROJEKT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "KONTINGENT_ID")})
     private Set<KontingentEntity> kontingente;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+
+    @ManyToMany
     @JoinTable(name = "PROJEKTVERTEILUNG",
             joinColumns = {@JoinColumn(name = "PROJEKT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "MITARBEITER_ID")})
