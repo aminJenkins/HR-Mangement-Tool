@@ -15,7 +15,6 @@ import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
@@ -38,8 +37,8 @@ public class CalendarService {
 
     public Termin createNewTermin(Termin newTermin, Authentication authentication) {
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
-        Set<MitarbeiterEntity> teilnehmerOfTermin = this.mitarbeiterService.getEmployees(newTermin.getTeilnehmer());
-        Optional<ProjektEntity> projektOfTermin = this.projektService.getProjectEntity(newTermin.getProjekt());
+        Set<MitarbeiterEntity> teilnehmerOfTermin = this.mitarbeiterService.getEmployeeEntities(newTermin.getTeilnehmer());
+        Optional<ProjektEntity> projektOfTermin = this.projektService.getProjectEntityByBezeichnung(newTermin.getProjekt());
         TerminEntity terminToBeSaved = calendarMapper.mapToTerminEntity(newTermin, teilnehmerOfTermin, erstellerOfTermin, projektOfTermin);
         this.terminRepo.save(terminToBeSaved);
         return this.calendarMapper.mapToTermin(terminToBeSaved);
@@ -47,22 +46,22 @@ public class CalendarService {
     }
 
     public void deleteTermin(int terminId, Authentication authentication) {
-        TerminEntity terminToDeleted = this.terminRepo.findById(terminId).orElseThrow();
-        if (!isLoggedInUserOwnerOfTermin(terminToDeleted.getErsteller().getId(), authentication)) {
+        TerminEntity terminToBeDeleted = this.terminRepo.findById(terminId).orElseThrow();
+        if (!isLoggedInUserOwnerOfTermin(terminToBeDeleted.getErsteller().getEmail(),authentication)) {
             throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
         }
-        this.terminRepo.deleteById(terminId);
+        this.terminRepo.delete(terminToBeDeleted);
     }
 
     public Termin updateTermin(TerminUpdate terminUpdate, Authentication authentication) {
         Termin terminToBeUpdated = getTermin(terminUpdate.getId());
-        if (!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErstellerId(), authentication)) {
+        if (!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErsteller(), authentication)) {
             throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
         }
         terminToBeUpdated.update(terminUpdate);
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
-        Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getEmployees(terminUpdate.getTeilnehmer());
-        Optional<ProjektEntity> projectOfTermin = this.projektService.getProjectEntity(terminToBeUpdated.getProjekt());
+        Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getEmployeeEntities(terminUpdate.getTeilnehmer());
+        Optional<ProjektEntity> projectOfTermin = this.projektService.getProjectEntityByBezeichnung(terminToBeUpdated.getProjekt());
         TerminEntity terminToBeUpdatedEntity = calendarMapper.mapToTerminEntity(terminToBeUpdated, teilnehmerOfUpdatedTermin, erstellerOfTermin, projectOfTermin);
         this.terminRepo.save(terminToBeUpdatedEntity);
         return this.calendarMapper.mapToTermin(terminToBeUpdatedEntity);
@@ -70,12 +69,11 @@ public class CalendarService {
     }
 
     private Termin getTermin(final int terminId) {
-        return this.terminRepo.findById(terminId).map(termin -> calendarMapper.mapToTermin(termin)).orElseThrow();
+        return this.terminRepo.findById(terminId).map(calendarMapper::mapToTermin).orElseThrow();
     }
 
-    private boolean isLoggedInUserOwnerOfTermin(int erstellerID, Authentication authentication) {
-        MitarbeiterEntity loggedInUser = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
-        return erstellerID == loggedInUser.getId();
+    private boolean isLoggedInUserOwnerOfTermin(String ownerOfAppointment, Authentication authentication) {
+        return ownerOfAppointment.equals(authentication.getName());
     }
 
 
@@ -117,7 +115,7 @@ public class CalendarService {
                 calendarWeekRowDTO.setFriday(appointmentsFriday.get(i));
             }
 
-        calendarWeekRowDTOS.add(calendarWeekRowDTO);
+            calendarWeekRowDTOS.add(calendarWeekRowDTO);
 
         }
 
@@ -130,10 +128,8 @@ public class CalendarService {
     }
 
     private List<TerminDTO> mapToTerminDTO(List<TerminEntity> terminEntities) {
-        List<Termin> termine = terminEntities.stream().map(terminEntity -> this.calendarMapper.mapToTermin(terminEntity)).collect(Collectors.toList());
-        List<TerminDTO> terminDTOS = termine.stream().map(termin -> this.calendarApiMapper.map(termin)).collect(Collectors.toList());
-
-        return terminDTOS;
+        List<Termin> termine = terminEntities.stream().map(this.calendarMapper::mapToTermin).collect(Collectors.toList());
+        return termine.stream().map(this.calendarApiMapper::map).collect(Collectors.toList());
     }
 
     public Set<MitarbeiterDTO> getAllPossibleParticipants(Authentication authentication) {
@@ -141,7 +137,7 @@ public class CalendarService {
         MitarbeiterEntity loggedInUser = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
         List<MitarbeiterEntity> possibleParticipants = allEmployees.stream().filter(employee -> employee.getId() != loggedInUser.getId()).collect(Collectors.toList());
 
-        return Mitarbeiter.parseEntitiestoDTOs(new HashSet<>(possibleParticipants));
+        return Mitarbeiter.mapEntitiesToDTOs(new HashSet<>(possibleParticipants));
     }
 
 

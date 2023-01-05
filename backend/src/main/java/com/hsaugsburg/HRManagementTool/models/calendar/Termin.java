@@ -22,7 +22,7 @@ public class Termin {
     private LocalDate datum;
     private Set<String> teilnehmer;
     private Priority priority;
-    private int erstellerId;
+    private String ersteller;
     private String projekt;
 
 

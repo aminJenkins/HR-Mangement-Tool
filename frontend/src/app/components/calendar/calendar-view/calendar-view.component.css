@@ -1,12 +1,15 @@
 .appointment-td {
   height: 10vh;
 }
-
-/* .calendar-header {
-  text-align: center;
-  width: 80%;
-  margin: 0 auto 0;
-} */
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+mat-card {
+  margin-top: 2%;
+  width: 70%;
+}
 
 .calendar-buttons {
   display: inline;

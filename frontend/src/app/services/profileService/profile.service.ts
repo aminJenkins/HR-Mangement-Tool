@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Employee} from '../shared/employee/Employee';
+import {Employee} from '../../shared/employee/Employee';
 import {Observable} from 'rxjs';
-import {PasswordReset} from '../shared/PasswordReset';
+import {PasswordReset} from '../../shared/PasswordReset';
 
 @Injectable({
   providedIn: 'root'

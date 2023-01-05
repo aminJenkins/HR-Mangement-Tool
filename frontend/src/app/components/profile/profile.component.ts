@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
+import {ProfileService} from '../../services/profileService/profile.service';
 import {AbstractControl, FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
-import {ProfileService} from '../../services/profile.service';
 import {throwError} from 'rxjs';
 import {Employee, UpdateEmployee} from '../../shared/employee/Employee';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -120,11 +120,11 @@ export class ProfileComponent {
   }
 
   private showInfoUserUpdated(): void {
-    this.snackbar.open('User information successfully updated', 'OK', {duration: 3000});
+    this.snackbar.open('Profil wurde erfolgreich aktualisiert', 'OK', {duration: 3000});
   }
 
   private showInfoPasswordReset(): void {
-    this.snackbar.open('Password successfully changed', 'OK', {duration: 5000});
+    this.snackbar.open('Passwort wurde erfolgreich aktualisiert', 'OK', {duration: 5000});
   }
 
   private fromUpdateEmployee(updateEmp: UpdateEmployee): Employee {

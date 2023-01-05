@@ -34,35 +34,32 @@ export class UpdateTimeTrackingFormComponent {
     projects: new FormControl('', [
       Validators.required,
     ]),
-
   });
 
 
   constructor(private _formBuilder: FormBuilder, private timeTrackingService: TimeTrackingService, private router: Router) {}
 
   ngOnInit(): void {
-  console.log("TimeTrackID "+ this.timeTrack.id);
     this.timeTrackingService.getContingents().subscribe((response: Contingent[]) => {
       this.contingents = response;
-      console.log(response);
     });
     this.timeTrackingService.getProjects().subscribe((response: Project[]) => {
       this.projects = response;
-      console.log(response);
     });
 
     this.prefillForm(this.timeTrack);
-    //console.log("testdaten:" + this.dataFromComponent)
   }
 
   public onSubmit(): void {
     if (this.elements.valid) {
       let values = this.elements.getRawValue();
       let timeTrack = this.parseToTimeTrackExist();
-      console.log(""+timeTrack);
-      this.timeTrackingService.updateTimeTrack(timeTrack).subscribe();
-      this.leaveStatus=true;
-      //console.log(this.elements.value.kommentar);
+      this.timeTrackingService.updateTimeTrack(timeTrack).subscribe(value => {
+        setTimeout(function () {
+          window.location.reload();
+        }, 2000);
+      });
+
 
     }
   }
@@ -87,11 +84,11 @@ export class UpdateTimeTrackingFormComponent {
   }
 
   public delete(): void {
-    this.timeTrackingService.deleteTimeTrack(this.timeTrack.id);
-    this.leaveStatus=true;
+    this.timeTrackingService.deleteTimeTrack(this.timeTrack.id).subscribe(value => {
+      setTimeout(function () {
+        window.location.reload();
+      }, 500);
+    });
   }
-
-
-
 
 }

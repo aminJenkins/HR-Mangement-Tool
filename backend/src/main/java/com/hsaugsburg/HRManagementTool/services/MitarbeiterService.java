@@ -12,10 +12,16 @@ import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.CreateEmployeeDTO;
 import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -50,6 +56,10 @@ public class MitarbeiterService {
 
     public MitarbeiterEntity getMitarbeiterEntity(String userName) {
         return mitarbeiterRepo.findByEmail(userName);
+    }
+
+    public MitarbeiterEntity getMitarbeiterEntityById(int id) {
+        return mitarbeiterRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
     public void createMitarbeiter(MitarbeiterDTO mitarbeiter) {
@@ -95,7 +105,7 @@ public class MitarbeiterService {
         ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiterDTO.getEmail()).orElseThrow();
         System.out.println("abteilung: " + abteilungEntity.toString());
         MitarbeiterEntity me = Mitarbeiter.mapDTOToEntity(mitarbeiterDTO, abteilungEntity, zugang);
-        System.out.println("MAEntity: "+ me.toString());
+        System.out.println("MAEntity: " + me.toString());
         MitarbeiterEntity updatedMitarbeiter = mitarbeiterRepo.save(me);
         return Mitarbeiter.mapEntityToDTO(updatedMitarbeiter);
     }
@@ -104,14 +114,22 @@ public class MitarbeiterService {
         SimpleGrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
         if (!authentication.getAuthorities().contains(roleAdmin)) {
             if (!authentication.getName().equals(email)) {
-                System.out.println("darf nicht updaten");
                 throw new Exception("You can only update your own user information");
             }
         }
     }
 
-    public Set<MitarbeiterEntity> getEmployees(Set<String> emailsOfEmployees){
-        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(emailsOfEmployees));
+    public Set<MitarbeiterEntity> getMitarbeiterEntities(Set<String> userNames) {
+        Set<MitarbeiterEntity> ma = new HashSet<>();
+        userNames.forEach(s -> ma.add(mitarbeiterRepo.findByEmail(s)));
+        return ma;
     }
 
+    public Set<MitarbeiterDTO> getAllEmployees() {
+        return Mitarbeiter.mapEntitiesToDTOs(new HashSet<>(mitarbeiterRepo.findAll()));
+    }
+
+    public Set<MitarbeiterEntity> getEmployeeEntities(Set<String> emailsOfEmployees){
+        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(emailsOfEmployees));
+    }
 }

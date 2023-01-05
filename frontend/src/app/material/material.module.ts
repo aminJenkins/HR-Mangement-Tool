@@ -18,11 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatMomentDateModule} from "@angular/material-moment-adapter";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -56,7 +54,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     MatCardModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatChipsModule,
   ],
   exports: [
     MatDatepickerModule,
@@ -79,7 +76,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     MatCardModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatChipsModule,
   ],
 })
 export class MaterialModule {}

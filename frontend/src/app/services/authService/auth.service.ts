@@ -23,15 +23,7 @@ export class AuthService {
       'http://localhost:8090/api/login',
       { email, password }
     );
-    // response.subscribe(
-    //   (authResponse) => {
-    //     console.log('token: ' + authResponse.token);
-    //     this.setSession(authResponse.token);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //     return error;
-    //   });
+
   }
 
   isUserLoggedIn(): boolean {

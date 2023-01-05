@@ -1,14 +1,9 @@
 package com.hsaugsburg.HRManagementTool.services;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +21,6 @@ import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import com.hsaugsburg.HRManagementTool.models.Zeiterfassung;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -94,7 +88,7 @@ public class TimeTrackingService {
     public ZeiterfassungEntity buildTimeTrackEntity(String mail, ZeiterfassungDTO zeiterfassungDTO) throws ParseException {
         MitarbeiterEntity maEntity = mitarbeiterService.getMitarbeiterEntity(mail);
 
-        ProjektEntity projektEntity = projektService.getProjektEntity(zeiterfassungDTO.getProjektID());
+        ProjektEntity projektEntity = projektService.getProjektEntityById(zeiterfassungDTO.getProjektID());
 
         KontingentEntity kontingentEntity = kontingentService.getKontingentEntity(zeiterfassungDTO.getKontingentID());
 

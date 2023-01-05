@@ -1,4 +1,3 @@
-//HTTP Request to backend to get TimeTracking data
 import {TimeTrack} from "../shared/TimeTrack";
 import {Injectable} from "@angular/core";
 import {environment} from '../../environments/environment';
@@ -11,12 +10,10 @@ import {TimetrackExist} from "../shared/TimetrackExist";
 import {UpdateTimeTrackForm} from "../shared/UpdateTimeTrackForm";
 import {Workday} from "../shared/Workday";
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class TimeTrackingService {
-  private static http: HttpClient;
 
   constructor(private  http: HttpClient) { }
 
@@ -43,15 +40,8 @@ export class TimeTrackingService {
     return this.http.put<string>(environment.TIME_TRACKING_URL,timeTrack);
   }
 
-  public deleteTimeTrack(timeTrackID: any): void{
-    console.log("Path "+environment.TIME_TRACKING_URL+"${timeTrackID}");
-    this.http.delete(environment.TIME_TRACKING_URL+timeTrackID).subscribe(() => 'Deleted successful');
-  }
-/*  public static setTimeTrackToUpdate(timeTrack:TimetrackExist):void{
-    TimeTrackingService.updateTimeTrackForm=timeTrack;
-  }
+  public deleteTimeTrack(timeTrackID: string): Observable<any>{
+    console.log("Path "+environment.TIME_TRACKING_URL+"/${timeTrackID}");
+    return this.http.delete(environment.TIME_TRACKING_URL+"/"+timeTrackID);
 
-  public static getTimeTrackToUpdate():TimetrackExist{
-    return TimeTrackingService.updateTimeTrackForm;
-  }*/
 }

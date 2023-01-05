@@ -18,7 +18,7 @@ public class ProjektEntity {
     private int id;
 
     @Column(name = "STUNDENSATZ", nullable = false)
-    private Double stundensatz;
+    private double stundensatz;
 
     @Column(name = "BUDGET_IN_ARBEITSTAGEN", nullable = false, columnDefinition = "DECIMAL(100,2)")
     private double budget;
@@ -33,16 +33,24 @@ public class ProjektEntity {
     @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID", nullable = false)
     private MitarbeiterEntity leiter;
 
-    @OneToMany(mappedBy = "projekt")
+    @OneToMany(mappedBy = "projekt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ZeiterfassungEntity> zeiterfassungen;
 
     @OneToMany(mappedBy = "projekt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TerminEntity> termine;
 
-    @ManyToMany(mappedBy = "projekte")
+
+    @ManyToMany
+    @JoinTable(name = "KONTINGENT_PROJEKT",
+            joinColumns = {@JoinColumn(name = "PROJEKT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "KONTINGENT_ID")})
     private Set<KontingentEntity> kontingente;
 
-    @ManyToMany(mappedBy = "projekte")
+
+    @ManyToMany
+    @JoinTable(name = "PROJEKTVERTEILUNG",
+            joinColumns = {@JoinColumn(name = "PROJEKT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "MITARBEITER_ID")})
     private Set<MitarbeiterEntity> projektbeteiligte;
 
 

@@ -36,10 +36,7 @@ export class TimeTrackingViewComponent {
   }
 
   public loadData(): void {
-   /* this.timeTrackingService.getDatasource().subscribe((response: TimetrackExist[]) => {
-      this.dataSource = response;
-      console.log(response);
-    });*/
+
     this.timeTrackingService.getSortedDataSource().subscribe((response: Workday[]) => {
       this.dataSource = response;
       console.log("Response "+response);

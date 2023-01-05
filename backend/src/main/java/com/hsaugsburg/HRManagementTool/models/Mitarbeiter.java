@@ -49,7 +49,7 @@ public class Mitarbeiter {
         return entity;
     }
 
-    public static Set<MitarbeiterDTO> parseEntitiestoDTOs(Set<MitarbeiterEntity> entities) {
+    public static Set<MitarbeiterDTO> mapEntitiesToDTOs(Set<MitarbeiterEntity> entities) {
         Set<MitarbeiterDTO> dtos = new HashSet<>();
         entities.forEach((e) -> {
             dtos.add(Mitarbeiter.mapEntityToDTO(e));

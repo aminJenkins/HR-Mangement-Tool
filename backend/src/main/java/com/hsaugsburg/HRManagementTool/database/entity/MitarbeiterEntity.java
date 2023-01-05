@@ -38,30 +38,22 @@ public class MitarbeiterEntity {
     @JoinColumn(name="ABTEILUNG", nullable = false)
     private AbteilungEntity abteilung;
 
-//    @OneToOne(fetch = FetchType.LAZY, targetEntity = ZugangEntity.class)
-//    @JoinColumn(name = "MAIL", referencedColumnName = "USERNAME", unique = true)
-//    private ZugangEntity zugangEntity;
-
-    @OneToMany(mappedBy = "leiter", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ProjektEntity> projekteInFuehrung = new HashSet<>();
 
-    @OneToMany(mappedBy = "ersteller", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "ersteller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TerminEntity> hostTermine = new HashSet<>();
 
-    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.REMOVE)
-    //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
+    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ZeiterfassungEntity> zeiterfassungen;
 
-    @OneToMany(mappedBy = "leiter", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AbteilungEntity> abteilungenInLeitung = new HashSet<>();
 
     @ManyToMany(mappedBy = "terminTeilnehmer")
     private Set<TerminEntity> teilnehmerTermine;
 
-    @ManyToMany
-    @JoinTable(name = "PROJEKTVERTEILUNG",
-            joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PROJEKT_ID")})
+    @ManyToMany(mappedBy = "projektbeteiligte")
     private Set<ProjektEntity> projekte;
 
 }

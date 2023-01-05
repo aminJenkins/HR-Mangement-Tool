@@ -24,7 +24,7 @@ public class CalendarMapper{
                 .id(terminEntity.getId()).beginn(terminEntity.getBeginn())
                 .ende(terminEntity.getEnde())
                 .datum(terminEntity.getDatum())
-                .erstellerId(terminEntity.getErsteller().getId())
+                .ersteller(terminEntity.getErsteller().getEmail())
                 .priority(terminEntity.getPriority())
                 .teilnehmer(teilnehmerOfTermin)
                 .projekt(projekt).build();
@@ -54,5 +54,3 @@ public class CalendarMapper{
     }
 
 }
-
-

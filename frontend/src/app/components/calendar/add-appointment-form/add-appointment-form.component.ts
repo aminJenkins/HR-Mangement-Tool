@@ -46,11 +46,14 @@ export class AddAppointmentFormComponent {
   createAppointment(): void {
     if (this.addAppointmentFormGroup.valid) {
       this.newAppointment = this.addAppointmentFormGroup.value;
+      this.showInfoAppointmentSuccessfulCreated();
       this.appointmentService
         .createNewAppointment(this.newAppointment)
         .subscribe((response: Appointment) => {
           this.addAppointmentDialogRef.close('Close!');
-          this.showInfoAppointmentSuccessfulCreated();
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
         });
     }
   }
@@ -59,5 +62,9 @@ export class AddAppointmentFormComponent {
     this.snackbar.open('Termin erfolgreich erstellt', 'OK', {
       duration: 3000,
     });
+  }
+
+  cancelAppointmentCreation(): void {
+    this.addAppointmentDialogRef.close('Close!');
   }
 }
