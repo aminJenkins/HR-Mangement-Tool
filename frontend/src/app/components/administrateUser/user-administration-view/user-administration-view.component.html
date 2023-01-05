@@ -1,53 +1,55 @@
-<div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>email</th>
-      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="nachname">
-      <th mat-header-cell *matHeaderCellDef>nachname</th>
-      <td mat-cell *matCellDef="let element">{{ element.nachname }}</td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="abteilung">
-      <th mat-header-cell *matHeaderCellDef>abteilung</th>
-      <td mat-cell *matCellDef="let element">{{ element.abteilung }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <button
-          mat-mini-fab
-          color="primary"
-          (click)="this.delete(element)"
-          title="Delete Employee"
-        >
-          <mat-icon fontIcon="delete"> </mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-  <button
-    style="float: right; margin-top: 10px"
-    mat-mini-fab
-    color="primary"
-    (click)="showAddEmployeeForm()"
-    title="Add Timetrack"
-    aria-label=""
+<mat-card style="padding: 20px; height: 100%">
+  <mat-card-title style="margin-bottom: 2%"
+    >Mitarbeiterübersicht</mat-card-title
   >
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
+  <mat-card-content>
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Vorname</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="nachname">
+          <th mat-header-cell *matHeaderCellDef>Nachname</th>
+          <td mat-cell *matCellDef="let element">{{ element.nachname }}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="abteilung">
+          <th mat-header-cell *matHeaderCellDef>Abteilung</th>
+          <td mat-cell *matCellDef="let element">{{ element.abteilung }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" (click)="this.delete(element)">
+              <mat-icon fontIcon="delete"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <button
+        style="float: right; margin-top: 10px"
+        mat-fab
+        color="primary"
+        (click)="showAddEmployeeForm()"
+        title="Add Timetrack"
+        aria-label=""
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

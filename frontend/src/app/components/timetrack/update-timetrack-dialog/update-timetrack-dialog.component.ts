@@ -1,65 +1,56 @@
-import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {TimeTrackingService} from "../../../services/time-tracking-service";
-import {Router} from "@angular/router";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, Inject } from '@angular/core';
 import {
-  AdministrateUserDialogComponent
-} from "../../administrateUser/administrate-user-dialog/administrate-user-dialog.component";
-import {Department} from "../../../shared/Department";
-import {TimetrackExist} from "../../../shared/TimetrackExist";
-import {Contingent} from "../../../shared/Contingent";
-import {Project} from "../../../models/Project";
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { TimeTrackingService } from '../../../services/time-tracking-service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdministrateUserDialogComponent } from '../../administrateUser/administrate-user-dialog/administrate-user-dialog.component';
+import { TimetrackExist } from '../../../shared/TimetrackExist';
+import { Contingent } from '../../../shared/Contingent';
+import { Project } from '../../../models/Project';
 
 @Component({
   selector: 'app-update-timetrack-dialog',
   templateUrl: './update-timetrack-dialog.component.html',
-  styleUrls: ['./update-timetrack-dialog.component.css']
+  styleUrls: ['./update-timetrack-dialog.component.css'],
 })
 export class UpdateTimetrackDialogComponent {
+  updateTimeTrackFormGroup!: FormGroup;
+  contingents!: Contingent[];
+  projects!: Project[];
 
-  updateTimeTrackFormGroup !: FormGroup;
-  contingents !: Contingent [];
-  projects!: Project [];
-
-  constructor(public userDialogComponentMatDialogRef: MatDialogRef<AdministrateUserDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: TimetrackExist,
-              private fb: FormBuilder,
-              private timeTrackingService: TimeTrackingService,
-              private snackbar: MatSnackBar) {
+  constructor(
+    public userDialogComponentMatDialogRef: MatDialogRef<AdministrateUserDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TimetrackExist,
+    private fb: FormBuilder,
+    private timeTrackingService: TimeTrackingService,
+    private snackbar: MatSnackBar
+  ) {
     this.initForm();
 
-    this.timeTrackingService.getContingents().subscribe((response: Contingent[]) => {
-      this.contingents = response;
-      console.log(response);
-    });
+    this.timeTrackingService
+      .getContingents()
+      .subscribe((response: Contingent[]) => {
+        this.contingents = response;
+        console.log(response);
+      });
     this.timeTrackingService.getProjects().subscribe((response: Project[]) => {
       this.projects = response;
       console.log(response);
     });
-
   }
 
-  initForm():void{
+  initForm(): void {
     this.updateTimeTrackFormGroup = new FormGroup({
-      kommentar: new FormControl('', [
-        Validators.required
-      ]),
-      dauer: new FormControl('', [
-        Validators.required,
-        Validators.min(0)
-      ]),
-      date: new FormControl('', [
-        Validators.required,
-      ]),
-      contingent: new FormControl('', [
-        Validators.required,
-      ]),
-      projects: new FormControl('', [
-        Validators.required,
-      ]),
-
+      kommentar: new FormControl('', [Validators.required]),
+      dauer: new FormControl('', [Validators.required, Validators.min(0)]),
+      date: new FormControl('', [Validators.required]),
+      contingent: new FormControl('', [Validators.required]),
+      projects: new FormControl('', [Validators.required]),
     });
   }
 
@@ -79,25 +70,27 @@ export class UpdateTimetrackDialogComponent {
     if (this.updateTimeTrackFormGroup.valid) {
       let values = this.updateTimeTrackFormGroup.getRawValue();
       let timeTrack = this.parseToTimeTrackExist();
-      console.log(""+timeTrack);
+      console.log('' + timeTrack);
       this.timeTrackingService.updateTimeTrack(timeTrack).subscribe();
       this.userDialogComponentMatDialogRef.close('Close!');
       this.showInfoUserSuccessfullyUpdated();
     }
   }
 
-
-  private parseToTimeTrackExist():TimetrackExist{
-    let timeTrackExist : TimetrackExist = new TimetrackExist(this.data.id,this.updateTimeTrackFormGroup.value.projects,this.updateTimeTrackFormGroup.value.kommentar,
-      this.updateTimeTrackFormGroup.value.contingent,this.updateTimeTrackFormGroup.value.dauer,this.updateTimeTrackFormGroup.value.date);
+  private parseToTimeTrackExist(): TimetrackExist {
+    let timeTrackExist: TimetrackExist = new TimetrackExist(
+      this.data.id,
+      this.updateTimeTrackFormGroup.value.projects,
+      this.updateTimeTrackFormGroup.value.kommentar,
+      this.updateTimeTrackFormGroup.value.contingent,
+      this.updateTimeTrackFormGroup.value.dauer,
+      this.updateTimeTrackFormGroup.value.date
+    );
     return timeTrackExist;
   }
 
   public delete(): void {
-    this.timeTrackingService.deleteTimeTrack(this.data.id);
     this.userDialogComponentMatDialogRef.close('Close!');
     this.showInfoUserSuccessfullyDeleted();
   }
-
-
 }

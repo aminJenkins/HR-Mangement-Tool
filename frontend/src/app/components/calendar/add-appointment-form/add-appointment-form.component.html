@@ -1,4 +1,4 @@
-<mat-card style="padding: 20px">
+<mat-card style="padding: 20px; height: 100%">
   <mat-card-title>Termin anlegen</mat-card-title>
   <mat-card-content>
     <form
@@ -68,7 +68,7 @@
           <mat-option
             *ngFor="let employee of data.employees"
             [value]="employee.email"
-          >{{ employee.email }}</mat-option
+            >{{ employee.email }}</mat-option
           >
         </mat-select>
       </mat-form-field>

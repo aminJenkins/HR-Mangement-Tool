@@ -5,16 +5,18 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { TimeTrackingService } from '../../services/time-tracking-service';
+
 import { Router } from '@angular/router';
-import { TimeTrack } from '../../shared/TimeTrack';
-import { Contingent } from '../../shared/Contingent';
-import { Project } from '../../models/Project';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MatMomentDateModule,
 } from '@angular/material-moment-adapter';
+import { Project } from 'src/app/models/Project';
+import { TimeTrackingService } from 'src/app/services/time-tracking-service';
+import { Contingent } from 'src/app/shared/Contingent';
+import { TimeTrack } from 'src/app/shared/TimeTrack';
 
 @Component({
   selector: 'app-timetracking-form-view',
@@ -61,13 +63,11 @@ export class TimetrackingFormViewComponent {
         this.elements.value.dauer,
         this.elements.value.date
       );
-      this.timeTrackingService
-        .sendTimeTrack(timeTrack)
-        .subscribe((value) => {
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
-        })
+      this.timeTrackingService.sendTimeTrack(timeTrack).subscribe((value) => {
+        setTimeout(function () {
+          window.location.reload();
+        }, 500);
+      });
       this.router.navigate(['../timetracking']);
     }
   }

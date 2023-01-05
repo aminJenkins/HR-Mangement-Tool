@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {AuthService} from './services/authService/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from './services/authService/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,7 @@ export class AppComponent {
   title = 'HR-Management';
   showSidebar = false;
 
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService) {}
 
   loggedIn(): boolean {
     return this.authService.isUserLoggedIn();
@@ -20,4 +19,8 @@ export class AppComponent {
   logout(): void {
     this.authService.logOut();
   }
+
+  /*  isAdmin():boolean{
+    this.authService.
+  } */
 }

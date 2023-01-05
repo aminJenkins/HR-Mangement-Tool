@@ -50,7 +50,7 @@ public class MitarbeiterService {
     }
 
     public Set<MitarbeiterDTO> getAllEmaployees() {
-        return Mitarbeiter.parseEntitiestoDTOs(new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAll()));
+        return Mitarbeiter.mapEntitiesToDTOs(new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAll()));
     }
 
 
@@ -58,28 +58,17 @@ public class MitarbeiterService {
         return mitarbeiterRepo.findByEmail(userName);
     }
 
-    public MitarbeiterEntity getMitarbeiterEntityById(int id) {
+    public MitarbeiterEntity getMitarbeiterEntityById(Integer id) {
         return mitarbeiterRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-    }
-
-    public void createMitarbeiter(MitarbeiterDTO mitarbeiter) {
-        AbteilungEntity abteilungEntity = abteilungsRepo.findById(mitarbeiter.getAbteilung());
-        ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiter.getEmail()).orElseThrow();
-        mitarbeiterRepo.save(Mitarbeiter.mapDTOToEntity(mitarbeiter, abteilungEntity, zugang));
     }
 
     public void delete(int employeeID){
         MitarbeiterEntity mitarbeiterEntity = mitarbeiterRepo.findById(employeeID);
-//        zugangsRepo.deleteByEmail(mitarbeiterEntity.getEmail());
-//
-//        System.out.print("ID "+employeeID);
-        zugangsRepo.deleteByEmail(mitarbeiterEntity.getEmail());
+        zugangsRepo.deleteByUsername(mitarbeiterEntity.getEmail());
         mitarbeiterRepo.deleteById(mitarbeiterEntity.getId());
-
-
     }
 
-    public void createEmployee(CreateEmployeeDTO createEmployeeDTO){
+    public MitarbeiterDTO createEmployee(CreateEmployeeDTO createEmployeeDTO){
         MitarbeiterEntity mitarbeiterEntity = new MitarbeiterEntity();
         ZugangEntity zugangEntity= new ZugangEntity();
         AbteilungEntity abteilungEntity = abteilungsRepo.findById(createEmployeeDTO.getAbteilung());
@@ -91,12 +80,14 @@ public class MitarbeiterService {
         mitarbeiterEntity.setEmail(createEmployeeDTO.getEmail());
         mitarbeiterEntity.setAnschrift(createEmployeeDTO.getAnschrift());
 
-        mitarbeiterRepo.save(mitarbeiterEntity);
+        MitarbeiterDTO me = Mitarbeiter.mapEntityToDTO(mitarbeiterRepo.save(mitarbeiterEntity));
 
         zugangEntity.setAuthority(createEmployeeDTO.getAuthority());
         zugangEntity.setUsername(createEmployeeDTO.getEmail());
         zugangEntity.setPassword(passwordEncoder.encode(createEmployeeDTO.getPassword()));
         zugangsRepo.save(zugangEntity);
+        return me;
+
     }
 
     public MitarbeiterDTO updateEmployee(MitarbeiterDTO mitarbeiterDTO) {

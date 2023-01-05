@@ -17,12 +17,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-administration-view.component.css'],
 })
 export class UserAdministrationViewComponent {
-  //email: string | undefined;
-  // name: string | undefined;
-  // nachname: string | undefined;
-  // anschrift: string | undefined;
-  // telnr: string | undefined;
-  // abteilung: number | undefined;
   displayedColumns: string[] = [
     'name',
     'nachname',
@@ -54,7 +48,6 @@ export class UserAdministrationViewComponent {
       .getDatasource()
       .subscribe((response: EmployeeExist[]) => {
         this.dataSource = response;
-        console.log('Empoyees: ' + response);
       });
     this.userAdministrationService
       .getDepartments()
@@ -65,16 +58,13 @@ export class UserAdministrationViewComponent {
   }
 
   public delete(element: any): void {
-    console.log(element.id);
-    this.userAdministrationService
-      .deleteEmployee(element.id)
-      .subscribe((value) => {
-        this.dataSource = this.dataSource.filter(
-          (employee) => employee.id !== element.id
-        );
-      });
+    this.userAdministrationService.deleteEmployee(element.id).subscribe(() => {
+      console.log(this.dataSource);
+      this.dataSource = this.dataSource.filter(
+        (employee) => employee.id !== element.id
+      );
+    });
     this.showInfoUserSuccessfullyDeleted();
-    this.loadData();
   }
 
   private showInfoUserSuccessfullyDeleted(): void {
@@ -92,9 +82,10 @@ export class UserAdministrationViewComponent {
         width: '600px',
       }
     );
-    userDialogComponentMatDialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
+    userDialogComponentMatDialogRef.afterClosed().subscribe((employee) => {
+      setTimeout(function () {
+        window.location.reload();
+      }, 500);
     });
   }
 }

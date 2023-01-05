@@ -79,7 +79,7 @@ export class CalendarViewComponent {
           employees: this.employees,
           projects: this.projects,
         },
-        height: '520px',
+        height: '600px',
         width: '600px',
       }
     );

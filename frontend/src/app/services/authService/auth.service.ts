@@ -23,12 +23,10 @@ export class AuthService {
       'http://localhost:8090/api/login',
       { email, password }
     );
-
   }
 
   isUserLoggedIn(): boolean {
     return localStorage.getItem(AuthService.TOKEN_ID) != null;
-    // todo check if token is expired
   }
 
   public setSession(token: string | undefined): void {
@@ -40,6 +38,13 @@ export class AuthService {
   private clearLocalStorage(): void {
     localStorage.removeItem(AuthService.TOKEN_ID);
   }
+
+  /* public isAdmin():boolean{
+    const token = this.getDecodedAccessToken();
+    return token?.authorities.includes({
+
+    })
+  } */
 
   getDecodedAccessToken(): Token | null {
     const token = localStorage.getItem(AuthService.TOKEN_ID) || '{}';

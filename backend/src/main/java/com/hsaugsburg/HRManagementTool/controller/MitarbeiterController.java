@@ -62,13 +62,8 @@ public class MitarbeiterController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<String> createEmployee(@RequestBody CreateEmployeeDTO createEmployeeDTO) {
-        try {
-            maService.createEmployee(createEmployeeDTO);
-            return ResponseEntity.ok("Der Mitarbeiter wurde erfolgreich angelegt");
-        } catch (Exception exception) {
-            return ResponseEntity.status(500).body(exception.getMessage());
-        }
+    public ResponseEntity<MitarbeiterDTO> createEmployee(@RequestBody CreateEmployeeDTO createEmployeeDTO) {
+            return ResponseEntity.ok(maService.createEmployee(createEmployeeDTO));
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -76,7 +71,7 @@ public class MitarbeiterController {
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") int employeeID) {
         try {
             maService.delete(employeeID);
-            return ResponseEntity.ok("Der Mitarbeiter wurde erfolgreich entfernt");
+            return ResponseEntity.ok().build();
         } catch (Exception exception) {
             return ResponseEntity.status(500).body(exception.getMessage());
         }

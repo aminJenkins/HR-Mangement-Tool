@@ -15,10 +15,8 @@ import java.util.Set;
 @Repository
 public interface ZugangsRepo extends JpaRepository<ZugangEntity, Integer> {
 
-     Optional<ZugangEntity> findByUsername(String username);
+    Optional<ZugangEntity> findByUsername(String username);
 
     @Transactional
-    @Modifying
-    @Query(value="DELETE FROM ZUGANGS_DATEN Z WHERE Z.USERNAME=:email",nativeQuery = true)
-    void deleteByEmail(String email);
+    void deleteByUsername(String email);
 }

@@ -1,57 +1,79 @@
 <div class="example-container">
   <form [formGroup]="elements">
-
     <div style="margin-right: 10px">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Dauer</mat-label>
-        <input matInput step="0.5" min="0" type="number" formControlName="dauer" placeholder="Dauer" required>
+        <input
+          matInput
+          step="0.5"
+          min="0"
+          type="number"
+          formControlName="dauer"
+          placeholder="Dauer"
+          required
+        />
       </mat-form-field>
     </div>
 
     <div style="margin-right: 10px">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-select formControlName="contingent" required>
-          <mat-option *ngFor="let contingent of contingents" [value]="contingent.id">
+          <mat-option
+            *ngFor="let contingent of contingents"
+            [value]="contingent.id"
+          >
             {{ contingent.bezeichnung }}
           </mat-option>
         </mat-select>
-        <mat-label><b> Contingent </b></mat-label>
+        <mat-label> Kontingent </mat-label>
       </mat-form-field>
     </div>
 
     <div style="margin-right: 10px">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-select formControlName="projects" required>
           <mat-option *ngFor="let project of projects" [value]="project.id">
             {{ project.bezeichnung }}
           </mat-option>
         </mat-select>
-        <mat-label><b> Projects </b></mat-label>
+        <mat-label>Projekte </mat-label>
       </mat-form-field>
     </div>
 
     <div style="margin-right: 10px">
-      <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="date">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-form-field appearance="outline">
+        <mat-label>Datum auswählen</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker>
           <mat-datepicker-actions>
-            <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            <button mat-button matDatepickerCancel>Abbrechen</button>
+            <button mat-raised-button color="primary" matDatepickerApply>
+              Anwenden
+            </button>
           </mat-datepicker-actions>
         </mat-datepicker>
       </mat-form-field>
     </div>
 
     <div style="margin-right: 10px">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Beschreibung</mat-label>
-        <input matInput formControlName="kommentar" placeholder="Beschreibung" required>
+        <input
+          matInput
+          formControlName="kommentar"
+          placeholder="Beschreibung"
+          required
+        />
       </mat-form-field>
     </div>
   </form>
   <div style="float: right">
-    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+    <button mat-fab color="primary" type="submit" (click)="onSubmit()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>

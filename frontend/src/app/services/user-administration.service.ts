@@ -1,3 +1,4 @@
+import { Employee } from 'src/app/shared/employee/Employee';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -17,8 +18,11 @@ export class userAdministrationService {
     return this.http.get<EmployeeExist[]>(environment.GET_ALL_EMPLOYEE_URL);
   }
 
-  public createEmployee(employee: any): Observable<any> {
-    return this.http.post<any>(environment.CREATE_EMPLOYEE_URL, employee);
+  public createEmployee(employee: any): Observable<EmployeeExist> {
+    return this.http.post<EmployeeExist>(
+      environment.CREATE_EMPLOYEE_URL,
+      employee
+    );
   }
 
   public getDepartments(): Observable<Department[]> {

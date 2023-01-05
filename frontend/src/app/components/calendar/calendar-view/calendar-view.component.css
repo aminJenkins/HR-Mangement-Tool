@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   margin-top: 2%;
+  height: 90%;
 }
 mat-card {
   margin-top: 2%;

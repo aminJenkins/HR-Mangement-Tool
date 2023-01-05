@@ -23,8 +23,10 @@ public interface MitarbeiterRepo extends JpaRepository<MitarbeiterEntity,Integer
 
     MitarbeiterEntity findById(int id);
 
+//    @Transactional
+//    @Modifying
+//    @Query(value="DELETE FROM MITARBEITER M  WHERE M.ID= :id",nativeQuery = true)
+//    Integer deleteById(int id);
     @Transactional
-    @Modifying
-    @Query(value="DELETE FROM MITARBEITER M  WHERE M.ID= :id",nativeQuery = true)
-    Integer deleteById(int id);
+    void deleteById(int id);
 }
