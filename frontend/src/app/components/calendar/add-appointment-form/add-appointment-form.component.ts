@@ -10,20 +10,6 @@ import { AppointmentService } from 'src/app/services/appointmentService/appointm
 import { AddAppointment, Appointment } from 'src/app/shared/Appointment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-/* export function creatDateRangeValidator() {
-  return (form: FormGroup): ValidationErrors | null => {
-    let start = form.get('beginn')!.value;
-    let ende = form.get('ende')!.value;
-    console.log(start > ende);
-
-    if (start > ende) {
-      return { dateRange: true };
-    } else {
-      return null;
-    }
-  };
-} */
-
 @Component({
   selector: 'app-add-appointment-form',
   templateUrl: './add-appointment-form.component.html',

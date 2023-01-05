@@ -29,7 +29,7 @@ public class ProjektEntity {
     @Column(name = "BEZEICHNUNG", nullable = false)
     private String bezeichnung;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
     @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID", nullable = false)
     private MitarbeiterEntity leiter;
 

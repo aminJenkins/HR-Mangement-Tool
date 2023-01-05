@@ -25,6 +25,6 @@ public class AbteilungEntity {
     @JoinColumn(name = "LEITER", referencedColumnName = "ID")
     private MitarbeiterEntity leiter;
 
-    @OneToMany(mappedBy="abteilung", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="abteilung", cascade = CascadeType.REMOVE)
     private Set<MitarbeiterEntity> zugeteilteMitarbeiter;
 }

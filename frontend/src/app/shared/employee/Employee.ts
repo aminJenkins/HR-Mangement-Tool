@@ -12,19 +12,19 @@ export class Employee {
   constructor(
     id: number | undefined,
     email: string | undefined,
-    name: string | undefined,
-    nachname: string | undefined,
-    anschrift: string | undefined,
-    telnr: string | undefined,
-    abteilung: number | undefined
+    firstname: string | undefined,
+    lastname: string | undefined,
+    adress: string | undefined,
+    telNumber: string | undefined,
+    department: number | undefined
   ) {
     this.id = id;
     this.email = email;
-    this.name = name;
-    this.nachname = nachname;
-    this.anschrift = anschrift;
-    this.telnr = telnr;
-    this.abteilung = abteilung;
+    this.name = firstname;
+    this.nachname = lastname;
+    this.anschrift = adress;
+    this.telnr = telNumber;
+    this.abteilung = department;
   }
 }
 

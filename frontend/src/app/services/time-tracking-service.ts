@@ -44,8 +44,8 @@ export class TimeTrackingService {
   }
 
   public deleteTimeTrack(timeTrackID: string): void{
-    console.log("Path "+environment.TIME_TRACKING_URL+"/${timeTrackID}");
-    this.http.delete(environment.TIME_TRACKING_URL+"/"+timeTrackID).subscribe(() => 'Delete successful');
+    console.log("Path "+environment.TIME_TRACKING_URL+"${timeTrackID}");
+    this.http.delete(environment.TIME_TRACKING_URL+timeTrackID).subscribe(() => 'Deleted successful');
   }
 /*  public static setTimeTrackToUpdate(timeTrack:TimetrackExist):void{
     TimeTrackingService.updateTimeTrackForm=timeTrack;

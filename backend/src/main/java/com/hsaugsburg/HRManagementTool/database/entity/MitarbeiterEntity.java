@@ -42,17 +42,17 @@ public class MitarbeiterEntity {
 //    @JoinColumn(name = "MAIL", referencedColumnName = "USERNAME", unique = true)
 //    private ZugangEntity zugangEntity;
 
-    @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "leiter", cascade = CascadeType.REMOVE)
     private Set<ProjektEntity> projekteInFuehrung = new HashSet<>();
 
-    @OneToMany(mappedBy = "ersteller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ersteller", cascade = CascadeType.REMOVE)
     private Set<TerminEntity> hostTermine = new HashSet<>();
 
-    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.REMOVE)
     //@Column(name = "PROJEKT_IN_FUEHRUNG", nullable = true, updatable = true)
     private Set<ZeiterfassungEntity> zeiterfassungen;
 
-    @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "leiter", cascade = CascadeType.REMOVE)
     private Set<AbteilungEntity> abteilungenInLeitung = new HashSet<>();
 
     @ManyToMany(mappedBy = "terminTeilnehmer")

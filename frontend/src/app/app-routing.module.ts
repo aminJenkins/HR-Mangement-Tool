@@ -7,6 +7,9 @@ import {TimetrackingFormViewComponent} from './components/timetracking-form-view
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/authGuard/auth-guard.service';
 import {ProfileComponent} from './components/profile/profile.component';
+import {
+  UserAdministrationViewComponent
+} from "./components/administrateUser/user-administration-view/user-administration-view.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -15,6 +18,7 @@ const routes: Routes = [
   {path: 'timetracking/timetracking-form', component: TimetrackingFormViewComponent, canActivate: [AuthGuard]},
   {path: 'calendar', component: CalendarViewComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'admin/employee', component: UserAdministrationViewComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
