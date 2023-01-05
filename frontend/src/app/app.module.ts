@@ -5,11 +5,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarViewComponent } from './components/calendar/calendar-view/calendar-view.component';
 import { HomeViewComponent } from './components/home-view/home-view.component';
-import { TimeTrackingViewComponent } from './components/time-tracking-view/time-tracking-view.component';
+import { TimeTrackingViewComponent } from './components/timetrack/time-tracking-view/time-tracking-view.component';
 import { MaterialModule } from './material/material.module';
 import { TimeTrackingService } from './services/time-tracking-service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { TimetrackingFormViewComponent } from './components/timetracking-form-view/timetracking-form-view.component';
+import { TimetrackingFormViewComponent } from './components/timetrack/timetracking-form-view/timetracking-form-view.component';
 import {DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoginComponent } from './components/login/login.component';
 import { AppointmentComponent } from './components/calendar/appointment/appointment.component';
@@ -17,7 +17,7 @@ import { AppointmentDetailsViewComponent } from './components/calendar/appointme
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthInterceptor} from './services/authInterceptor/auth.interceptor';
 import {FormsModule} from '@angular/forms';
-import { UpdateTimeTrackingFormComponent } from './components/update-time-tracking-form/update-time-tracking-form.component';
+import { UpdateTimeTrackingFormComponent } from './components/timetrack/update-time-tracking-form/update-time-tracking-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './material/MomentUtcDateAdapter';
@@ -27,6 +27,7 @@ import {
   UserAdministrationViewComponent
 } from "./components/administrateUser/user-administration-view/user-administration-view.component";
 import { AdministrateUserDialogComponent } from './components/administrateUser/administrate-user-dialog/administrate-user-dialog.component';
+import { UpdateTimetrackDialogComponent } from './components/timetrack/update-timetrack-dialog/update-timetrack-dialog.component';
 
 // @ts-ignore
 @NgModule({
@@ -43,7 +44,8 @@ import { AdministrateUserDialogComponent } from './components/administrateUser/a
     AppComponent,
     UpdateTimeTrackingFormComponent,
     AddAppointmentFormComponent,
-    AdministrateUserDialogComponent
+    AdministrateUserDialogComponent,
+    UpdateTimetrackDialogComponent
   ],
   providers: [TimeTrackingService, MatDatepickerModule, MatNativeDateModule,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,},

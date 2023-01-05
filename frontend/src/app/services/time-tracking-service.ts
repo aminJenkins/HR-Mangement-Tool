@@ -43,7 +43,7 @@ export class TimeTrackingService {
     return this.http.put<string>(environment.TIME_TRACKING_URL,timeTrack);
   }
 
-  public deleteTimeTrack(timeTrackID: string): void{
+  public deleteTimeTrack(timeTrackID: any): void{
     console.log("Path "+environment.TIME_TRACKING_URL+"${timeTrackID}");
     this.http.delete(environment.TIME_TRACKING_URL+timeTrackID).subscribe(() => 'Deleted successful');
   }

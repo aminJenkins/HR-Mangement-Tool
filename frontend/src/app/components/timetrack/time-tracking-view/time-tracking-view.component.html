@@ -54,7 +54,7 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-              (click)="this.callUpdateForm(row);"></tr>
+              (click)="this.timeTrackToUpdate = row; showUpdateTimeTrackForm();"></tr>
         </table>
       </div>
     </div>
