@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.database.repository;
 
-import java.util.List;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
@@ -14,5 +13,6 @@ public interface ZeiterfassungRepo extends JpaRepository<ZeiterfassungEntity,Int
     @Query(value = "SELECT * FROM ZEITERFASSUNG WHERE MITARBEITER_ID= (SELECT U.ID FROM MITARBEITER U WHERE U.MAIL = :email)", nativeQuery = true)
     Set<ZeiterfassungEntity> findTimeTracksForEmploye(@Param("email") String userMail);
 
-
+    @Query(value ="SELECT * FROM ZEITERFASSUNG WHERE MITARBEITER_ID= (SELECT U.ID FROM MITARBEITER U WHERE U.MAIL = :email) ORDER BY DATUM DESC", nativeQuery = true)
+    Set<ZeiterfassungEntity> getAllSortedByDate(@Param("email") String userMail);
 }

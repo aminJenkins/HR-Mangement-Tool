@@ -1,5 +1,7 @@
 package com.hsaugsburg.HRManagementTool.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +29,8 @@ public class Zeiterfassung {
     private String kommentar;
     private double dauer;
     private Date datum;
+    final static private String pattern = "dd-M-yyyy hh:mm:ss";
+    final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
     public static AngelegteZeiterfassungDTO mapEntityToDTO(ZeiterfassungEntity entity){
         AngelegteZeiterfassungDTO dto = new AngelegteZeiterfassungDTO();
@@ -52,7 +56,7 @@ public class Zeiterfassung {
     }
 
     public static ZeiterfassungEntity mapDTOToEntity(ZeiterfassungDTO dto, ProjektEntity projektEntity,KontingentEntity kontingentEntity,
-            MitarbeiterEntity mitarbeiterEntity){
+            MitarbeiterEntity mitarbeiterEntity) throws ParseException {
         ZeiterfassungEntity entity = new ZeiterfassungEntity();
         entity.setProjekt(projektEntity);
         entity.setKontingent(kontingentEntity);
@@ -60,9 +64,6 @@ public class Zeiterfassung {
         entity.setDauer(dto.getDauer());
         entity.setDatum(dto.getDatum());
         entity.setMitarbeiter(mitarbeiterEntity);
-//        entity.setKontingentID(kontingentEntity.getId());
-//        entity.setMitarbeiterID(mitarbeiterEntity.getId());
-//        entity.setProjektID(projektEntity.getId());
         return entity;
     }
 
@@ -70,7 +71,8 @@ public class Zeiterfassung {
         Set<AngelegteZeiterfassungDTO> dtos = new HashSet<>();
         entities.forEach((e)->{
             AngelegteZeiterfassungDTO dto = new AngelegteZeiterfassungDTO();
-            dto.setDatum(e.getDatum());
+                dto.setDatum(e.getDatum());
+
             dto.setDauer(e.getDauer());
             dto.setId(e.getId());
             dto.setKommentar(e.getKommentar());

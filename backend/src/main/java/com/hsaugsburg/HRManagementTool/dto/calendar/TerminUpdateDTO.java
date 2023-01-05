@@ -45,7 +45,4 @@ public class TerminUpdateDTO {
 
     private String projekt;
 
-
-
-
 }

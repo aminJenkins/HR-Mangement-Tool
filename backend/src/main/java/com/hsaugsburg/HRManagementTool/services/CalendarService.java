@@ -74,7 +74,7 @@ public class CalendarService {
     }
 
     private boolean isLoggedInUserOwnerOfTermin(String ownerOfAppointment, Authentication authentication) {
-            return ownerOfAppointment.equals(authentication.getName());
+        return ownerOfAppointment.equals(authentication.getName());
     }
 
 
@@ -116,7 +116,7 @@ public class CalendarService {
                 calendarWeekRowDTO.setFriday(appointmentsFriday.get(i));
             }
 
-        calendarWeekRowDTOS.add(calendarWeekRowDTO);
+            calendarWeekRowDTOS.add(calendarWeekRowDTO);
 
         }
 
