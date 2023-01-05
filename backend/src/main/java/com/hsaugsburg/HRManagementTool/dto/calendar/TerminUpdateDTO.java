@@ -42,10 +42,7 @@ public class TerminUpdateDTO {
     @NotNull
     private Priority priority;
 
-    @NotNull
+
     private String projekt;
-
-
-
 
 }

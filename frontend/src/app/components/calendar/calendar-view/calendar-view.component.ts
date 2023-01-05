@@ -20,6 +20,8 @@ export class CalendarViewComponent {
   calendarData!: CalendarTable;
   currentStartOfWeek!: Date | number;
   currentEndOfWeek!: Date | number;
+  loggedInUser: string | undefined =
+    this.authService.getDecodedAccessToken()?.sub;
 
   displayedColumns: string[] = [
     'Montag',
@@ -67,20 +69,6 @@ export class CalendarViewComponent {
         this.currentStartOfWeek = new Date(response.startOfWeek);
         this.currentEndOfWeek = new Date(response.endOfWeek);
       });
-
-    console.log(this.authService.getDecodedAccessToken()?.sub);
-  }
-
-  showAppointmentDetails(appointment: any): void {
-    const dialogRef = this.dialog.open(AppointmentDetailsViewComponent, {
-      data: appointment,
-      height: '520px',
-      width: '600px',
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
-    });
   }
 
   showAddAppointmentForm(): void {
