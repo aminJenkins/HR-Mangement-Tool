@@ -3,15 +3,16 @@ package com.hsaugsburg.HRManagementTool.database.entity;
 import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name="TERMIN")
 @Table(name = "TERMIN")
 public class TerminEntity {
     @Id
@@ -29,12 +30,16 @@ public class TerminEntity {
     @JoinColumn(name = "PROJEKT_ID", referencedColumnName = "ID")
     private ProjektEntity projekt;
 
+
+    @JoinColumn(name = "ERSTELLER_ID",updatable = false)
     @ManyToOne
-    @JoinColumn(name = "ERSTELLER", updatable = false)
     private MitarbeiterEntity ersteller;
 
-    @ManyToMany(mappedBy = "teilnehmerTermine")
-    private Set<MitarbeiterEntity> terminTeilnehmern;
+    @ManyToMany
+    @JoinTable(name = "TERMIN_TEILNEHMER",
+            joinColumns = {@JoinColumn(name = "TERMIN_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "MITARBEITER_ID")})
+    private Set<MitarbeiterEntity> terminTeilnehmer;
 
     @Column(name = "BEGINN", nullable = false)
     private LocalTime beginn;
@@ -42,9 +47,8 @@ public class TerminEntity {
     @Column(name = "ENDE", nullable = false)
     private LocalTime ende;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "DATUM", nullable = false)
-    private Date datum;
+    private LocalDate datum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PRIORITY", nullable = false)

@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
-import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.CalenderMitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.models.Priority;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -34,9 +33,11 @@ public class NewTerminDTO {
     private Date datum;
 
     @NotNull
-    private Set<CalenderMitarbeiterDTO> teilnehmer;
+    private Set<String> teilnehmer;
 
     @NotNull
     private Priority priority;
+
+    private String projekt;
 
 }

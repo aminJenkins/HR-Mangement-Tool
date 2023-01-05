@@ -55,10 +55,7 @@ public class MitarbeiterEntity {
     @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AbteilungEntity> abteilungenInLeitung = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "TERMIN_TEILNEHMER",
-            joinColumns = {@JoinColumn(name = "MITARBEITER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "TERMIN_ID")})
+    @ManyToMany(mappedBy = "terminTeilnehmer")
     private Set<TerminEntity> teilnehmerTermine;
 
 

@@ -2,6 +2,9 @@ package com.hsaugsburg.HRManagementTool.services;
 
 import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.repository.ProjektRepo;
 import com.hsaugsburg.HRManagementTool.dto.project.CreateProjectDTO;
@@ -11,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +26,12 @@ public class ProjektService {
     private KontingentService kontingentService;
 
 
-    public ProjektEntity getProjektEntity(int projektID) {
+    public ProjektEntity getProjektEntityById(int projektID) {
         return projektRepo.findById(projektID);
+    }
+
+    public Optional<ProjektEntity> getProjectEntityByBezeichnung(String bezeichnung){
+        return projektRepo.findByBezeichnung(bezeichnung);
     }
 
     public Set<ProjektDTO> getProjektDTOs(String userMail) {
@@ -56,11 +61,8 @@ public class ProjektService {
     }
 
     public void deleteProject(int projectId) {
-//        ProjektEntity p = projektRepo.findById(projectId).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Projekt nicht gefunden"));
-//        System.out.println("leiter: "+p.getLeiter());
         if (projektRepo.existsById(projectId)) {
             projektRepo.deleteById(projectId);
-
         }
     }
 }

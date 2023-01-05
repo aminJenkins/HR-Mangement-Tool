@@ -20,6 +20,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class MitarbeiterService {
@@ -60,11 +67,10 @@ public class MitarbeiterService {
         return Mitarbeiter.mapEntityToDTO(updatedMitarbeiter);
     }
 
-    public void checkAuthority(Authentication authentication, String email) throws Exception {
+    public void checkIsAdminOrCorrectUser(Authentication authentication, String email) throws Exception {
         SimpleGrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
         if (!authentication.getAuthorities().contains(roleAdmin)) {
             if (!authentication.getName().equals(email)) {
-                System.out.println("darf nicht updaten");
                 throw new Exception("You can only update your own user information");
             }
         }
@@ -78,5 +84,9 @@ public class MitarbeiterService {
 
     public Set<MitarbeiterDTO> getAllEmployees() {
         return Mitarbeiter.mapEntitiesToDTOs(new HashSet<>(mitarbeiterRepo.findAll()));
+    }
+
+    public Set<MitarbeiterEntity> getEmployeeEntities(Set<String> emailsOfEmployees){
+        return new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAllByEmail(emailsOfEmployees));
     }
 }

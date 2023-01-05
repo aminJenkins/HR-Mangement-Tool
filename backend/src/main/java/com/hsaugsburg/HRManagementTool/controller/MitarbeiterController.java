@@ -42,9 +42,8 @@ public class MitarbeiterController {
     @PostMapping("/update")
     public ResponseEntity<MitarbeiterDTO> updateEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
         try {
-            maService.checkAuthority(authentication, mitarbeiterDTO.getEmail());
-            MitarbeiterDTO m = maService.updateEmployee(mitarbeiterDTO);
-            System.out.println("nach update:" + m.toString());
+            maService.checkIsAdminOrCorrectUser(authentication, mitarbeiterDTO.getEmail());
+            MitarbeiterDTO m =  maService.updateEmployee(mitarbeiterDTO);
             return ResponseEntity.status(HttpStatus.OK).body(m);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Irgendetwas stimmt nicht");
@@ -61,4 +60,6 @@ public class MitarbeiterController {
             return ResponseEntity.status(500).body(exception.getMessage());
         }
     }
+
+ 
 }

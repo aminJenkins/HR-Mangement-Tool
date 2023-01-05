@@ -1,4 +1,3 @@
-//HTTP Request to backend to get TimeTracking data
 import {TimeTrack} from "../shared/TimeTrack";
 import {Injectable} from "@angular/core";
 import {environment} from '../../environments/environment';
@@ -9,19 +8,18 @@ import {AuthenticationResponse} from "../shared/AuthenticationResponse";
 import {Project} from "../models/Project";
 import {TimetrackExist} from "../shared/TimetrackExist";
 import {UpdateTimeTrackForm} from "../shared/UpdateTimeTrackForm";
-
+import {Workday} from "../shared/Workday";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeTrackingService {
-  private static http: HttpClient;
 
   constructor(private  http: HttpClient) { }
 
-  public getDatasource(): Observable<TimetrackExist[]> {
-    return this.http.get<TimetrackExist[]>(environment.TIME_TRACKING_URL);
-  }
+  public getSortedDataSource(): Observable<Workday[]> {
+  return this.http.get<Workday[]>(environment.TIME_TRACKING_URL);
+}
 
   public getContingents(): Observable<Contingent[]>{
     return this.http.get<Contingent[]>(environment.CONTINGENTS_URL,);
@@ -42,15 +40,9 @@ export class TimeTrackingService {
     return this.http.put<string>(environment.TIME_TRACKING_URL,timeTrack);
   }
 
-  public deleteTimeTrack(timeTrackID: string): void{
+  public deleteTimeTrack(timeTrackID: string): Observable<any>{
     console.log("Path "+environment.TIME_TRACKING_URL+"/${timeTrackID}");
-    this.http.delete(environment.TIME_TRACKING_URL+"/"+timeTrackID).subscribe(() => 'Delete successful');
-  }
-/*  public static setTimeTrackToUpdate(timeTrack:TimetrackExist):void{
-    TimeTrackingService.updateTimeTrackForm=timeTrack;
+    return this.http.delete(environment.TIME_TRACKING_URL+"/"+timeTrackID);
   }
 
-  public static getTimeTrackToUpdate():TimetrackExist{
-    return TimeTrackingService.updateTimeTrackForm;
-  }*/
 }

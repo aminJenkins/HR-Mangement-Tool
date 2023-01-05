@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
-import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.CalenderMitarbeiterDTO;
 import com.hsaugsburg.HRManagementTool.models.Priority;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +24,9 @@ public class TerminDTO {
     private String beschreibung;
 
     @NotNull
+    private String ersteller;
+
+    @NotNull
     private LocalTime beginn;
 
     @NotNull
@@ -37,6 +39,9 @@ public class TerminDTO {
     private Date datum;
 
     @NotNull
-    private Set<CalenderMitarbeiterDTO> teilnehmer;
+    private Set<String> teilnehmer;
+
+    @NotNull
+    private String projekt;
 
 }

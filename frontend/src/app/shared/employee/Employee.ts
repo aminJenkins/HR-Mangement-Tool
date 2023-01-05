@@ -1,3 +1,5 @@
+import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+
 export class Employee {
   id: number | undefined;
   email: string | undefined;
@@ -7,9 +9,15 @@ export class Employee {
   telnr: string | undefined;
   abteilung: number | undefined;
 
-  constructor(id: number | undefined, email: string | undefined, name: string | undefined,
-              nachname: string | undefined, anschrift: string | undefined,
-              telnr: string | undefined, abteilung: number | undefined) {
+  constructor(
+    id: number | undefined,
+    email: string | undefined,
+    name: string | undefined,
+    nachname: string | undefined,
+    anschrift: string | undefined,
+    telnr: string | undefined,
+    abteilung: number | undefined
+  ) {
     this.id = id;
     this.email = email;
     this.name = name;
@@ -19,7 +27,6 @@ export class Employee {
     this.abteilung = abteilung;
   }
 }
-
 
 export interface UpdateEmployee {
   firstname: string;

@@ -1,8 +1,10 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
+import com.hsaugsburg.HRManagementTool.dto.ArbeitstagDTO;
 import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
 import com.hsaugsburg.HRManagementTool.services.TimeTrackingService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TimeTrackingController {
     @Autowired
     private  TimeTrackingService timeTrackingService;
-
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/tracks")
-    public ResponseEntity<Set<AngelegteZeiterfassungDTO>> getTimeTracks(Authentication authentication) {
-        try {
-            return ResponseEntity.ok(timeTrackingService.getTimeTracks(authentication.getName()));
-        }catch (Exception exception){
-            return ResponseEntity.status(500).body(null);
-        }
-    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/tracks")
@@ -60,6 +50,16 @@ public class TimeTrackingController {
             return ResponseEntity.ok().build();
         }catch (Exception exception){
             return ResponseEntity.status(500).body(exception.getMessage());
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/tracks")
+    public ResponseEntity<List<ArbeitstagDTO>> getSortedTimeTracks(Authentication authentication) {
+        try {
+            return ResponseEntity.ok(timeTrackingService.getTimeTracksSortedByDate(authentication.getName()));
+        }catch (Exception exception){
+            return ResponseEntity.status(500).build();
         }
     }
 

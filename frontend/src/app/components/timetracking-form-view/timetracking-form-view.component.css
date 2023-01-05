@@ -1,7 +1,6 @@
 form {
   display: flex;
   justify-content: center;
-  padding-top: 5%;
 }
 
 
@@ -17,4 +16,5 @@ form {
   display: flex;
   justify-content: center;
   margin-top: 2%;
+
 }

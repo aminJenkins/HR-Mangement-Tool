@@ -5,6 +5,7 @@ import {TimeTrackingService} from "../../services/time-tracking-service";
 import {TimetrackingFormViewComponent} from "../timetracking-form-view/timetracking-form-view.component";
 import {TimetrackExist} from "../../shared/TimetrackExist";
 import {Router} from "@angular/router";
+import {Workday} from "../../shared/Workday";
 
 @Component({
   selector: 'app-time-tracking-view',
@@ -14,9 +15,10 @@ import {Router} from "@angular/router";
 export class TimeTrackingViewComponent {
   displayedColumns: string[] = ['kommentar', 'dauer', 'kontingentID', 'datum'];
   displayUpdateForm: boolean = false;
+  displayCreateForm:boolean =true;
   timeTrackToUpdate: any;
   testdaten = 'test';
-  public dataSource: TimetrackExist[] = [];
+  public dataSource: Workday[] = [];
 
   constructor(private timeTrackingService: TimeTrackingService, private router: Router) {
   }
@@ -28,10 +30,19 @@ export class TimeTrackingViewComponent {
   }
 
   public loadData(): void {
-    this.timeTrackingService.getDatasource().subscribe((response: TimetrackExist[]) => {
+
+    this.timeTrackingService.getSortedDataSource().subscribe((response: Workday[]) => {
       this.dataSource = response;
-      console.log(response);
+      console.log("Response "+response);
     });
+  }
+  public callUpdateForm(row:TimetrackExist):void{
+    let timeTrack : TimetrackExist = row;
+    console.log(timeTrack)
+    this.timeTrackToUpdate=timeTrack;
+    this.displayUpdateForm=true;
+    console.log(this.displayUpdateForm);
+
   }
 }
 

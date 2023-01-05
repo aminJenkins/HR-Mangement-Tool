@@ -19,3 +19,29 @@ body {
 .bold {
   font-weight: bold;
 }
+
+#create-appointment-form
+  .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+#create-appointment-form .mat-mdc-form-field {
+  width: 212px;
+}
+
+#update-appointment-form
+  .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+#update-appointment-form .mat-mdc-form-field {
+  width: 212px;
+}
+
+.mdc-data-table__cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}

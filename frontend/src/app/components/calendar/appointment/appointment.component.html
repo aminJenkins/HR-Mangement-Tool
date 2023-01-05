@@ -1,0 +1,17 @@
+<div *ngIf="appointment">
+  <mat-icon
+    *ngIf="loggedInUser === appointment.ersteller"
+    style="float: right"
+    aria-hidden="false"
+    fontIcon="delete"
+    color="warn"
+    (click)="deleteAppointment(appointment)"
+  ></mat-icon>
+  <div (click)="showAppointmentDetails(appointment)">
+    <span> {{ appointment.titel }} </span>
+    <br />
+    <span> Beginn: {{ appointment.beginn.substring(0, 5) }} </span>
+    <br />
+    <span> Ende: {{ appointment.ende.substring(0, 5) }} </span>
+  </div>
+</div>
