@@ -47,18 +47,18 @@ public class CalendarService {
     }
 
     public void deleteTermin(int terminId, Authentication authentication) {
-        TerminEntity terminToDeleted = this.terminRepo.findById(terminId).orElseThrow();
-        if (!isLoggedInUserOwnerOfTermin(terminToDeleted.getErsteller().getId(), authentication)) {
+        TerminEntity terminToBeDeleted = this.terminRepo.findById(terminId).orElseThrow();
+        if (!isLoggedInUserOwnerOfTermin(terminToBeDeleted.getErsteller().getEmail(),authentication)) {
             throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
         }
-        this.terminRepo.deleteById(terminId);
+        this.terminRepo.delete(terminToBeDeleted);
     }
 
     public Termin updateTermin(TerminUpdate terminUpdate, Authentication authentication) {
         Termin terminToBeUpdated = getTermin(terminUpdate.getId());
-//        if (!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErstellerId(), authentication)) {
-//            throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
-//        }
+        if (!isLoggedInUserOwnerOfTermin(terminToBeUpdated.getErsteller(), authentication)) {
+            throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
+        }
         terminToBeUpdated.update(terminUpdate);
         MitarbeiterEntity erstellerOfTermin = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
         Set<MitarbeiterEntity> teilnehmerOfUpdatedTermin = this.mitarbeiterService.getEmployees(terminUpdate.getTeilnehmer());
@@ -73,9 +73,8 @@ public class CalendarService {
         return this.terminRepo.findById(terminId).map(termin -> calendarMapper.mapToTermin(termin)).orElseThrow();
     }
 
-    private boolean isLoggedInUserOwnerOfTermin(int erstellerID, Authentication authentication) {
-        MitarbeiterEntity loggedInUser = this.mitarbeiterService.getMitarbeiterEntity(authentication.getName());
-        return erstellerID == loggedInUser.getId();
+    private boolean isLoggedInUserOwnerOfTermin(String ownerOfAppointment, Authentication authentication) {
+            return ownerOfAppointment.equals(authentication.getName());
     }
 
 

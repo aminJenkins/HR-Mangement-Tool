@@ -18,4 +18,5 @@ public interface TerminRepo extends JpaRepository<TerminEntity,Integer> {
     public List<TerminEntity> findAppointmentsByDate(LocalDate startDate, int userId);
 
 
+
 }
