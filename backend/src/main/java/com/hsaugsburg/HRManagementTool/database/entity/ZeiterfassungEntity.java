@@ -32,11 +32,6 @@ public class ZeiterfassungEntity {
     @JoinColumn(name = "MITARBEITER_ID", nullable = false, referencedColumnName = "ID")
     private MitarbeiterEntity mitarbeiter;
 
-    /*@ManyToMany
-    @JoinTable(
-            name = "ZEITERFASSUNG_PROJEKT",
-            joinColumns = @JoinColumn(name = "ZEITERFASSUNG_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PROJEKT_ID"))*/
     @ManyToOne
     @JoinColumn(name = "Projekt_ID", referencedColumnName = "ID")
     private ProjektEntity projekt;

@@ -24,7 +24,6 @@ public class ProjektDTO {
 
     private String bezeichnung;
 
-    //private Set<TerminEntity> termine;
 
     private Set<String> projektbeteiligte;
 

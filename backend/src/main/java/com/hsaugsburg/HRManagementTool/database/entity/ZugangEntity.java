@@ -28,9 +28,6 @@ public class ZugangEntity {
     @Column(name = "AUTHORITY", nullable = false)
     private String authority;
 
-//    @OneToOne(mappedBy = "zugangEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private MitarbeiterEntity mitarbeiter;
-
     public ZugangEntity(String username, String password, String authority) {
         this.username = username;
         this.password = password;
