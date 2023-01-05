@@ -13,9 +13,8 @@
           name="titel"
           matInput
           formControlName="titel"
-          style="color: gray"
           [value]="data.appointment.titel"
-          [disabled]="
+          [readonly]="
             !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
           "
         />
@@ -42,9 +41,8 @@
           type="time"
           name="begin"
           matInput
-          style="color: gray"
           [value]="data.appointment.beginn"
-          [disabled]="
+          [readonly]="
             !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
           "
           formControlName="beginn"
@@ -57,9 +55,8 @@
           name="ende"
           type="time"
           matInput
-          style="color: gray"
           [value]="data.appointment.ende"
-          [disabled]="
+          [readonly]="
             !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
           "
           formControlName="ende"
@@ -105,9 +102,8 @@
         <textarea
           name="beschreibung"
           matInput
-          style="color: gray"
           [value]="data.appointment.beschreibung"
-          [disabled]="
+          [readonly]="
             !isLoggedInUserOwnerOfAppointment(data.appointment.ersteller)
           "
           formControlName="beschreibung"
