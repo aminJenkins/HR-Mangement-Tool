@@ -20,7 +20,7 @@ export class AppComponent {
     this.authService.logOut();
   }
 
-  /*  isAdmin():boolean{
-    this.authService.
-  } */
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
 }

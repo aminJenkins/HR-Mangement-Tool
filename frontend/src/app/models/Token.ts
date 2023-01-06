@@ -2,9 +2,9 @@ export interface Token {
   exp: number;
   iat: number;
   sub: string;
-  authorities: Authorities[];
+  authorities: Authority[];
 }
 
-export interface Authorities {
+export interface Authority {
   authority: string;
 }

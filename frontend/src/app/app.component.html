@@ -17,10 +17,18 @@
       <a mat-list-item routerLink="profile" (click)="sidenav.toggle()"
         >Profil</a
       >
-      <a mat-list-item routerLink="projects" (click)="sidenav.toggle()"
+      <a
+        mat-list-item
+        *ngIf="isAdmin()"
+        routerLink="projects"
+        (click)="sidenav.toggle()"
         >Projekte</a
       >
-      <a mat-list-item routerLink="admin/employee" (click)="sidenav.toggle()"
+      <a
+        mat-list-item
+        *ngIf="isAdmin()"
+        routerLink="admin/employee"
+        (click)="sidenav.toggle()"
         >Mitarbeiter</a
       >
     </mat-nav-list>

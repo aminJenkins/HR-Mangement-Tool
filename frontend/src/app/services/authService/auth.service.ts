@@ -39,12 +39,18 @@ export class AuthService {
     localStorage.removeItem(AuthService.TOKEN_ID);
   }
 
-  /* public isAdmin():boolean{
+  public isAdmin(): boolean {
     const token = this.getDecodedAccessToken();
-    return token?.authorities.includes({
-
-    })
-  } */
+    let isAdmin: boolean = false;
+    if (token !== null) {
+      token.authorities.forEach((auth) => {
+        if (auth.authority === 'ROLE_ADMIN') {
+          isAdmin = true;
+        }
+      });
+    }
+    return isAdmin;
+  }
 
   getDecodedAccessToken(): Token | null {
     const token = localStorage.getItem(AuthService.TOKEN_ID) || '{}';
