@@ -38,7 +38,6 @@ export class UserAdministrationViewComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log('Init');
     this.displayUpdateForm = false;
     this.loadData();
   }
@@ -53,13 +52,11 @@ export class UserAdministrationViewComponent {
       .getDepartments()
       .subscribe((response: Department[]) => {
         this.departments = response;
-        response.forEach((obj) => console.log('Departments: ' + obj.name));
       });
   }
 
   public delete(element: any): void {
     this.userAdministrationService.deleteEmployee(element.id).subscribe(() => {
-      console.log(this.dataSource);
       this.dataSource = this.dataSource.filter(
         (employee) => employee.id !== element.id
       );

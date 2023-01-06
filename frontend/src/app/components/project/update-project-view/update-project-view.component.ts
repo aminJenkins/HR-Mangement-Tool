@@ -1,17 +1,17 @@
-import {Component, Inject} from '@angular/core';
-import {Project} from '../../../shared/Project';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProjectService} from '../../../services/projectService/project.service';
-import {Contingent} from '../../../shared/Contingent';
-import {Employee} from '../../../shared/employee/Employee';
-import {throwError} from 'rxjs';
-import {ContingentService} from '../../../services/contingentService/contingent.service';
+import { Component, Inject } from '@angular/core';
+import { Project } from '../../../shared/Project';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProjectService } from '../../../services/projectService/project.service';
+import { Contingent } from '../../../shared/Contingent';
+import { Employee } from '../../../shared/employee/Employee';
+import { throwError } from 'rxjs';
+import { ContingentService } from '../../../services/contingentService/contingent.service';
 
 @Component({
   selector: 'app-update-project-view',
   templateUrl: './update-project-view.component.html',
-  styleUrls: ['./update-project-view.component.css']
+  styleUrls: ['./update-project-view.component.css'],
 })
 export class UpdateProjectViewComponent {
   updateProjectFormGroup!: FormGroup;
@@ -20,26 +20,33 @@ export class UpdateProjectViewComponent {
   allMitarbeiter!: Employee[];
 
   selectedTeilnehmer: string[] = [];
-  selectedContingents: number[]= [];
+  selectedContingents: number[] = [];
   selectedLeiter: number;
 
-  constructor(public dialogRef: MatDialogRef<UpdateProjectViewComponent>,
-              @Inject(MAT_DIALOG_DATA) public project: Project,
-              private fb: FormBuilder,
-              private projectService: ProjectService,
-              private contingentService: ContingentService) {
-    console.log("hier projekt:", project)
+  constructor(
+    public dialogRef: MatDialogRef<UpdateProjectViewComponent>,
+    @Inject(MAT_DIALOG_DATA) public project: Project,
+    private fb: FormBuilder,
+    private projectService: ProjectService,
+    private contingentService: ContingentService
+  ) {
     this.selectedLeiter = project.leiterID!;
     this.selectedTeilnehmer = project.projektbeteiligte!;
     this.selectedContingents = project.kontingente!;
 
-    projectService.getAllEmployees().subscribe(result => {
-      this.allMitarbeiter = result;
-    }, error => throwError(error));
+    projectService.getAllEmployees().subscribe(
+      (result) => {
+        this.allMitarbeiter = result;
+      },
+      (error) => throwError(error)
+    );
 
-    contingentService.getContingents().subscribe(result => {
-      this.contingents = result;
-    }, error => throwError(error));
+    contingentService.getContingents().subscribe(
+      (result) => {
+        this.contingents = result;
+      },
+      (error) => throwError(error)
+    );
 
     this.initForms();
   }
@@ -52,7 +59,7 @@ export class UpdateProjectViewComponent {
       stundensatz: ['', Validators.required],
       projektleiter: [Validators.required],
       kontingente: [Validators.required],
-      teilnehmer: [Validators.required]
+      teilnehmer: [Validators.required],
     });
   }
 
@@ -62,9 +69,7 @@ export class UpdateProjectViewComponent {
       this.project.kontingente = this.selectedContingents;
       this.project.leiterID = this.selectedLeiter;
       this.project.projektbeteiligte = this.selectedTeilnehmer;
-      console.log(this.project);
-      this.projectService.updateProject(this.project).subscribe(result => {
-        console.log('create result:', result);
+      this.projectService.updateProject(this.project).subscribe((result) => {
         this.closeWithData(result);
       });
     }

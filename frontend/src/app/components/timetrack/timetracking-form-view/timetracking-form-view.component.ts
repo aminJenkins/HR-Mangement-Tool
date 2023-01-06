@@ -45,11 +45,9 @@ export class TimetrackingFormViewComponent {
       .getContingents()
       .subscribe((response: Contingent[]) => {
         this.contingents = response;
-        console.log(response);
       });
     this.timeTrackingService.getProjects().subscribe((response: Project[]) => {
       this.projects = response;
-      console.log(response);
     });
   }
 

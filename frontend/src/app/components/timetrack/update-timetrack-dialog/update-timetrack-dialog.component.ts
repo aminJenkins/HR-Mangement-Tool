@@ -36,11 +36,9 @@ export class UpdateTimetrackDialogComponent {
       .getContingents()
       .subscribe((response: Contingent[]) => {
         this.contingents = response;
-        console.log(response);
       });
     this.timeTrackingService.getProjects().subscribe((response: Project[]) => {
       this.projects = response;
-      console.log(response);
     });
   }
 
@@ -70,7 +68,6 @@ export class UpdateTimetrackDialogComponent {
     if (this.updateTimeTrackFormGroup.valid) {
       let values = this.updateTimeTrackFormGroup.getRawValue();
       let timeTrack = this.parseToTimeTrackExist();
-      console.log('' + timeTrack);
       this.timeTrackingService.updateTimeTrack(timeTrack).subscribe();
       this.userDialogComponentMatDialogRef.close('Close!');
       this.showInfoUserSuccessfullyUpdated();

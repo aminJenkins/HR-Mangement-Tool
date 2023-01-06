@@ -27,7 +27,6 @@ mat-card-content {
 
 .error {
   padding: 16px;
-  width: 89%;
   color: white;
   background-color: red;
 }

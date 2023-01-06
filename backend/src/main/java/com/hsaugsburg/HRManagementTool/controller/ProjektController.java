@@ -23,9 +23,9 @@ public class ProjektController {
     @Autowired
     ProjektService projektService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/")
-    public ResponseEntity<Set<ProjektDTO>> getProjects(Authentication authentication) {
+    public ResponseEntity<Set<ProjektDTO>> getEmployeeProjects(Authentication authentication) {
         try {
             return ResponseEntity.ok(projektService.getProjektDTOs(authentication.getName()));
         } catch (Exception exception) {

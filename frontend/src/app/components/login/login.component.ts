@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
       if (val.email && val.password) {
         this.authService.logIn(val.email, val.password).subscribe(
           (authResponse) => {
-            console.log('token: ' + authResponse.token);
             this.authService.setSession(authResponse.token);
             this.router.navigateByUrl('/');
           },
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit {
             if (err.status === 403) {
               this.errorMessage = 'Passwort und Email stimmen nicht überein';
             } else {
-              console.log('error:', err.message);
               this.errorMessage = err.message;
             }
           }

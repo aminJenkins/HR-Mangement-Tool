@@ -37,9 +37,6 @@ export class AppointmentComponent {
       height: '520px',
       width: '600px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

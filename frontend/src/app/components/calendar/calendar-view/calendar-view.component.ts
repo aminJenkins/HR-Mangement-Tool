@@ -84,10 +84,7 @@ export class CalendarViewComponent {
       }
     );
 
-    addAppointmentDialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
-    });
+    addAppointmentDialogRef.afterClosed().subscribe((result) => {});
   }
 
   showAppointmentsNextWeek(): void {
