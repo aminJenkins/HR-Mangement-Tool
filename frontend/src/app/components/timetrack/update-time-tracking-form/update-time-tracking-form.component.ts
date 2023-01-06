@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {Contingent} from "../../shared/Contingent";
-import {Project} from "../../models/Project";
+import {Contingent} from "../../../shared/Contingent";
+import {Project} from "../../../models/Project";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {TimeTrackingService} from "../../services/time-tracking-service";
+import {TimeTrackingService} from "../../../services/time-tracking-service";
 import {Router} from "@angular/router";
-import {TimeTrack} from "../../shared/TimeTrack";
-import {TimetrackExist} from "../../shared/TimetrackExist";
+import {TimeTrack} from "../../../shared/TimeTrack";
+import {TimetrackExist} from "../../../shared/TimetrackExist";
 
 @Component({
   selector: 'app-update-time-tracking-form',

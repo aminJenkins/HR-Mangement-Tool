@@ -53,7 +53,6 @@ public class MitarbeiterEntity {
     @ManyToMany(mappedBy = "terminTeilnehmer")
     private Set<TerminEntity> teilnehmerTermine;
 
-
     @ManyToMany(mappedBy = "projektbeteiligte")
     private Set<ProjektEntity> projekte;
 

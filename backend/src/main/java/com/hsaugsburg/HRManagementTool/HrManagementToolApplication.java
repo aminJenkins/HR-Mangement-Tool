@@ -36,9 +36,6 @@ public class HrManagementToolApplication {
 			if (zugangsRepo.findByUsername("kai.musterman@gmail.com").isEmpty())
 				zugangsRepo.save(new ZugangEntity("kai.musterman@gmail.com", encoder.encode("password"), "ROLE_USER,ROLE_ADMIN"));
 
-			if (zugangsRepo.findByUsername("user.musterman@gmail.com").isEmpty())
-				zugangsRepo.save(new ZugangEntity("user.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-
 			if (zugangsRepo.findByUsername("rudolf.musterman@gmail.com").isEmpty())
 				zugangsRepo.save(new ZugangEntity("rudolf.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
 

@@ -8,27 +8,34 @@
           required
           type="email"
           matInput
-          placeholder="Enter email..."
-          formControlName="email">
+          placeholder="Email eingeben ..."
+          formControlName="email"
+        />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
+        <mat-label>Passwort</mat-label>
         <input
           type="password"
           matInput
-          placeholder="Enter password..."
-          formControlName="password">
+          placeholder="Passwort eingeben ..."
+          formControlName="password"
+        />
       </mat-form-field>
 
       <p *ngIf="errorMessage" class="error">
-        {{ errorMessage}}
+        {{ errorMessage }}
       </p>
 
       <div class="button">
-        <button mat-raised-button color="primary" type="submit" style="width: 100%" >Login</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          style="width: 100%"
+        >
+          Login
+        </button>
       </div>
-
-
     </form>
   </mat-card-content>
 </mat-card>

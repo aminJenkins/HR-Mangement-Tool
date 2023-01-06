@@ -1,0 +1,94 @@
+<mat-card style="padding: 20px; height: 100%">
+  <mat-card-title>Mitarbeiter anlegen</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="addUserFormGroup" (ngSubmit)="createUser()">
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          id="inputEmail4"
+          formControlName="email"
+          style="color: gray"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Vorname</mat-label>
+        <input required matInput type="text" id="name" formControlName="name" />
+        <!--            placeholder="{{employee.name}}"-->
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Nachname</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          id="surname"
+          formControlName="surname"
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Adresse</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          id="address"
+          formControlName="address"
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Telefonnummer</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          id="telNumber"
+          formControlName="telNumber"
+        />
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Abteilung</mat-label>
+        <mat-select formControlName="department" required>
+          <mat-option
+            *ngFor="let department of this.data"
+            [value]="department.id"
+          >
+            {{ department.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Rolle</mat-label>
+        <mat-select formControlName="authority">
+          <mat-option value="ROLE_USER">MITARBEITER</mat-option>
+          <mat-option value="ROLE_USER,ROLE_ADMIN">ADMIN</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="margin-right: 10px" appearance="outline">
+        <mat-label>Passwort</mat-label>
+        <input
+          matInput
+          required
+          type="password"
+          id="password"
+          formControlName="password"
+        />
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" type="submit">
+          Speichern
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

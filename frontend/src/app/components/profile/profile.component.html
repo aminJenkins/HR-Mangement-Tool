@@ -1,11 +1,14 @@
 <mat-card>
-  <mat-card-title>User Profile</mat-card-title>
+  <mat-card-title>Profil</mat-card-title>
   <mat-card-content>
-
     <!-- Change User information   -->
-    <form id="change-username-form" [formGroup]="profileInfoFormGroup" (ngSubmit)="updateProfileInfo()" class="column">
+    <form
+      id="change-username-form"
+      [formGroup]="profileInfoFormGroup"
+      (ngSubmit)="updateProfileInfo()"
+      class="column"
+    >
       <div class="column">
-
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input
@@ -20,7 +23,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Firstname</mat-label>
+          <mat-label>Vorname</mat-label>
           <input
             [(ngModel)]="employee.name"
             required="false"
@@ -32,7 +35,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Lastname</mat-label>
+          <mat-label>Nachname</mat-label>
           <input
             matInput
             required="false"
@@ -44,7 +47,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Address</mat-label>
+          <mat-label>Adresse</mat-label>
           <input
             matInput
             required="false"
@@ -55,7 +58,7 @@
           />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Tel. Number</mat-label>
+          <mat-label>Telefonnummer</mat-label>
           <input
             matInput
             required="false"
@@ -66,55 +69,64 @@
           />
         </mat-form-field>
       </div>
-      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-raised-button color="primary" type="submit">Speichern</button>
     </form>
 
-
-    <hr style="height: 50%; background-color: gray">
+    <hr style="height: 50%; background-color: gray" />
 
     <!-- Password reset         -->
-    <form [formGroup]="changePasswordFormGroup" (ngSubmit)="changePassword(formDirective)" #formDirective="ngForm"
-          class="column">
+    <form
+      [formGroup]="changePasswordFormGroup"
+      (ngSubmit)="changePassword(formDirective)"
+      #formDirective="ngForm"
+      class="column"
+    >
       <mat-form-field appearance="outline">
-        <mat-label>Old Password</mat-label>
+        <mat-label>Altes Passwort</mat-label>
         <input
           matInput
           type="password"
           id="inputPassword4"
-          formControlName="oldPassword"/>
+          formControlName="oldPassword"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>New Password</mat-label>
+        <mat-label>Neues Passwort</mat-label>
         <input
           matInput
           type="password"
           id="inputPassword5"
-          formControlName="newPassword"/>
-        <mat-error *ngIf="isNewPasswordMissing">Password field id required</mat-error>
+          formControlName="newPassword"
+        />
+        <mat-error *ngIf="isNewPasswordMissing"
+          >Dieses ist ein Pflichtfeld</mat-error
+        >
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Confirm Password</mat-label>
+        <mat-label>Passwort bestätigen</mat-label>
         <input
           matInput
           type="password"
           id="inputPassword6"
-          formControlName="confirmPassword"/>
+          formControlName="confirmPassword"
+        />
         <mat-error *ngIf="isConfirmPasswordMissing" class="form-error">
-          Confirm Password is required
+          Dieses ist ein Pflichtfeld
         </mat-error>
         <mat-error *ngIf="doesConfirmPasswordMatch">
-          Password and Confirm Password must match
+          Altes und neues Passwort müssen übereinstimmen
         </mat-error>
       </mat-form-field>
 
       <p *ngIf="errorMessage" class="error">
-        {{ errorMessage}}
+        {{ errorMessage }}
       </p>
 
-      <button mat-raised-button color="primary" type="submit">Change Password</button>
+      <button mat-raised-button color="primary" type="submit">
+        Passwort ändern
+      </button>
     </form>
-
   </mat-card-content>
 </mat-card>

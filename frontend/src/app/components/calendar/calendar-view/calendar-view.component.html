@@ -1,8 +1,6 @@
 <mat-card>
   <mat-card-content>
-
-
-    <div style="margin-bottom: 10px;">
+    <div style="margin-bottom: 10px">
       <h1>Kalender</h1>
       <button
         style="margin-right: 5px; display: inline"
@@ -103,12 +101,15 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-
-    <div  style="margin-right: 5px; float: right; margin-top: 10px">
-      <button mat-fab color="primary" (click)="showAddAppointmentForm()"  type="submit">
+    <div style="margin-right: 5px; float: right; margin-top: 10px">
+      <button
+        mat-fab
+        color="primary"
+        (click)="showAddAppointmentForm()"
+        type="submit"
+      >
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </mat-card-content>
-
 </mat-card>

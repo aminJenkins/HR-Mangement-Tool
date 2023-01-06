@@ -1,0 +1,100 @@
+<div class="example-container" *ngIf="!leaveStatus">
+  <form [formGroup]="elements">
+    <div class="example-form-fields">
+      <mat-form-field appearance="fill">
+        <mat-label>Dauer</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.5"
+          formControlName="dauer"
+          placeholder="Dauer"
+          required
+          [(ngModel)]="this.timeTrack.dauer"
+        />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-select
+          formControlName="contingent"
+          required
+          [(ngModel)]="this.timeTrack.kontingentID"
+        >
+          <mat-option
+            *ngFor="let contingent of contingents"
+            [value]="contingent.id"
+          >
+            {{ contingent.bezeichnung }}
+          </mat-option>
+        </mat-select>
+        <mat-label><b> Kontingente </b></mat-label>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-select
+          formControlName="projects"
+          required
+          [(ngModel)]="this.timeTrack.projektID"
+        >
+          <mat-option *ngFor="let project of projects" [value]="project.id">
+            {{ project.bezeichnung }}
+          </mat-option>
+        </mat-select>
+        <mat-label><b> Projekte </b></mat-label>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" class="example-form-field">
+        <mat-label>Datum auswählen</mat-label>
+        <input
+          matInput
+          formControlName="date"
+          [matDatepicker]="datepicker"
+          required
+          [(ngModel)]="this.timeTrack.datum"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="datepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>
+              Apply
+            </button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Beschreibung</mat-label>
+        <input
+          matInput
+          formControlName="kommentar"
+          placeholder="Beschreibung"
+          required
+          [(ngModel)]="this.timeTrack.kommentar"
+        />
+      </mat-form-field>
+    </div>
+    <button mat-icon-button color="warn" (click)="delete()">
+      <mat-icon fontIcon="delete"></mat-icon>
+    </button>
+  </form>
+  <button
+    mat-raised-button
+    color="primary"
+    style="width: 100%"
+    type="submit"
+    (click)="onSubmit()"
+  >
+    Submit
+  </button>
+</div>

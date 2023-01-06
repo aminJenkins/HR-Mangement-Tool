@@ -4,12 +4,15 @@
 
 export const environment = {
   production: false,
-  TIME_TRACKING_URL: 'http://localhost:8090/api/timetracking/tracks',
+  TIME_TRACKING_URL: 'http://localhost:8090/api/timetracking/tracks/',
   CONTINGENTS_URL: 'http://localhost:8090/api/contingent/',
-  GREETING_URL: 'http://localhost:8090/api/greetings',
+  GREETING_URL: 'http://localhost:8090/api/greetings/',
   PROJECTS_URL: 'http://localhost:8090/api/projects/',
   EMPLOYEE_URL: 'http://localhost:8090/api/employee/',
+  CREATE_EMPLOYEE_URL: 'http://localhost:8090/api/employee/create/',
+  GET_ALL_EMPLOYEE_URL: 'http://localhost:8090/api/employee/getAll/',
   CALENDAR_URL: 'http://localhost:8090/api/calendar/',
+  DEPARTMENT: 'http://localhost:8090/api/department/',
 };
 
 /*

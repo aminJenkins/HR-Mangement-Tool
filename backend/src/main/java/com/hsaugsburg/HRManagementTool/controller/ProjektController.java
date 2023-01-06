@@ -33,7 +33,7 @@ public class ProjektController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public ResponseEntity<List<ProjektDTO>> getAllProjects() {
         return ResponseEntity.ok(projektService.getAllProjects());

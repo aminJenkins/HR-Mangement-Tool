@@ -1,6 +1,7 @@
 package com.hsaugsburg.HRManagementTool.controller;
 
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
+import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.CreateEmployeeDTO;
 import com.hsaugsburg.HRManagementTool.services.MitarbeiterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/employee")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class MitarbeiterController {
 
@@ -29,6 +30,15 @@ public class MitarbeiterController {
             return ResponseEntity.ok(maService.getMitarbeiterDTO(authentication.getName()));
         } catch (Exception exception) {
             return ResponseEntity.status(500).body(null);
+        }
+    }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/getAll")
+    public ResponseEntity<Set<MitarbeiterDTO>> getAllEmployees() {
+        try {
+            return ResponseEntity.ok(maService.getAllEmaployees());
+        }catch (Exception exception){
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -52,14 +62,18 @@ public class MitarbeiterController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<String> createEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
+    public ResponseEntity<MitarbeiterDTO> createEmployee(@RequestBody CreateEmployeeDTO createEmployeeDTO) {
+            return ResponseEntity.ok(maService.createEmployee(createEmployeeDTO));
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") int employeeID) {
         try {
-            maService.createMitarbeiter(mitarbeiterDTO);
-            return ResponseEntity.ok("Der Mitarbeiter wurde erfolgreich angelegt");
+            maService.delete(employeeID);
+            return ResponseEntity.ok().build();
         } catch (Exception exception) {
             return ResponseEntity.status(500).body(exception.getMessage());
         }
     }
-
- 
 }

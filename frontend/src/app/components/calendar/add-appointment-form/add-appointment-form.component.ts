@@ -10,7 +10,6 @@ import { AppointmentService } from 'src/app/services/appointmentService/appointm
 import { AddAppointment, Appointment } from 'src/app/shared/Appointment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-add-appointment-form',
   templateUrl: './add-appointment-form.component.html',

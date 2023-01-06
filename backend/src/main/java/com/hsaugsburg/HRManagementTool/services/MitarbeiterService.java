@@ -7,12 +7,15 @@ import com.hsaugsburg.HRManagementTool.database.repository.AbteilungsRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.MitarbeiterRepo;
 import com.hsaugsburg.HRManagementTool.database.repository.ZugangsRepo;
 import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
+import com.hsaugsburg.HRManagementTool.dto.ZugangDTO;
+import com.hsaugsburg.HRManagementTool.dto.mitarbeiter.CreateEmployeeDTO;
 import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import java.util.HashSet;
@@ -37,23 +41,53 @@ public class MitarbeiterService {
     @Autowired
     ZugangsRepo zugangsRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public MitarbeiterDTO getMitarbeiterDTO(String userName) {
         MitarbeiterEntity maEntity = getMitarbeiterEntity(userName);
         return Mitarbeiter.mapEntityToDTO(maEntity);
     }
 
+    public Set<MitarbeiterDTO> getAllEmaployees() {
+        return Mitarbeiter.mapEntitiesToDTOs(new HashSet<MitarbeiterEntity>(mitarbeiterRepo.findAll()));
+    }
+
+
     public MitarbeiterEntity getMitarbeiterEntity(String userName) {
         return mitarbeiterRepo.findByEmail(userName);
     }
 
-    public MitarbeiterEntity getMitarbeiterEntityById(int id) {
+    public MitarbeiterEntity getMitarbeiterEntityById(Integer id) {
         return mitarbeiterRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
-    public void createMitarbeiter(MitarbeiterDTO mitarbeiter) {
-        AbteilungEntity abteilungEntity = abteilungsRepo.findById(mitarbeiter.getAbteilung());
-        ZugangEntity zugang = zugangsRepo.findByUsername(mitarbeiter.getEmail()).orElseThrow();
-        mitarbeiterRepo.save(Mitarbeiter.mapDTOToEntity(mitarbeiter, abteilungEntity, zugang));
+    public void delete(int employeeID){
+        MitarbeiterEntity mitarbeiterEntity = mitarbeiterRepo.findById(employeeID);
+        zugangsRepo.deleteByUsername(mitarbeiterEntity.getEmail());
+        mitarbeiterRepo.deleteById(mitarbeiterEntity.getId());
+    }
+
+    public MitarbeiterDTO createEmployee(CreateEmployeeDTO createEmployeeDTO){
+        MitarbeiterEntity mitarbeiterEntity = new MitarbeiterEntity();
+        ZugangEntity zugangEntity= new ZugangEntity();
+        AbteilungEntity abteilungEntity = abteilungsRepo.findById(createEmployeeDTO.getAbteilung());
+
+        mitarbeiterEntity.setAbteilung(abteilungEntity);
+        mitarbeiterEntity.setTelnr(createEmployeeDTO.getTelnr());
+        mitarbeiterEntity.setName(createEmployeeDTO.getName());
+        mitarbeiterEntity.setNachname(createEmployeeDTO.getNachname());
+        mitarbeiterEntity.setEmail(createEmployeeDTO.getEmail());
+        mitarbeiterEntity.setAnschrift(createEmployeeDTO.getAnschrift());
+
+        MitarbeiterDTO me = Mitarbeiter.mapEntityToDTO(mitarbeiterRepo.save(mitarbeiterEntity));
+
+        zugangEntity.setAuthority(createEmployeeDTO.getAuthority());
+        zugangEntity.setUsername(createEmployeeDTO.getEmail());
+        zugangEntity.setPassword(passwordEncoder.encode(createEmployeeDTO.getPassword()));
+        zugangsRepo.save(zugangEntity);
+        return me;
+
     }
 
     public MitarbeiterDTO updateEmployee(MitarbeiterDTO mitarbeiterDTO) {
