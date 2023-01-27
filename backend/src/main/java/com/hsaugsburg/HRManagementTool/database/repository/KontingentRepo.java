@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface KontingentRepo extends JpaRepository<KontingentEntity,Integer> {
+public interface KontingentRepo extends JpaRepository<KontingentEntity, Integer> {
     KontingentEntity findById(int id);
 }

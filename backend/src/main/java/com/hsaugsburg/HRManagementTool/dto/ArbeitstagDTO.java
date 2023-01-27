@@ -1,15 +1,15 @@
 package com.hsaugsburg.HRManagementTool.dto;
 
-import java.time.LocalDateTime;
-import java.util.Set;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
 
-public class ArbeitstagDTO implements Comparable<ArbeitstagDTO>{
+public class ArbeitstagDTO implements Comparable<ArbeitstagDTO> {
     Set<ZeiterfassungDTO> timeTracks;
     LocalDateTime date;
     String day;

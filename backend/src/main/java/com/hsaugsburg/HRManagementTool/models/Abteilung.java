@@ -1,12 +1,10 @@
 package com.hsaugsburg.HRManagementTool.models;
 
+import com.hsaugsburg.HRManagementTool.database.entity.AbteilungEntity;
+import com.hsaugsburg.HRManagementTool.dto.AbteilungDTO;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import com.hsaugsburg.HRManagementTool.database.entity.AbteilungEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
-import com.hsaugsburg.HRManagementTool.dto.AbteilungDTO;
-import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
 
 public class Abteilung {
 

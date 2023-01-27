@@ -23,7 +23,7 @@ public class CreateProjectDTO {
     private Set<String> projektbeteiligte;
     private Set<Integer> kontingente;
 
-    public  ProjektEntity parseToEntity(MitarbeiterEntity leiter, Set<MitarbeiterEntity> beteiligte, Set<KontingentEntity> kontingente) {
+    public ProjektEntity parseToEntity(MitarbeiterEntity leiter, Set<MitarbeiterEntity> beteiligte, Set<KontingentEntity> kontingente) {
         ProjektEntity projektEntity = new ProjektEntity();
         projektEntity.setStundensatz(stundensatz);
         projektEntity.setBudget(budget);

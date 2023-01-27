@@ -1,13 +1,14 @@
 package com.hsaugsburg.HRManagementTool.dto.project;
 
-import java.util.HashSet;
+import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import com.hsaugsburg.HRManagementTool.database.entity.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
@@ -43,7 +44,7 @@ public class ProjektDTO {
         return projektEntity;
     }
 
-    public static ProjektDTO parseFromEntity(ProjektEntity entity){
+    public static ProjektDTO parseFromEntity(ProjektEntity entity) {
         ProjektDTO dto = new ProjektDTO();
         dto.setId(entity.getId());
         dto.setAuftragsgeber(entity.getAuftragsgeber());
@@ -51,7 +52,7 @@ public class ProjektDTO {
         dto.setLeiterID(entity.getLeiter().getId());
         dto.setBudget(entity.getBudget());
         dto.setStundensatz(entity.getStundensatz());
-        dto.setProjektbeteiligte( entity.getProjektbeteiligte().stream().map(MitarbeiterEntity::getEmail).collect(Collectors.toSet()));
+        dto.setProjektbeteiligte(entity.getProjektbeteiligte().stream().map(MitarbeiterEntity::getEmail).collect(Collectors.toSet()));
         dto.setKontingente(entity.getKontingente().stream().map(KontingentEntity::getId).collect(Collectors.toSet()));
         return dto;
     }

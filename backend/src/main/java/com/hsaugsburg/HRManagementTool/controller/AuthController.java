@@ -35,8 +35,6 @@ public class AuthController {
         //generates token for user
         final String token = zugangsService.generateTokenForUser(request.getEmail());
         if (token != null) {
-            System.out.println("token: " + token);
-
             return ResponseEntity.ok(new AuthenticationResponse(token));
         } else {
             return ResponseEntity.status(401).body("Could not find user");

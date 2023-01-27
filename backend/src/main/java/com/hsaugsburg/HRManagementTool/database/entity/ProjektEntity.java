@@ -3,9 +3,8 @@ package com.hsaugsburg.HRManagementTool.database.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,7 +28,7 @@ public class ProjektEntity {
     @Column(name = "BEZEICHNUNG", nullable = false)
     private String bezeichnung;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "PROJEKT_LEITER", referencedColumnName = "ID", nullable = false)
     private MitarbeiterEntity leiter;
 

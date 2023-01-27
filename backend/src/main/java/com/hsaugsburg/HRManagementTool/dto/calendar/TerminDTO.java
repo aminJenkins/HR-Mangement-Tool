@@ -1,7 +1,6 @@
 package com.hsaugsburg.HRManagementTool.dto.calendar;
 
 import com.hsaugsburg.HRManagementTool.models.Priority;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

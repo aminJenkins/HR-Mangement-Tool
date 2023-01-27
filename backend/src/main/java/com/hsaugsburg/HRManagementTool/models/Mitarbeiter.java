@@ -1,8 +1,5 @@
 package com.hsaugsburg.HRManagementTool.models;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.hsaugsburg.HRManagementTool.database.entity.AbteilungEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ZugangEntity;
@@ -10,6 +7,9 @@ import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter

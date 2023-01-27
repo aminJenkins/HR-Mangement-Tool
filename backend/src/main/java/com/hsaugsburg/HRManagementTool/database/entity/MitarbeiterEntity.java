@@ -1,12 +1,11 @@
 package com.hsaugsburg.HRManagementTool.database.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -15,7 +14,7 @@ import lombok.Setter;
 public class MitarbeiterEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
     private int id;
 
@@ -35,7 +34,7 @@ public class MitarbeiterEntity {
     private String anschrift;
 
     @ManyToOne
-    @JoinColumn(name="ABTEILUNG", nullable = false)
+    @JoinColumn(name = "ABTEILUNG", nullable = false)
     private AbteilungEntity abteilung;
 
     @OneToMany(mappedBy = "leiter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

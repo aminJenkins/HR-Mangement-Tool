@@ -66,9 +66,11 @@ export class UpdateProjectViewComponent {
   updateProject() {
     if (this.updateProjectFormGroup.valid) {
       const value = this.updateProjectFormGroup.value;
-      this.project.kontingente = this.selectedContingents;
+      console.log(value)
+      this.project.kontingente = value.kontingente;
       this.project.leiterID = this.selectedLeiter;
-      this.project.projektbeteiligte = this.selectedTeilnehmer;
+      this.project.projektbeteiligte = value.teilnehmer;
+      console.log("project:", this.project)
       this.projectService.updateProject(this.project).subscribe((result) => {
         this.closeWithData(result);
       });

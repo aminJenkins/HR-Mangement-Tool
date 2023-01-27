@@ -1,4 +1,4 @@
-import { Token } from './../../models/Token';
+import { Token } from '../../models/Token';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
