@@ -16,16 +16,6 @@ public class HrManagementToolApplication {
         SpringApplication.run(HrManagementToolApplication.class, args);
     }
 
-
-    /**
-     * If this method is uncommented, the db will be filled with the user data below. So this should only be used when the db does not already
-     * have the below users.
-     * After initializing the db the method needs to be commented again.
-     *
-     * @param zugangsRepo
-     * @param encoder     to encode the passwords
-     * @return
-     */
     @Bean
     CommandLineRunner commandLineRunner(ZugangsRepo zugangsRepo, PasswordEncoder encoder) {
         return args -> {
@@ -38,10 +28,6 @@ public class HrManagementToolApplication {
 
             if (zugangsRepo.findByUsername("rudolf.musterman@gmail.com").isEmpty())
                 zugangsRepo.save(new ZugangEntity("rudolf.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-
-            if (zugangsRepo.findByUsername("amin.musterman@gmail.com").isEmpty())
-                zugangsRepo.save(new ZugangEntity("amin.musterman@gmail.com", encoder.encode("password"), "ROLE_USER"));
-
         };
     }
 }
