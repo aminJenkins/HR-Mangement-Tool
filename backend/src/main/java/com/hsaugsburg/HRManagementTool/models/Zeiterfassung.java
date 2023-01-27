@@ -1,23 +1,24 @@
 package com.hsaugsburg.HRManagementTool.models;
 
+import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
+import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
+import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
+import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
+import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
+import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
+import com.hsaugsburg.HRManagementTool.dto.project.ProjektDTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.hsaugsburg.HRManagementTool.database.entity.KontingentEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
-import com.hsaugsburg.HRManagementTool.database.entity.ZeiterfassungEntity;
-import com.hsaugsburg.HRManagementTool.dto.KontingentDTO;
-import com.hsaugsburg.HRManagementTool.dto.MitarbeiterDTO;
-import com.hsaugsburg.HRManagementTool.dto.project.ProjektDTO;
-import com.hsaugsburg.HRManagementTool.dto.AngelegteZeiterfassungDTO;
-import com.hsaugsburg.HRManagementTool.dto.ZeiterfassungDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
@@ -48,7 +49,7 @@ public class Zeiterfassung {
         return dto;
     }
 
-    public static ZeiterfassungEntity mapDTOToEntity(AngelegteZeiterfassungDTO timeTrackDto){
+    public static ZeiterfassungEntity mapDTOToEntity(AngelegteZeiterfassungDTO timeTrackDto) {
         ZeiterfassungEntity zeiterfassungEntity = mapDTOToEntity(timeTrackDto);
         zeiterfassungEntity.setId(timeTrackDto.getId());
         return zeiterfassungEntity;

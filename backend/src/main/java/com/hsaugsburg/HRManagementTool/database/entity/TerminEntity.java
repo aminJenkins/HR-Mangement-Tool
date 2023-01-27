@@ -4,19 +4,18 @@ import com.hsaugsburg.HRManagementTool.models.Priority;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
-import javax.persistence.*;
-
 @Getter
 @Setter
-@Entity(name="TERMIN")
+@Entity(name = "TERMIN")
 @Table(name = "TERMIN")
 public class TerminEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false, updatable = false)
     private int id;
 
@@ -31,7 +30,7 @@ public class TerminEntity {
     private ProjektEntity projekt;
 
 
-    @JoinColumn(name = "ERSTELLER_ID",updatable = false)
+    @JoinColumn(name = "ERSTELLER_ID", updatable = false)
     @ManyToOne
     private MitarbeiterEntity ersteller;
 

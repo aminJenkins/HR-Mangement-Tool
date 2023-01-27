@@ -2,15 +2,13 @@ package com.hsaugsburg.HRManagementTool.database.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.util.Set;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name="abteilung")
+@Entity(name = "abteilung")
 @Table(name = "ABTEILUNG")
 public class AbteilungEntity {
     @Id
@@ -25,6 +23,6 @@ public class AbteilungEntity {
     @JoinColumn(name = "LEITER", referencedColumnName = "ID")
     private MitarbeiterEntity leiter;
 
-    @OneToMany(mappedBy="abteilung", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "abteilung", cascade = CascadeType.REMOVE)
     private Set<MitarbeiterEntity> zugeteilteMitarbeiter;
 }

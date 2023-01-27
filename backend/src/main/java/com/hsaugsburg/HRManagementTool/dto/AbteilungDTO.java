@@ -1,6 +1,5 @@
 package com.hsaugsburg.HRManagementTool.dto;
 
-import javax.persistence.Column;
 
 import lombok.Getter;
 import lombok.Setter;

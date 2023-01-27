@@ -55,7 +55,7 @@ public class ZugangsService implements UserDetailsService {
         return passwortResetDTO.getNewPassword().equals(passwortResetDTO.getConfirmPassword());
     }
 
-    public void createZugang(ZugangDTO zugangDTO){
+    public void createZugang(ZugangDTO zugangDTO) {
         zugangsRepo.save(Zugang.mapDTOtoEntity(zugangDTO));
     }
 }

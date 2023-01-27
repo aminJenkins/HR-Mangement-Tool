@@ -15,8 +15,8 @@ import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -47,7 +47,7 @@ public class CalendarService {
 
     public void deleteTermin(int terminId, Authentication authentication) {
         TerminEntity terminToBeDeleted = this.terminRepo.findById(terminId).orElseThrow();
-        if (!isLoggedInUserOwnerOfTermin(terminToBeDeleted.getErsteller().getEmail(),authentication)) {
+        if (!isLoggedInUserOwnerOfTermin(terminToBeDeleted.getErsteller().getEmail(), authentication)) {
             throw new RuntimeException("ERROR! Logged in User is not owner of Termin");
         }
         this.terminRepo.delete(terminToBeDeleted);
@@ -99,19 +99,19 @@ public class CalendarService {
 
         for (int i = 0; i < maxListLength; i++) {
             CalendarWeekRowDTO calendarWeekRowDTO = new CalendarWeekRowDTO();
-            if(i < appointmentsMonday.size()){
+            if (i < appointmentsMonday.size()) {
                 calendarWeekRowDTO.setMonday(appointmentsMonday.get(i));
             }
-            if(i < appointmentsTuesday.size()){
+            if (i < appointmentsTuesday.size()) {
                 calendarWeekRowDTO.setTuesday(appointmentsTuesday.get(i));
             }
-            if(i < appointmentsWednesday.size()){
+            if (i < appointmentsWednesday.size()) {
                 calendarWeekRowDTO.setWednesday(appointmentsWednesday.get(i));
             }
-            if(i < appointmentsThursday.size()) {
+            if (i < appointmentsThursday.size()) {
                 calendarWeekRowDTO.setThursday(appointmentsThursday.get(i));
             }
-            if(i < appointmentsFriday.size()){
+            if (i < appointmentsFriday.size()) {
                 calendarWeekRowDTO.setFriday(appointmentsFriday.get(i));
             }
 
@@ -139,7 +139,6 @@ public class CalendarService {
 
         return Mitarbeiter.mapEntitiesToDTOs(new HashSet<>(possibleParticipants));
     }
-
 
 
 }

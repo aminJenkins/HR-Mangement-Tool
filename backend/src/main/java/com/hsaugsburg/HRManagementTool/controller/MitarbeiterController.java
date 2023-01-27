@@ -32,12 +32,13 @@ public class MitarbeiterController {
             return ResponseEntity.status(500).body(null);
         }
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAll")
     public ResponseEntity<Set<MitarbeiterDTO>> getAllEmployees() {
         try {
             return ResponseEntity.ok(maService.getAllEmaployees());
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return ResponseEntity.status(500).build();
         }
     }
@@ -53,17 +54,17 @@ public class MitarbeiterController {
     public ResponseEntity<MitarbeiterDTO> updateEmployee(@RequestBody MitarbeiterDTO mitarbeiterDTO, Authentication authentication) {
         try {
             maService.checkIsAdminOrCorrectUser(authentication, mitarbeiterDTO.getEmail());
-            MitarbeiterDTO m =  maService.updateEmployee(mitarbeiterDTO);
+            MitarbeiterDTO m = maService.updateEmployee(mitarbeiterDTO);
             return ResponseEntity.status(HttpStatus.OK).body(m);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Irgendetwas stimmt nicht");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage());
         }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<MitarbeiterDTO> createEmployee(@RequestBody CreateEmployeeDTO createEmployeeDTO) {
-            return ResponseEntity.ok(maService.createEmployee(createEmployeeDTO));
+        return ResponseEntity.ok(maService.createEmployee(createEmployeeDTO));
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

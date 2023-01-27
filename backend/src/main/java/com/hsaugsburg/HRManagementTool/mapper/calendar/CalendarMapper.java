@@ -3,23 +3,22 @@ package com.hsaugsburg.HRManagementTool.mapper.calendar;
 import com.hsaugsburg.HRManagementTool.database.entity.MitarbeiterEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.ProjektEntity;
 import com.hsaugsburg.HRManagementTool.database.entity.TerminEntity;
-import com.hsaugsburg.HRManagementTool.models.Mitarbeiter;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
-
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 @Component
 @NoArgsConstructor
-public class CalendarMapper{
+public class CalendarMapper {
 
-    public Termin mapToTermin(TerminEntity terminEntity){
+    public Termin mapToTermin(TerminEntity terminEntity) {
         Set<String> teilnehmerOfTermin = terminEntity.getTerminTeilnehmer().stream().map(teilnehmer -> teilnehmer.getEmail()).collect(Collectors.toSet());
-        String projekt = terminEntity.getProjekt() == null? null : terminEntity.getProjekt().getBezeichnung();
-        Termin termin =    Termin.builder().titel(terminEntity.getTitel())
+        String projekt = terminEntity.getProjekt() == null ? null : terminEntity.getProjekt().getBezeichnung();
+        Termin termin = Termin.builder().titel(terminEntity.getTitel())
                 .beschreibung(terminEntity.getBeschreibung())
                 .id(terminEntity.getId()).beginn(terminEntity.getBeginn())
                 .ende(terminEntity.getEnde())
@@ -32,7 +31,7 @@ public class CalendarMapper{
         return termin;
     }
 
-    public TerminEntity mapToTerminEntity(Termin termin, Set<MitarbeiterEntity> teilnehmerOfTermin, MitarbeiterEntity ersteller, Optional<ProjektEntity> projektEntity){
+    public TerminEntity mapToTerminEntity(Termin termin, Set<MitarbeiterEntity> teilnehmerOfTermin, MitarbeiterEntity ersteller, Optional<ProjektEntity> projektEntity) {
         TerminEntity terminEntity = new TerminEntity();
         terminEntity.setId(termin.getId());
         terminEntity.setTitel(termin.getTitel());
@@ -45,7 +44,7 @@ public class CalendarMapper{
         terminEntity.setErsteller(ersteller);
         terminEntity.setTerminTeilnehmer(teilnehmerOfTermin);
 
-        if(projektEntity.isPresent()){
+        if (projektEntity.isPresent()) {
             terminEntity.setProjekt(projektEntity.get());
         }
 

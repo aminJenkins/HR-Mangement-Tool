@@ -3,17 +3,16 @@ package com.hsaugsburg.HRManagementTool.database.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name="KONTINGENT")
+@Table(name = "KONTINGENT")
 public class KontingentEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
     private int id;
 

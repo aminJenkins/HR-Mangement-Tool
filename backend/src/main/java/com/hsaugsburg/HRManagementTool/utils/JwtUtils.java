@@ -20,7 +20,9 @@ public class JwtUtils {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token) { return extractClaim(token, Claims::getExpiration);}
+    public Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
 
     public boolean hasClaim(String token, String claimName) {
         final Claims claims = extractAllClaims(token);
@@ -32,7 +34,9 @@ public class JwtUtils {
         return claimsResolver.apply(claims);
     }
 
-    public Claims extractAllClaims (String token) {return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();}
+    public Claims extractAllClaims(String token) {
+        return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();
+    }
 
 
     public Boolean isTokenValid(String token, UserDetails userDetails) {
@@ -61,7 +65,6 @@ public class JwtUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)))
                 .signWith(SignatureAlgorithm.HS256, jwtSigningKey).compact();
     }
-
 
 
 }

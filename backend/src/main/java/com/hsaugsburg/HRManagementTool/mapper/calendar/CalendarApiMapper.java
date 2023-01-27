@@ -5,7 +5,6 @@ import com.hsaugsburg.HRManagementTool.dto.calendar.TerminDTO;
 import com.hsaugsburg.HRManagementTool.dto.calendar.TerminUpdateDTO;
 import com.hsaugsburg.HRManagementTool.models.calendar.Termin;
 import com.hsaugsburg.HRManagementTool.models.calendar.TerminUpdate;
-import com.hsaugsburg.HRManagementTool.models.mitarbeiter.Mitarbeiter;
 import org.mapstruct.Mapper;
 
 @Mapper

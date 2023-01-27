@@ -7,7 +7,6 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Set;
 
 @Getter
@@ -26,7 +25,7 @@ public class Termin {
     private String projekt;
 
 
-    public void update(final TerminUpdate update){
+    public void update(final TerminUpdate update) {
         this.titel = update.getTitel();
         this.beschreibung = update.getBeschreibung();
         this.beginn = update.getBeginn();
