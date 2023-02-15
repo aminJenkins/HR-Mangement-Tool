@@ -25,3 +25,18 @@ This will insert two users into the db on application start up.
 * After starting the application the _commandLineRunner_ method should be commented again to prevent db errors and inserting duplicates.
 * Then you can access the h2-console under _http://localhost:8090/h2-console/_. The password is defined in the application.properties file.
 * In the h2-console execute the insert statements defined in the file **testData.sql** located in **src/main/resources/database/testData.sql**
+
+###Docker
+* To containerise the application, it is needed to deploy the image. 
+$ docker build -t hr-management-tool .
+$ cd docker
+$ docker-compose up
+* To achieve the docker container with the db use the exec statement
+$ docker exec -it db /bin/bash
+* To login into the db 
+$ psql -U compose-postgres -W compose-postgres
+* Than just enter the password
+* To execute any sql statement follow the schema:
+$ select * from ABTEILUNG
+$ \crosstabview
+* The data is persisted in the volume, described in the docker-compose file.

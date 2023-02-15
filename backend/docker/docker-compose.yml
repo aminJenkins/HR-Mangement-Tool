@@ -1,0 +1,30 @@
+version: '2'
+services:
+  app:
+    image: 'hr-management-tool'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - 8090:8090
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+      #psql -U compose-postgres -W compose-postgres
+    ports:
+      - 3300:3300
+    volumes:
+      - db:/var/lib/db
+volumes:
+  db:
