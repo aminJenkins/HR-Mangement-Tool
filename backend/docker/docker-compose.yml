@@ -25,6 +25,6 @@ services:
     ports:
       - 3300:3300
     volumes:
-      - db:/var/lib/db
-volumes:
-  db:
+      - "../database:/var/lib/postgresql/data"
+#volumes:
+#  db:
